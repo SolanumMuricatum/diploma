@@ -1,0 +1,77 @@
+.event-title{
+    height: 300px;
+    display: flex;
+    background-image: url(../photo/party.jpg);
+    background-size: cover;
+    background-position: center;
+    font-size: 32pt;
+    color: antiquewhite;
+    align-items: center; 
+    justify-content: center;
+}
+
+.friend-photo-container{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+/*     grid-template-rows: repeat(2, 300px); */
+    justify-items: center;
+    align-items: center;
+    border-bottom: 2px solid black;
+}
+
+.friend-photo{
+    margin: 50px;
+    width: 150px;
+    height: 200px;
+    background-image: url(../photo/me.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.friend-name{
+    display: flex;
+    align-items: center;
+    height: 70px;
+    font-size: 16pt;
+    padding-left: 20px;
+}
+
+.friend-avatar{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid black;
+    background-image: url(../photo/me.jpg);
+    background-size: cover;
+    background-position: center; ;
+}
+
+.friend-data-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+}
+
+.friend-select-all-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: center;
+}
+
+.friend-data-container-wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid black;
+    padding-left: 70px;
+    padding-right: 70px;
+}
+
+input[type="checkbox"]{
+  accent-color: #C56FFF;
+  width: 20px;
+  height: 20px;
+}

@@ -1,0 +1,24 @@
+@keyframes arrowmove {
+    0%   {bottom: 0px;}
+  15%  {bottom: 5px;}
+  30%  {bottom: 0px;}
+  100% {bottom: 0px;}
+}
+
+.get-started-button{
+  padding: 20px 38px;
+  margin-top: 50px;
+  font-size: 12pt;
+  background-color: #e99fa7;
+  transition: ease-in 0.3s;
+}
+
+.get-started-button:hover{
+    background-color: #4EC9DC;
+}
+
+.arrow-get-started-icon{
+    position: relative;
+    animation-delay: 3s;
+    animation: arrowmove 2s infinite;
+}
