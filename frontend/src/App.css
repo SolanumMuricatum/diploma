@@ -1,3 +1,31 @@
 body{
   background-color: lightcyan;
 }
+
+@font-face {
+  font-family: 'Old Classic';
+  src: url('./fonts/ofont.ru_Old\ Classic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Isabella-Decor';
+  src: url('./fonts/ofont.ru_Isabella-Decor.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Rosarium';
+  src: url('./fonts/ofont.ru_Rosarium.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Manrope';
+  src: url('./fonts/ofont.ru_Manrope.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}

@@ -1,0 +1,21 @@
+.event-title{
+    height: 300px;
+    display: flex;
+    /* background-image: url(../photo/party.jpg);
+    background-color: #C56FFF; */
+    background-size: cover;
+    background-position: center;
+    font-size: 32pt;
+    color: black;
+    align-items: center; 
+    justify-content: center;
+}
+
+.event-description{
+    height: 50px;
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    font-size: 16pt;
+    color: black;
+}

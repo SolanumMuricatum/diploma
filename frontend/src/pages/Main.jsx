@@ -1,15 +1,16 @@
 import '../styles/main.css';
+import { Event } from '../connection/Event'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ReactComponent as CameraIcon } from '../photo/photo-camera-svgrepo-com.svg';
 import { ReactComponent as PhotoIcon } from '../photo/picture-svgrepo-com.svg';
 import { faArrowUp, faDirections } from '@fortawesome/free-solid-svg-icons'
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom'; // Убедитесь, что это правильно
 
 export function Main() {
     return (
         <div>
-            <div className='event-title'>
-                Гендерпати у Миши и Светы ♡
-            </div>
+            <Event/>
             <div style={{position: 'sticky', top: '0px', borderBottom: '2px solid black', backgroundColor: 'aquamarine'}}>фильтры</div>
             <div>
                 <div className='friend-data-container-wrapper'>
