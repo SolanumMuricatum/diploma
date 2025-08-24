@@ -12,9 +12,9 @@ export function Header() {
             </div>
             <nav>
                 <ul>
-                    <li><a href="/">About Us</a></li>
-                    <li><a href="/">Instructions</a></li>
-                    <li><a href="/about">Help</a></li>
+                    <li><a href="/">О нас</a></li>
+                    <li><a href="/">Инструкции</a></li>
+                    <li><a href="/about">Помощь</a></li>
                 </ul>
             </nav>
             <a className='login' href='/'><FontAwesomeIcon icon={faUser}/></a> 

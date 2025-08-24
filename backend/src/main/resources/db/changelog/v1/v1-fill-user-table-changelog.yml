@@ -1,0 +1,14 @@
+#databaseChangeLog:
+#  - changeSet:
+#      id: v1-2
+#      author: pepino
+#      preConditions:
+#        - onFail: MARK_RAN
+#          tableIsEmpty:
+#            tableName: user
+#      changes:
+#        - loadData:
+#            tableName: user
+#            separator: ','
+#            encoding: UTF-8
+#            file: db/data/user-data.csv
