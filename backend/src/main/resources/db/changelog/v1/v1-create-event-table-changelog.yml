@@ -23,6 +23,26 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
+                  name: background
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: text_color
+                  type: varchar(7)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: text_font
+                  type: varchar(25)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: text_size
+                  type: varchar(2)
+                  constraints:
+                    nullable: false
+              - column:
                   name: start_date
                   type: date
                   constraints:

@@ -95,3 +95,22 @@
     margin-bottom: 10px;
     cursor: pointer;
 }
+
+.third-block-create-event button {
+  padding: 10px 40px;
+  background-color: #e99fa7;
+  color: black; 
+  margin-top: 50px; 
+  cursor: pointer;
+  border: 1px solid black;
+  border-radius: 3px;
+}
+
+.third-block-create-event button:hover{
+  background-color: #4EC9DC;
+}
+
+.third-block-create-event button:disabled{
+  background-color: #628287;
+  cursor: not-allowed;
+}

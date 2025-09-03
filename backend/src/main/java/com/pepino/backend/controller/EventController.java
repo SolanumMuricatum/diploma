@@ -22,8 +22,8 @@ public class EventController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<?> saveEvent(@RequestBody Event event) throws Exception {
-        eventService.saveEvent(event);
+    public ResponseEntity<?> saveEvent(@RequestBody Event event, @RequestParam UUID creatorId) throws Exception {
+        eventService.saveEvent(event, creatorId);
         return ResponseEntity.status(201).body(event);
     }
 

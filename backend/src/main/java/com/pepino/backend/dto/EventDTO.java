@@ -12,6 +12,10 @@ import java.util.UUID;
 @Data
 public class EventDTO {
     private String name;
+    private String background;
+    private String textColor;
+    private String textFont;
+    private String textSize;
     private LocalDate startDate;
     private LocalDate endDate;
     private String creatorName;
