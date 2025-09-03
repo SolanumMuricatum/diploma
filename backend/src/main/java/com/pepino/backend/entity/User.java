@@ -27,4 +27,9 @@ public class User {
     private String name;
     @Column(name = "surname")
     private String surname;
+
+    public User(UUID id) {
+        this.id = id;
+    }
 }
+

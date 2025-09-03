@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface EventService {
-    public void saveEvent(Event event);
+    public void saveEvent(Event event, UUID creatorId);
     public List<Event> getEvents(UUID userUUID);
     public EventDTO getEvent(UUID eventUUID) throws Exception; ;
 }

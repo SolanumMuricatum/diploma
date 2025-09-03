@@ -12,7 +12,7 @@ import java.util.UUID;
 
 public interface EventRepository extends JpaRepository<Event, UUID> {
     @Query("SELECT new com.pepino.backend.dto.EventDTO" +
-            "(e.name, e.startDate, e.endDate, u.name, u.surname) " +
+            "(e.name, e.background, e.textColor, e.textFont, e.textSize, e.startDate, e.endDate, u.name, u.surname) " +
             "FROM Event e " +
             "LEFT JOIN User u ON e.creator.id = u.id " +
             "WHERE e.id = :eventId ")

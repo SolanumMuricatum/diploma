@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Hello } from './pages/Hello';
 import { Main } from './pages/Main';
-import { CreateEvent } from './pages/CreateEvent';
+import { EventPage } from './pages/EventPage';
 
 function App() {
   return (
@@ -13,7 +13,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Hello />}/>
           <Route path="/main/:eventId" element={<Main />}/>
-          <Route path="/event/create" element={<CreateEvent />}/>
+          <Route path="/event/create" element={<EventPage />}/>
+          <Route path="/event/update/:eventId" element={<EventPage />}/>
         </Routes>
       </div>
     </Router>

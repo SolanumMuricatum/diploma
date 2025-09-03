@@ -2,6 +2,7 @@ package com.pepino.backend.service.impl;
 
 import com.pepino.backend.dto.EventDTO;
 import com.pepino.backend.entity.Event;
+import com.pepino.backend.entity.User;
 import com.pepino.backend.exception.EventException;
 import com.pepino.backend.repository.EventRepository;
 import com.pepino.backend.service.EventService;
@@ -9,6 +10,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -25,7 +27,11 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public void saveEvent(Event event) {
+    public void saveEvent(Event event, UUID creatorId) {
+
+        event.setStartDate(LocalDate.now());
+        event.setEndDate(LocalDate.now().plusMonths(1));
+        event.setCreator(new User(creatorId)); //проверить пользователя, что он есть
         eventRepository.save(event);
     }
 

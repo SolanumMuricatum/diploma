@@ -1,5 +1,6 @@
 package com.pepino.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -23,12 +24,23 @@ public class Event {
     private UUID id;
     @Column(name = "name")
     private String name;
+    @Column(name = "background")
+    private String background;
+    @Column(name = "text_color")
+    private String textColor;
+    @Column(name = "text_font")
+    private String textFont;
+    @Column(name = "text_size")
+    private String textSize;
+    @JsonIgnore
     @Column(name = "start_date")
     private LocalDate startDate;
+    @JsonIgnore
     @Column(name = "end_date")
     private LocalDate endDate;
 
     @ManyToOne
+    @JsonIgnore
     @JsonManagedReference
     @JoinColumn(name = "creator_id") // Указывает на внешний ключ в таблице
     private User creator;
