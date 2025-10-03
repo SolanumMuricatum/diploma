@@ -9,12 +9,17 @@
   padding: 20px 38px;
   margin-top: 50px;
   font-size: 12pt;
-  background-color: #e99fa7;
+  color: #fafafa;
+  background-color: #112250;
   transition: ease-in 0.3s;
+  border: 3px solid #112250;
 }
 
 .get-started-button:hover{
-    background-color: #4EC9DC;
+  cursor: pointer;
+    background-color: #D6AF8D;
+    border-color: #0C7F69;
+    color: black;
 }
 
 .arrow-get-started-icon{

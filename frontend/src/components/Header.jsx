@@ -2,8 +2,12 @@ import '../styles/header.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import { faCameraRetro } from '@fortawesome/free-solid-svg-icons'
+import { Link } from 'react-router-dom';
 
 export function Header() {
+
+
+
     return (
         <header>
             <div className='logo'>
@@ -14,10 +18,12 @@ export function Header() {
                 <ul>
                     <li><a href="/">О нас</a></li>
                     <li><a href="/">Инструкции</a></li>
-                    <li><a href="/about">Помощь</a></li>
+                    <li><a href="/help">Помощь</a></li>
                 </ul>
             </nav>
-            <a className='login' href='/'><FontAwesomeIcon icon={faUser}/></a> 
+            <Link to={`/login`}className="login">
+                <FontAwesomeIcon icon={faUser} />
+            </Link>
         </header>
     );
 }

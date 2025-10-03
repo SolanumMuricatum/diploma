@@ -12,7 +12,11 @@ export const Event = () => {
         setErr(false);  // сброс ошибки
         const fetchEvent = async () => {
             try {
-                let response = await fetch(`http://localhost:8080/event/get?id=${eventId}`);
+                let response = await fetch(`http://localhost:8080/event/get?id=${eventId}`, {
+                    method: 'GET',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                });
                 if (!response.ok) {
                     throw new Error();
                 }
@@ -47,7 +51,7 @@ export const Event = () => {
         <div>
             <div className='event-title' style={{backgroundImage: `url(${event.background})`, color: `${event.textColor}`, fontFamily: `${event.textFont === "None" ? `-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"` : `${event.textFont}` }`, fontSize: `${event.textSize}pt`}}>{event.name}</div>
             <div className='event-description'>
-                <div>{`Создатель: ${event.creatorName} ${event.creatorSurname}`}</div>
+                <div>{`Создатель: ${event.creator}`}</div>
                 <div>{`Дата создания: ${event.startDate}`}</div>
                 <div>{`Дата окончания: ${event.endDate}`}</div> 
             </div>

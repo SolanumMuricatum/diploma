@@ -17,3 +17,11 @@ spring:
       max-request-size: 100MB
   liquibase:
     change-log: db/changelog/main-changelog.yml
+
+app:
+  token:
+    secret: "pepino is a bushy perennial plant (Solanum muricatum) of the nightshade family that is native to temperate uplands of South America and has an edible usually purple-marked yellow fruit"
+    expirationMs: 3600000
+  endpoints:
+    login: "/login"
+    registration: "/user/save"

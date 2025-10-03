@@ -18,7 +18,7 @@ databaseChangeLog:
                     primaryKey: true
                   defaultValueComputed: gen_random_uuid()
               - column:
-                  name: login
+                  name: email
                   type: varchar(50)
                   constraints:
                     nullable: false
@@ -29,12 +29,8 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: name
-                  type: varchar(50)
+                  name: login
+                  type: varchar(25)
                   constraints:
                     nullable: false
-              - column:
-                  name: surname
-                  type: varchar(50)
-                  constraints:
-                    nullable: false
+                    unique: true

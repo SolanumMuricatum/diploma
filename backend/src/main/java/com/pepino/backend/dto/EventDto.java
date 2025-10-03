@@ -5,12 +5,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class EventDTO {
+public class EventDto {
     private String name;
     private String background;
     private String textColor;
@@ -18,6 +17,5 @@ public class EventDTO {
     private String textSize;
     private LocalDate startDate;
     private LocalDate endDate;
-    private String creatorName;
-    private String creatorSurname;
+    private String creator;
 }

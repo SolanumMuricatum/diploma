@@ -1,0 +1,114 @@
+.container {
+  width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  margin-top: 125px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  background: #fff;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  font-size: 18pt;
+}
+
+.tab-button {
+  flex: 1;
+  padding: 10px;
+  cursor: pointer;
+  border: none;
+  background: #f0f0f0;
+  border-radius: 5px;
+  margin: 0 5px;
+  font-weight: bold;
+}
+
+.tab-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.social-login {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.social-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+.social-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.or {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.input {
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.options {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+.options-center {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.btn {
+  padding: 10px;
+  color: #fafafa;
+  background-color: #112250;
+  transition: ease-in 0.3s;
+  border: 3px solid #112250;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.btn:hover {
+  background-color: #D6AF8D;
+  border-color: #0C7F69;    
+  color: black;
+}
+
+.text-center {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.text-center > a, .options > a{
+  color: #0C7F69;
+}
+
+.text-center > a:hover, .options > a:hover{
+  color: #112250;
+  text-decoration: underline;
+}

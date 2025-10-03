@@ -29,6 +29,7 @@ ul{
     flex-direction: row;
     justify-content: space-around;
     list-style-type: none;
+    padding-inline-start: 0px !important;
 }
 
 a{
@@ -42,5 +43,5 @@ a{
 }
 
 .login{
-    z-index: 9;
+    z-index: 10;
 }

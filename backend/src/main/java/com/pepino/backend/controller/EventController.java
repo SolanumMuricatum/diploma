@@ -1,16 +1,14 @@
 package com.pepino.backend.controller;
 
 import com.pepino.backend.entity.Event;
-import com.pepino.backend.entity.User;
 import com.pepino.backend.service.EventService;
-import com.pepino.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/event")
 public class EventController {
@@ -28,7 +26,13 @@ public class EventController {
     }
 
     @GetMapping("/get")
-    public ResponseEntity<?> getEvent(@RequestParam String id) throws Exception {
-        return ResponseEntity.status(200).body(eventService.getEvent(UUID.fromString(id)));
+    public ResponseEntity<?> getEvent(@RequestParam UUID id) throws Exception {
+        return ResponseEntity.status(200).body(eventService.getEvent(id));
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<?> putEvent(@RequestBody Event event, @RequestParam UUID eventId) throws Exception {
+        eventService.putEvent(event, eventId);
+        return ResponseEntity.status(200).body(event);
     }
 }

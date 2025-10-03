@@ -1,10 +1,11 @@
 package com.pepino.backend.service.impl;
 
-import com.pepino.backend.dto.EventDTO;
+import com.pepino.backend.dto.EventDto;
 import com.pepino.backend.entity.Event;
 import com.pepino.backend.entity.User;
 import com.pepino.backend.exception.EventException;
 import com.pepino.backend.repository.EventRepository;
+import com.pepino.backend.repository.UserRepository;
 import com.pepino.backend.service.EventService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +20,13 @@ import java.util.UUID;
 public class EventServiceImpl implements EventService {
     private final EventRepository eventRepository;
     private final ModelMapper modelMapper;
+    private final UserRepository userRepository;
 
     @Autowired
-    public EventServiceImpl(EventRepository eventRepository, ModelMapper modelMapper) {
+    public EventServiceImpl(EventRepository eventRepository, ModelMapper modelMapper, UserRepository userRepository) {
         this.eventRepository = eventRepository;
         this.modelMapper = modelMapper;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -41,8 +44,8 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public EventDTO getEvent(UUID eventUUID) throws EventException {
-        Optional<EventDTO> eventDTOOptional = Optional.ofNullable(eventRepository.getEventDTO(eventUUID));
+    public EventDto getEvent(UUID eventUUID) throws EventException {
+        Optional<EventDto> eventDTOOptional = Optional.ofNullable(eventRepository.getEventDTO(eventUUID));
         if(eventDTOOptional.isPresent()) {
             return eventDTOOptional.get();
         }
@@ -50,4 +53,22 @@ public class EventServiceImpl implements EventService {
             throw new EventException("События с таким идентификатором не существует");
         }
     }
+
+    @Override
+    public void putEvent(Event event, UUID id) throws EventException {
+        Optional<Event> eventOptional = eventRepository.findById(id);
+        if(eventOptional.isPresent()) {
+            Event updatedEvent = eventOptional.get();
+            updatedEvent.setName(event.getName());
+            updatedEvent.setBackground(event.getBackground());
+            updatedEvent.setTextColor(event.getTextColor());
+            updatedEvent.setTextSize(event.getTextSize());
+            updatedEvent.setTextFont(event.getTextFont());
+            eventRepository.save(updatedEvent);
+        }
+        else {
+            throw new EventException("События с таким идентификатором не существует");
+        }
+    }
+
 }

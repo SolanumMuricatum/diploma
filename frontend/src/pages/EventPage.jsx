@@ -21,13 +21,15 @@ import { faArrowUp, faDirections } from '@fortawesome/free-solid-svg-icons'
 import React, { useEffect, useState } from 'react';
 import { Event } from '../connection/Event';
 import { useParams } from 'react-router-dom'; // Убедитесь, что это правильно
+import { useAuth } from '../auth/AuthProvider';
 
 export function EventPage() {
     const { eventId } = useParams();
     const [disableButton, setDisableButton] = useState(true);
     const [err, setErr] = useState(false);
     const [event, setEvent] = useState({ name: '', background: '', textColor: '#000000', textFont: 'None', textSize: ''});
-    const userId = '9588a76b-119a-4a70-8e52-a4d5869983f2';
+    const { userId, setUserId } = useAuth();
+    //const userId  = '68994ca2-998a-48db-9696-2e7bc761b977';
     const [backgroundBorderColor, setBackgroundBorderColor] = useState(null);
     const [borderNameColor, setBorderNameColor] = useState(null);
     const backgrounds = [bg1, bg2, bg3, bg4, bg5, bg6, bg7, bg8, bg9, bg10, bg11, bg12, bg13, bg14, bg15];
@@ -36,8 +38,15 @@ export function EventPage() {
         if(eventId != undefined){
             const getEvent = async () => {
                 try {
-                    let response = await fetch(`http://localhost:8080/event/get?id=${eventId}`);
+                    let response = await fetch(`http://localhost:8080/event/get?id=${eventId}`, {
+                        method: 'GET',
+                        headers: { 'Content-Type': 'application/json' },
+                        credentials: 'include',
+                    });
                     if (!response.ok) {
+                        if(response == 409){
+                            setUserId(null);
+                        }
                         throw new Error('Network response was not ok');
                     }
                     let data = await response.json(); // Получаем данные только один раз
@@ -96,6 +105,7 @@ export function EventPage() {
         try {
             const response = await fetch(`http://localhost:8080/event/save?creatorId=${userId}`, {
             method: 'POST',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -103,6 +113,9 @@ export function EventPage() {
             });
 
             const statusCode = response.status;
+            if(statusCode == 409){
+                setUserId(null);
+            }
             console.log('Код ответа:', statusCode);
             alert('Событие успешно создано!');
             window.location.reload();
@@ -114,10 +127,11 @@ export function EventPage() {
         }
     };
 
-    const patchEvent = async () => {
+    const putEvent = async () => {
         try {
             const response = await fetch(`http://localhost:8080/event/update?eventId=${eventId}`, {
             method: 'PUT',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -125,6 +139,9 @@ export function EventPage() {
             });
 
             const statusCode = response.status;
+            if(statusCode == 409){
+                setUserId(null);
+            }
             console.log('Код ответа:', statusCode);
             alert('Событие успешно отредактировано!');
             window.location.reload();
@@ -188,7 +205,9 @@ export function EventPage() {
                                //id={`${id}-background-create-event`}
                                 onClick={() => handleBackgroundClick(bgd)}
                                 style={{
-                                    border: `3px solid ${backgroundBorderColor === bgd || event.background === bgd ? '#818CF8' : 'black'}`,
+                                    outline: `3px solid ${backgroundBorderColor === bgd || event.background === bgd ? '#112250' : 'transparent'}`,
+                                    border:  `3px solid #112250`,
+                                    outlineOffset: `3px`,
                                     backgroundImage: `url(${bgd})`,
                                     backgroundRepeat: `no-repeat`,
                                     backgroundSize: `cover`,
@@ -207,7 +226,9 @@ export function EventPage() {
                                 <div
                                 onClick={() => handleTextColorClick(index)}
                                 style={{
-                                    border: `3px solid ${borderNameColor === index || event.textColor === color ? '#818CF8' : 'black'}`,
+                                    outline: `3px solid ${borderNameColor === index || event.textColor === color ? '#112250' : 'transparent'}`,
+                                    border: `3px solid #112250`,
+                                    outlineOffset: `3px`,
                                     backgroundColor: `${color}`
                                 }}
                                 ></div>
@@ -220,10 +241,10 @@ export function EventPage() {
                             {textFonts.map((font) => (
                             <div>
                                 {event.textFont === font && (
-                                    <input type="radio" id={font} name="font" value={font} defaultChecked onChange={() => handleTextFontCLick(font)} />
+                                    <input style={{accentColor: '#112250'}} type="radio" id={font} name="font" value={font} defaultChecked onChange={() => handleTextFontCLick(font)} />
                                 )}
                                 {event.textFont != font && (
-                                    <input type="radio" id={font} name="font" value={font} onChange={() => handleTextFontCLick(font)} />
+                                    <input style={{accentColor: '#112250'}} type="radio" id={font} name="font" value={font} onChange={() => handleTextFontCLick(font)} />
                                 )}
                                 <label for={font}>{font}</label>
                             </div>
@@ -234,16 +255,16 @@ export function EventPage() {
                 <div className='third-block-create-event'>
                     <div>Выберите размер шрифта</div>
                     <div>
-                        <input type="range" id="volume" name='volume' min="28" max="60" defaultValue={event.textSize} onChange={(e) => handletextSizeClick(e.target.value)} />
+                        <input style={{accentColor: '#112250'}} type="range" id="volume" name='volume' min="28" max="60" defaultValue={event.textSize} onChange={(e) => handletextSizeClick(e.target.value)} />
                     </div>
                     {(eventId && !err) && (
                         <div>
-                            <button onClick={eventId != null ? () => patchEvent() : () => postEvent() }>Save</button>
+                            <button onClick={eventId != null ? () => putEvent() : () => postEvent() }>Save</button>
                         </div> 
                     )}
                     {!eventId && (
                         <div>
-                            <button onClick={eventId != null ? () => patchEvent() : () => postEvent() }>Save</button>
+                            <button onClick={eventId != null ? () => putEvent() : () => postEvent() }>Save</button>
                         </div> 
                     )}
                 </div>

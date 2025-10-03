@@ -1,17 +1,18 @@
 package com.pepino.backend.service.impl;
 
+import com.pepino.backend.config.auth.UserDetailsImpl;
 import com.pepino.backend.entity.User;
 import com.pepino.backend.exception.UserException;
 import com.pepino.backend.repository.UserRepository;
 import com.pepino.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, UserDetailsService {
     private final UserRepository userRepository;
 
     @Autowired
@@ -21,12 +22,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void saveUser(User user) throws UserException {
-        Example<User> example = Example.of(user);
-        if (userRepository.exists(example)) {
-            throw new UserException("Пользователь с таким адресом электронной почты уже существует");
-        } else {
-            userRepository.save(user);
-            System.out.printf(String.valueOf(user.getId()));
+        if (userRepository.existsByLogin(user.getLogin())) {
+            throw new UserException("Пользователь с таким логином уже существует");
         }
+        if (userRepository.existsByEmail(user.getEmail())) {
+            throw new UserException("Пользователь с таким адресом электронной почты уже существует");
+        }
+        userRepository.save(user);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByLogin(username).orElseThrow(() -> new UsernameNotFoundException(
+                String.format("User '%s' not found", username)
+        ));
+        return UserDetailsImpl.build(user);
     }
 }
