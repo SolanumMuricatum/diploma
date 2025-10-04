@@ -1,13 +1,18 @@
 // src/components/PrivateRoute.js
 import { Navigate } from "react-router-dom";
-import { useAuth } from '../auth/AuthProvider';
+import { useAuth } from './AuthProvider';
+import { useEffect } from "react";
 
-function PrivateLazyRoute({ children }) {
+function PrivateRoute({ children }) {
   const { userId, loading, checkAuth } = useAuth();
+
+  useEffect(() => {
+    checkAuth();
+  }, []);
 
   if (loading) return <div>Загрузка...</div>;
 
   return userId ? children : <Navigate to="/login" />;
 }
 
-export default PrivateLazyRoute;
+export default PrivateRoute; 

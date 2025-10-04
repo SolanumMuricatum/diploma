@@ -1,24 +1,24 @@
 package com.pepino.backend.service.impl;
 
-import com.pepino.backend.config.auth.JwtCore;
+import com.pepino.backend.config.auth.JwtAccess;
+import com.pepino.backend.config.auth.JwtRefresh;
 import com.pepino.backend.config.auth.UserDetailsImpl;
 import com.pepino.backend.config.properties.PublicEndpointsProperties;
 import com.pepino.backend.dto.LoginRequestDto;
+import com.pepino.backend.dto.UserDto;
 import com.pepino.backend.exception.UserException;
 import com.pepino.backend.repository.UserRepository;
 import com.pepino.backend.service.AuthService;
+import com.pepino.backend.service.TokenService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.web.server.Cookie;
-import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.http.ResponseCookie;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -31,9 +31,10 @@ public class AuthServiceImpl implements AuthService {
     private final UserRepository userRepository;
     private final AuthenticationManager authenticationManager;
     private final PublicEndpointsProperties publicEndpointsProperties;
-    private final JwtCore jwtCore;
+    private final TokenService tokenService;
+
     @Override
-    public String login(
+    public void login(
             @RequestBody LoginRequestDto loginRequestDTO,
             HttpServletRequest request,
             HttpServletResponse response
@@ -52,19 +53,8 @@ public class AuthServiceImpl implements AuthService {
         }
         //не обязательно! контекст будет ставиться при токен фильтре
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = jwtCore.generateToken(authentication);
-        //response.setHeader("Authorization", "Bearer " + jwt);
 
-        ResponseCookie cookie = ResponseCookie.from("AuthToken", jwt)
-                .httpOnly(true)
-                .secure(true)
-                .path("/")
-                .maxAge(Duration.ofHours(1))
-                .sameSite("Strict")
-                .build();
-
-        response.addHeader("Set-Cookie", cookie.toString());
-        return jwt;
+        tokenService.createTokenCookies(authentication, response);
     }
 
     @Override
@@ -79,10 +69,10 @@ public class AuthServiceImpl implements AuthService {
         Object principal = authentication.getPrincipal();
 
         if (principal instanceof UserDetailsImpl userDetailsImpl) {
-
             return userDetailsImpl.getId();
+        } else {
+            throw new UserException("User not found");
         }
-
-        throw new UserException("Пользователь не найден");
     }
+
 }

@@ -22,7 +22,8 @@ public class AuthController {
             HttpServletRequest request,
             HttpServletResponse response
     ) throws Exception {
-        return ResponseEntity.ok(authService.login(loginRequestDTO, request, response));
+        authService.login(loginRequestDTO, request, response);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/auth/check")

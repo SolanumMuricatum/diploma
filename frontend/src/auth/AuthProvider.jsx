@@ -10,9 +10,9 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   // Проверка авторизации при первом рендере
-  useEffect(() => {
+  /* useEffect(() => {
     checkAuth();
-  }, []);
+  }, []); */
 
   const checkAuth = () => {
     setLoading(true);

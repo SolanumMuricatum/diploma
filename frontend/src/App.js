@@ -8,7 +8,7 @@ import { Login } from './pages/Login';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { SupportPage } from './pages/SupportPage';
-import PrivateLazyRoute from './auth/PrivateLazyRoute';
+import PrivateRoute from './auth/PrivateRoute';
 import { AuthProvider } from "./auth/AuthProvider";
 
 function App() {
@@ -38,25 +38,25 @@ function App() {
               <Route
                 path="/main/:eventId"
                 element={
-                  <PrivateLazyRoute>
+                  <PrivateRoute>
                     <Main />
-                  </PrivateLazyRoute>
+                  </PrivateRoute>
                 }
               />
               <Route
                 path="/event/create"
                 element={
-                  <PrivateLazyRoute>
+                  <PrivateRoute>
                     <EventPage />
-                  </PrivateLazyRoute>
+                  </PrivateRoute>
                 }
               />
               <Route
                 path="/event/update/:eventId"
                 element={
-                  <PrivateLazyRoute>
+                  <PrivateRoute>
                     <EventPage />
-                  </PrivateLazyRoute>
+                  </PrivateRoute>
                 }
               />
 

@@ -3,7 +3,7 @@ package com.pepino.backend.config.auth;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
-import lombok.Data;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
@@ -15,11 +15,15 @@ import java.util.Date;
 
 @Component
 @RequiredArgsConstructor
-public class JwtCore {
-    @Value("${app.token.secret}")
+public class JwtRefresh {
+    @Value("${app.token.refresh.secret}")
     private String secret;
-    @Value("${app.token.expirationMs}")
+    @Getter
+    @Value("${app.token.refresh.expirationMs}")
     private int lifetime;
+    @Getter
+    @Value("${app.token.refresh.name}")
+    private String name;
     private Key key;
 
     @PostConstruct
@@ -37,7 +41,7 @@ public class JwtCore {
                 .compact();
     }
 
-    public String getNameFromJwt(String token) {
+    public String getUsernameFromJwt(String token) {
         return Jwts.parser()
                 .verifyWith((SecretKey) key) // проверка подписи
                 .build()
