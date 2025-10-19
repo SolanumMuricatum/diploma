@@ -13,6 +13,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseCookie;
@@ -29,7 +30,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Component
-@AllArgsConstructor
+@RequiredArgsConstructor
 @NonNullApi
 public class TokenFilter extends OncePerRequestFilter {
     private final JwtAccess jwtAccess;
@@ -37,8 +38,8 @@ public class TokenFilter extends OncePerRequestFilter {
     private final PublicEndpointsProperties publicEndpointsProperties;
     private final UserDetailsService userDetailsService;
     private final TokenService tokenService;
-    private static final Logger logger = LoggerFactory.getLogger(TokenFilter.class);
-    private static String userNameFromRefreshToken;
+    private final Logger logger = LoggerFactory.getLogger(TokenFilter.class);
+    private String userNameFromRefreshToken;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -50,7 +51,7 @@ public class TokenFilter extends OncePerRequestFilter {
 
         try {
             extractToken(request, response);
-        } catch (AuthException e) {
+        } catch (Exception e) {
             logger.error("Authentication failed: {}", e.getMessage());
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, e.getMessage());
             return;

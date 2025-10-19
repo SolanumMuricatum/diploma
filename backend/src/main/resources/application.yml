@@ -23,11 +23,11 @@ app:
     access:
       name: "AccessToken"
       secret: "pepino is a bushy perennial plant (Solanum muricatum) of the nightshade family that is native to temperate uplands of South America and has an edible usually purple-marked yellow fruit"
-      expirationMs: 60000
+      expirationMs: 1800000
     refresh:
       name: "RefreshToken"
       secret: "And so, Sally can wait, she knows it's too late, as we're walkin' on by. Her soul slides away, but don't look back in anger, I heard you say"
-      expirationMs: 180000
+      expirationMs: 604800000
   endpoints:
-    login: "/login"
+    login: "/auth/login"
     registration: "/user/save"

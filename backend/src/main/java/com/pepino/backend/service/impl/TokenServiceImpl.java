@@ -42,4 +42,28 @@ public class TokenServiceImpl implements TokenService {
         response.addHeader("Set-Cookie", accessTokenCookie.toString());
         response.addHeader("Set-Cookie", refreshTokenCookie.toString());
     }
+
+    @Override
+    public void deleteTokenCookies(HttpServletResponse response){
+
+        ResponseCookie accessTokenCookie = ResponseCookie.from(jwtAccess.getName())
+                .httpOnly(true)
+                .secure(true)
+                .path("/")
+                .maxAge(Duration.ofMillis(0))
+                .sameSite("Strict")
+                .build();
+
+        ResponseCookie refreshTokenCookie = ResponseCookie.from(jwtRefresh.getName())
+                .httpOnly(true)
+                .secure(true)
+                .path("/")
+                .maxAge(Duration.ofMillis(0))
+                .sameSite("Strict")
+                .build();
+
+        response.addHeader("Set-Cookie", accessTokenCookie.toString());
+        response.addHeader("Set-Cookie", refreshTokenCookie.toString());
+
+    }
 }

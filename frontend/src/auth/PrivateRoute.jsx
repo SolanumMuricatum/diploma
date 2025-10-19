@@ -6,9 +6,9 @@ import { useEffect } from "react";
 function PrivateRoute({ children }) {
   const { userId, loading, checkAuth } = useAuth();
 
-  useEffect(() => {
+/*   useEffect(() => {
     checkAuth();
-  }, []);
+  }, []); */
 
   if (loading) return <div>Загрузка...</div>;
 

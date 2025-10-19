@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/auth")
 @CrossOrigin
 public class AuthController {
     private final AuthService authService;
@@ -26,17 +27,13 @@ public class AuthController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/auth/check")
+    @GetMapping("/check")
     public ResponseEntity<?> authCheck() throws Exception {
         return ResponseEntity.ok(authService.authCheck());
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<String> logout() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null) {
-            SecurityContextHolder.clearContext();
-        }
-        return ResponseEntity.ok("The exit was successful");
+    public ResponseEntity<String> logout(HttpServletResponse response) throws Exception {
+        return ResponseEntity.ok(authService.authDelete(response));
     }
 }

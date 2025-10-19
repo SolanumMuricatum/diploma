@@ -1,29 +1,29 @@
-import '../styles/createEvent.css';
-import bg1 from '../photo/event/backgrounds/1.png';
-import bg2 from '../photo/event/backgrounds/2.png';
-import bg3 from '../photo/event/backgrounds/3.png';
-import bg4 from '../photo/event/backgrounds/4.png';
-import bg5 from '../photo/event/backgrounds/5.png';
-import bg6 from '../photo/event/backgrounds/6.png';
-import bg7 from '../photo/event/backgrounds/7.png';
-import bg8 from '../photo/event/backgrounds/8.png';
-import bg9 from '../photo/event/backgrounds/9.png';
-import bg10 from '../photo/event/backgrounds/10.png';
-import bg11 from '../photo/event/backgrounds/11.png';
-import bg12 from '../photo/event/backgrounds/12.png';
-import bg13 from '../photo/event/backgrounds/13.png';
-import bg14 from '../photo/event/backgrounds/14.png';
-import bg15 from '../photo/event/backgrounds/15.png';
+import '../../styles/albums.css';
+import bg1 from '../../photo/event/backgrounds/1.png';
+import bg2 from '../../photo/event/backgrounds/2.png';
+import bg3 from '../../photo/event/backgrounds/3.png';
+import bg4 from '../../photo/event/backgrounds/4.png';
+import bg5 from '../../photo/event/backgrounds/5.png';
+import bg6 from '../../photo/event/backgrounds/6.png';
+import bg7 from '../../photo/event/backgrounds/7.png';
+import bg8 from '../../photo/event/backgrounds/8.png';
+import bg9 from '../../photo/event/backgrounds/9.png';
+import bg10 from '../../photo/event/backgrounds/10.png';
+import bg11 from '../../photo/event/backgrounds/11.png';
+import bg12 from '../../photo/event/backgrounds/12.png';
+import bg13 from '../../photo/event/backgrounds/13.png';
+import bg14 from '../../photo/event/backgrounds/14.png';
+import bg15 from '../../photo/event/backgrounds/15.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { ReactComponent as CameraIcon } from '../photo/photo-camera-svgrepo-com.svg';
-import { ReactComponent as PhotoIcon } from '../photo/picture-svgrepo-com.svg';
+import { ReactComponent as CameraIcon } from '../../photo/photo-camera-svgrepo-com.svg';
+import { ReactComponent as PhotoIcon } from '../../photo/picture-svgrepo-com.svg';
 import { faArrowUp, faDirections } from '@fortawesome/free-solid-svg-icons'
 import React, { useEffect, useState } from 'react';
-import { Event } from '../connection/Event';
+import { Event } from '../../connection/Event';
 import { useParams } from 'react-router-dom'; // Убедитесь, что это правильно
-import { useAuth } from '../auth/AuthProvider';
+import { useAuth } from '../../auth/AuthProvider';
 
-export function EventPage() {
+export function Albums() {
     const { eventId } = useParams();
     const [disableButton, setDisableButton] = useState(true);
     const [err, setErr] = useState(false);

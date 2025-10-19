@@ -2,37 +2,44 @@
 import React from "react";
 import { createContext, useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { useNavigate } from 'react-router-dom'; 
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [userId, setUserId] = useState(null);
+  const navigate = useNavigate();
+  const [userId, setUserId] = useState();
   const [loading, setLoading] = useState(true);
 
-  // Проверка авторизации при первом рендере
-  /* useEffect(() => {
-    checkAuth();
-  }, []); */
-
-  const checkAuth = () => {
-    setLoading(true);
-    fetch("http://localhost:8080/auth/check", {
+const checkAuth = async () => {
+  setLoading(true);
+  try {
+    const res = await fetch("http://localhost:8080/auth/check", {
       method: "GET",
       credentials: "include",
-    })
-      .then((res) => {
-        if (res.ok) return res.json();
-        throw new Error("Not authorized");
-      })
-      .then((data) => setUserId(data))
-      .catch(() => setUserId(null))
-      .finally(() => setLoading(false));
-  };
+    });
+
+    if (!res.ok) throw new Error("Not authorized");
+
+    const data = await res.json();
+    setUserId(data);  
+  } catch (err) {
+    setUserId(null);
+  } finally {
+    setLoading(false);
+  }
+};
+
+
+    // Проверка авторизации при первом рендере
+  useEffect(() => {
+    checkAuth();
+  }, []);
 
   // Вызов при логине
   const login = async ( user ) => {
     try {
-      const data = await apiFetch(`http://localhost:8080/login`, {
+      const data = await apiFetch(`http://localhost:8080/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -43,7 +50,10 @@ export function AuthProvider({ children }) {
       });
 
       toast.success('Пользователь успешно вошёл в систему!', {
-        onClose: () => window.location.reload()
+        onClose: () => {
+          navigate(`/main`)
+          window.location.reload();
+        }
       });
       console.log('Ответ сервера:', data);
       return data;
@@ -81,7 +91,13 @@ export function AuthProvider({ children }) {
       method: "POST",
       credentials: "include",
     });
-    setUserId(null);
+    setUserId(null); //вернуть когда допишу метод сервера
+    toast.success('Вы вышли из аккаунта', {
+      onClose: () => {
+        navigate(`/`)
+        window.location.reload();
+      }
+    });
   };
 
   return (

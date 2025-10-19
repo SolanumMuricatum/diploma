@@ -1,67 +1,43 @@
-
-
-.friend-photo-container{
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-/*     grid-template-rows: repeat(2, 300px); */
-    justify-items: center;
-    align-items: center;
-    border-bottom: 2px solid black;
-}
-
-.friend-photo{
-    margin: 50px;
-    width: 150px;
-    height: 200px;
-    background-image: url(../photo/me.jpg);
-    background-size: cover;
-    background-position: center;
-}
-
-.friend-name{
+.main-container{
+    width: 100%;
+    padding-top: 200px;
     display: flex;
+    justify-content: center;
     align-items: center;
-    height: 70px;
+}
+
+
+.main-photoalbum-container{
+    width: 500px;
+    height: 150px;
+}
+
+.main-photoalbum-container > p{
     font-size: 16pt;
-    padding-left: 20px;
+    text-align: center;
 }
 
-.friend-avatar{
-    width: 50px;
+.main-photoalbum-container > div{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.main-photoalbum-container > div > button{
+    width: 200px;
     height: 50px;
-    border-radius: 50%;
-    border: 1px solid black;
-    background-image: url(../photo/me.jpg);
-    background-size: cover;
-    background-position: center; ;
+    font-size: 12pt;
+    color: #fafafa;
+    background-color: #112250;
+    transition: ease-in 0.3s;
+    border: 3px solid #112250;
 }
 
-.friend-data-container{
-    display: flex;
-    flex-direction: row;
-    justify-content: start;
-    align-items: center;
-}
-
-.friend-select-all-container{
-    display: flex;
-    flex-direction: row;
-    justify-content: end;
-    align-items: center;
-}
-
-.friend-data-container-wrapper{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 2px solid black;
-    padding-left: 70px;
-    padding-right: 70px;
-}
-
-input[type="checkbox"]{
-  accent-color: #C56FFF;
-  width: 20px;
-  height: 20px;
+.main-photoalbum-container > div > button:hover{
+    cursor: pointer;
+    background-color: #D6AF8D;
+    border-color: #0C7F69;
+    color: black;
 }

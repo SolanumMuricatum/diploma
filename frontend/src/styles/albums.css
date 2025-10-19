@@ -1,16 +1,16 @@
 .event-create-title{
-    height: 300px;
-    display: flex;
-    text-align: center;
+  height: 300px;
+  display: flex;
+  text-align: center;
     /* background-image: url(../photo/event/backgrounds/10.png); */
     /* background-color: #C56FFF; */
-    background-size: cover;
-    background-position: center;
-    font-size: 32pt;
-    color: black;
-    align-items: center; 
-    justify-content: center;
-    border: 1px solid black;
+  background-size: cover;
+  background-position: center;
+  font-size: 32pt;
+  color: black;
+  align-items: center; 
+  justify-content: center;
+  border: 1px solid black;
 }
 
 .event-name-input {
@@ -47,31 +47,31 @@
 }
 
 .event-constructor{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    justify-items: center;
-    align-items: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  align-items: center;
 }
 
 .background-block-create-event{
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .background-create-event{
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    justify-items: center;
-    align-items: center;
-    margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  justify-items: center;
+  align-items: center;
+  margin-top: 10px;
 }
 
 .background-create-event > div{
-    width: 50px;
-    height: 50px;
-    border-radius: 5px;
-    border: 3px solid black;
-    margin-bottom: 10px;
-    cursor: pointer;
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+  border: 3px solid black;
+  margin-bottom: 10px;
+  cursor: pointer;
 }
 
 /* .text-color-block-create-event{
@@ -79,21 +79,21 @@
 } */
 
 .text-color-create-event{
-    display: grid;
-    width: 300px;
-    grid-template-columns: repeat(5, 1fr);
-    justify-items: center;
-    align-items: center;
-    margin-top: 10px;
+  display: grid;
+  width: 300px;
+  grid-template-columns: repeat(5, 1fr);
+  justify-items: center;
+  align-items: center;
+  margin-top: 10px;
 }
 
 .text-color-create-event > div{
-    width: 30px;
-    height: 30px;
-    border-radius: 5px;
-    border: 3px solid black;
-    margin-bottom: 10px;
-    cursor: pointer;
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  border: 3px solid black;
+  margin-bottom: 10px;
+  cursor: pointer;
 }
 
 .third-block-create-event button {
@@ -104,15 +104,15 @@
   border: 3px solid #112250;
   margin-top: 50px; 
   cursor: pointer;
-}
 
-.third-block-create-event button:hover{
-  background-color: #D6AF8D;
-  border: 3px solid #0C7F69;    
-  color: black;
-}
+  &:hover {
+    background-color: #D6AF8D;
+    border: 3px solid #0C7F69;    
+    color: black;
+  }
 
-.third-block-create-event button:disabled{
-  background-color: #112250;
-  cursor: not-allowed;
+  &:disabled {
+    background-color: #112250;
+    cursor: not-allowed;
+  }
 }

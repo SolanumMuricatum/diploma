@@ -8,4 +8,5 @@ import java.time.Duration;
 
 public interface TokenService {
     void createTokenCookies(Authentication authenticationToken, HttpServletResponse response);
+    void deleteTokenCookies(HttpServletResponse response);
 }

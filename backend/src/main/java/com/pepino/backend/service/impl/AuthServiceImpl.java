@@ -75,4 +75,15 @@ public class AuthServiceImpl implements AuthService {
         }
     }
 
+    @Override
+    public String authDelete(HttpServletResponse response){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null) {
+            SecurityContextHolder.clearContext();
+            tokenService.deleteTokenCookies(response);
+            return "The exit was successful";
+        }
+
+        return "Something went wrong";
+    }
 }

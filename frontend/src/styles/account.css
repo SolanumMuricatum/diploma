@@ -1,0 +1,140 @@
+.account-container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.account-data-container{
+    margin-top: 50px;
+    width: 100%;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.account-photo-container{
+    position: relative;
+}
+
+.photo-edit-icon{
+    position: absolute;
+    right: 0px;
+    bottom: 3px;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.account-photo{
+    width: 200px;
+    height: 200px;
+    outline: 3px solid #112250;
+    outline-offset: 5px; 
+    border-radius: 50%;
+    background-image: url(../photo/me.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.account-login{
+    position: relative;
+    font-size: 16pt;
+    margin-top: 10px;
+    width: 300px;
+}
+
+.account-login label.text {
+  font-size: 0.75rem;
+  color: black;
+  font-weight: 700;
+  position: relative;
+  top: 0.5rem;
+  margin: 0 0 0 7px;
+  padding: 0 3px;
+  background-color: #f5f0e9;
+  width: fit-content;
+}
+
+.account-login input[type=text].input {
+  padding: 11px 10px;
+  font-size: 1rem;
+  border: 2px black solid;
+  border-radius: 5px;
+  background: transparent;
+}
+
+.account-login input[type=text].input:focus {
+  outline: none;
+}
+
+.account-email{
+    position: relative;
+    font-size: 16pt;
+    width: 300px;
+}
+
+.account-email label.text {
+  font-size: 0.75rem;
+  color: black;
+  font-weight: 700;
+  position: relative;
+  top: 0.5rem;
+  margin: 0 0 0 7px;
+  padding: 0 3px;
+  background-color: #f5f0e9;
+  width: fit-content;
+}
+
+.account-email input[type=text].input {
+  padding: 11px 10px;
+  font-size: 1rem;
+  border: 2px black solid;
+  border-radius: 5px;
+  background: transparent;
+}
+
+.account-email input[type=text].input:focus {
+  outline: none;
+}
+
+.account-password > button{
+    width: 300px;
+    height: 50px;
+    margin-top: 30px;
+    font-size: 12pt;
+    color: #fafafa;
+    background-color: #112250;
+    transition: ease-in 0.3s;
+    border: 3px solid #112250;
+
+    &:hover{
+        cursor: pointer;
+        background-color: #D6AF8D;
+        border-color: #0C7F69;
+        color: black;
+    }
+}
+
+.account-delete > button{
+    width: 300px;
+    height: 50px;
+    margin-top: 30px;
+    font-size: 12pt;
+    color: #fafafa;
+    background-color: #0C7F69;
+    transition: ease-in 0.3s;
+    border: 3px solid #0C7F69;
+
+    &:hover{
+        cursor: pointer;
+        background-color: #D6AF8D;
+        border-color: #0C7F69;
+        color: black;
+    }
+}

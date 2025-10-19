@@ -14,4 +14,5 @@ public interface AuthService {
     void login(LoginRequestDto requestDTO, HttpServletRequest request, HttpServletResponse response) throws Exception;
     boolean isUserExist(String email);
     UUID authCheck() throws Exception;
+    String authDelete(HttpServletResponse response) throws Exception;
 }

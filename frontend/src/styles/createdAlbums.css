@@ -1,0 +1,87 @@
+.created-albums-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+}
+
+.created-albums-wrapper{
+    display: grid;
+    width: 1260px;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+    align-items: center;
+    row-gap: 70px;
+    margin-bottom: 100px;
+}
+
+.created-album-card{
+    position: relative;
+    display: grid;
+    grid-template-columns: 125px 175px;
+    justify-items: center;
+    align-items: center;
+    width: 340px;
+    height: 190px;
+    background-color: transparent;
+    border-radius: 10px;
+    border: 3px solid #112250;
+}
+
+.created-album-image-container{
+    display: flex;
+    justify-content: start;
+    width: 100%;
+    height: 100%;
+}
+
+.created-album-image{
+    width: 80%;
+    height: 88.23%;
+    background-image: url(../../src/photo/party.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 10px;
+    margin: 10px 10px 10px 10px;
+}
+
+.created-album-card > div:nth-child(2){
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 90px 60px 25px 15px;
+}
+
+.created-album-title{
+    font-size: 14pt;
+    margin-top: 10px;
+    font-weight: 600;
+}
+
+.created-album-creator{
+    font-size: 10pt;
+    display: flex;
+    align-items: end;
+}
+
+.created-album-creator > svg{
+    margin-right: 10px;
+}
+
+.created-album-date{
+    font-size: 10pt;
+    display: flex;
+    align-items: end;
+}
+
+.created-album-date > svg{
+    margin-right: 10px;
+    margin-bottom: 2.5px;
+}
+
+.created-album-options{
+    position: absolute;
+    bottom: 14px;
+    right: 15px;
+}
