@@ -45,9 +45,9 @@ export function Header() {
             </div>
             <nav>
                 <ul>
-                    <li><a href="/">О нас</a></li>
-                    <li><a href="/">Инструкции</a></li>
-                    <li><a href="/help">Помощь</a></li>
+                    <li><a href="/">About us</a></li>
+                    <li><a href="/">Instructions</a></li>
+                    <li><a href="/help">Help</a></li>
                 </ul>
             </nav>
             {!userId && (

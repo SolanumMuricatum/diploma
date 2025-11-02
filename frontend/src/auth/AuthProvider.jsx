@@ -30,7 +30,6 @@ const checkAuth = async () => {
   }
 };
 
-
     // Проверка авторизации при первом рендере
   useEffect(() => {
     checkAuth();
@@ -71,7 +70,7 @@ const checkAuth = async () => {
       const data = await response.json().catch(() => ({}));
 
       if (!response.ok) {
-        throw new Error(data.message || `Ошибка ${response.status}`);
+        throw new Error(data.error || `Ошибка ${response.status}`);
       }
       
       return data; 

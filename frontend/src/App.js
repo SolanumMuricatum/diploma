@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, BrowserRouter } from 'react-rou
 import { Header } from './components/Header';
 import { Hello } from './pages/Hello';
 import { CurrentAlbum } from './pages/album/CurrentAlbum';
-import { Albums } from './pages/album/Albums';
+import { Album } from './pages/album/Album';
 import { Login } from './pages/Login';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -39,29 +39,29 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/account" element={<Account />} />
                 <Route path="/main" element={<Main/>} />
-                <Route path="/created/albums" element={<CreatedAlbums/>} />
-
+                <Route path="/albums/created" element={<CreatedAlbums/>} />
+                
                 <Route
-                  path="/album/:eventId"
+                  path="/albums/create"
+                  element={
+                    <PrivateRoute>
+                      <Album />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path="/albums/edit/:albumId"
+                  element={
+                    <PrivateRoute>
+                      <Album />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path="/albums/:albumId"
                   element={
                     <PrivateRoute>
                       <CurrentAlbum />
-                    </PrivateRoute>
-                  }
-                />
-                <Route
-                  path="/album/create"
-                  element={
-                    <PrivateRoute>
-                      <Albums />
-                    </PrivateRoute>
-                  }
-                />
-                <Route
-                  path="/album/edit/:eventId"
-                  element={
-                    <PrivateRoute>
-                      <Albums />
                     </PrivateRoute>
                   }
                 />

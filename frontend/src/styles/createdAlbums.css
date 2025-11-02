@@ -1,3 +1,7 @@
+.created-albums-page-container{
+    position: relative;
+}
+
 .created-albums-container{
     display: flex;
     flex-direction: column;
@@ -25,14 +29,48 @@
     height: 190px;
     background-color: transparent;
     border-radius: 10px;
-    border: 3px solid #112250;
+    border: 2px solid #0F172A;
+}
+
+.created-album-card:hover{
+    background-color: #0F172A;
+    border: 2px solid #0C7F69;
+    cursor: pointer;
+    
+    .created-album-image{
+        border: 2px solid #f5f0e9;
+    }
+
+    .created-album-title,
+    .created-album-date,
+    .created-album-creator,
+    .created-album-options{
+        color: #f5f0e9;
+    }
+}
+
+.created-album-card:active{
+    background-color: #f5f0e9;
+    border: 2px solid #0C7F69;
+    cursor: pointer;
+    
+    .created-album-image{
+        border: 2px solid #0F172A;
+    }
+
+    .created-album-title,
+    .created-album-date,
+    .created-album-creator,
+    .created-album-options{
+        color: #0F172A;
+    }
 }
 
 .created-album-image-container{
     display: flex;
     justify-content: start;
     width: 100%;
-    height: 100%;
+    height: 100%;    
 }
 
 .created-album-image{
@@ -43,6 +81,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     border-radius: 10px;
+    border: 2px solid #0F172A;
     margin: 10px 10px 10px 10px;
 }
 
@@ -84,4 +123,19 @@
     position: absolute;
     bottom: 14px;
     right: 15px;
+}
+
+.albums-created-add-icon{
+    position: sticky;
+    font-size: 32pt;
+    bottom: 50px;
+    text-align: end;
+
+    svg{
+        margin-right: 50px;
+
+        &:hover{
+            cursor: pointer;
+        }
+    }
 }

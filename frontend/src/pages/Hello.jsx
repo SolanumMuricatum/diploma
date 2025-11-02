@@ -13,8 +13,8 @@ export function Hello() {
     return (
         <div>
             <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',  marginTop: '50px', fontSize: '48pt', paddingTop: '125px', textAlign: 'center'}}>
-                Поделись <br></br> воспоминаниями
-                <button className='get-started-button' onClick={() => handleButtonClick()}>Начать</button>
+                Share your <br></br> common photos
+                <button className='get-started-button' onClick={() => handleButtonClick()}>Start</button>
                 <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginTop: '50px', width: '20px', height: '20px',}}>
                     <FontAwesomeIcon className='arrow-get-started-icon' icon={faArrowUp}/>
 {/*                 <div>Press to follow the instructions</div> */}

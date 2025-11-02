@@ -23,11 +23,11 @@ import { Event } from '../../connection/Event';
 import { useParams } from 'react-router-dom'; // Убедитесь, что это правильно
 import { useAuth } from '../../auth/AuthProvider';
 
-export function Albums() {
-    const { eventId } = useParams();
+export function Album() {
+    const { albumId } = useParams();
     const [disableButton, setDisableButton] = useState(true);
     const [err, setErr] = useState(false);
-    const [event, setEvent] = useState({ name: '', background: '', textColor: '#000000', textFont: 'None', textSize: ''});
+    const [album, setAlbum] = useState({ name: '', background: '', textColor: '#000000', textFont: 'None', textSize: ''});
     const { userId, setUserId } = useAuth();
     //const userId  = '68994ca2-998a-48db-9696-2e7bc761b977';
     const [backgroundBorderColor, setBackgroundBorderColor] = useState(null);
@@ -35,10 +35,10 @@ export function Albums() {
     const backgrounds = [bg1, bg2, bg3, bg4, bg5, bg6, bg7, bg8, bg9, bg10, bg11, bg12, bg13, bg14, bg15];
 
     useEffect(() => {
-        if(eventId != undefined){
-            const getEvent = async () => {
+        if(albumId != undefined){
+            const getAlbum = async () => {
                 try {
-                    let response = await fetch(`http://localhost:8080/event/get?id=${eventId}`, {
+                    let response = await fetch(`http://localhost:8080/album?id=${albumId}`, {
                         method: 'GET',
                         headers: { 'Content-Type': 'application/json' },
                         credentials: 'include',
@@ -50,66 +50,66 @@ export function Albums() {
                         throw new Error('Network response was not ok');
                     }
                     let data = await response.json(); // Получаем данные только один раз
-                    setEvent(data);
+                    setAlbum(data);
                     setDisableButton(false);
                 } catch (error) {
                     setErr(true);
                     console.error('Ошибка при получении события:', error);
                 }
             };
-            getEvent();
+            getAlbum();
         }
     }, []);
 
     const handleInputChange = (e) => {
         const { value } = e.target;
-        setEvent((prevEvent) => ({
-        ...prevEvent,
+        setAlbum((prevAlbum) => ({
+        ...prevAlbum,
         ['name']: value,
         }));
     };
 
     const handleTextColorClick = (index) => {
         setBorderNameColor(index); //just it to be existed
-        setEvent((prevEvent) => ({
-        ...prevEvent,
+        setAlbum((prevAlbum) => ({
+        ...prevAlbum,
         ['textColor']: textColors[index],
         }));
     };
 
     const handleBackgroundClick = (bgd) => {
         setBackgroundBorderColor(bgd); //just it to be existed
-        setEvent((prevEvent) => ({
-        ...prevEvent,
+        setAlbum((prevAlbum) => ({
+        ...prevAlbum,
         ['background']: bgd,
         }));
     };
 
     const handleTextFontCLick = (font) => {
-        setEvent((prevEvent) => ({
-             ... prevEvent,
+        setAlbum((prevAlbum) => ({
+             ... prevAlbum,
             ['textFont']: font,
         }));
     }
 
     const  handletextSizeClick = (value) =>{
         console.log(value);
-        setEvent((prevEvent) => ({
-        ...prevEvent,
+        setAlbum((prevAlbum) => ({
+        ...prevAlbum,
         ['textSize']: value,
         }));
-        console.log(eventId);
+        console.log(albumId);
     }
 
-    const postEvent = async () => {
+    const postAlbum = async () => {
         try {
-            const response = await fetch(`http://localhost:8080/event/save?creatorId=${userId}`, {
+            const response = await fetch(`http://localhost:8080/album/save?creatorId=${userId}`, {
             method: 'POST',
             credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({name: event.name, background: event.background, textColor: event.textColor, textFont: event.textFont, textSize: event.textSize}),
+            body: JSON.stringify({name: album.name, background:album.background, textColor: album.textColor, textFont: album.textFont, textSize: album.textSize}),
             });
 
             const statusCode = response.status;
@@ -127,15 +127,15 @@ export function Albums() {
         }
     };
 
-    const putEvent = async () => {
+    const putAlbum = async () => {
         try {
-            const response = await fetch(`http://localhost:8080/event/update?eventId=${eventId}`, {
+            const response = await fetch(`http://localhost:8080/album/update?albumId=${albumId}`, {
             method: 'PUT',
             credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({name: event.name, background: event.background, textColor: event.textColor, textFont: event.textFont, textSize: event.textSize}),
+            body: JSON.stringify({name: album.name, background: album.background, textColor: album.textColor, textFont: album.textFont, textSize: album.textSize}),
             });
 
             const statusCode = response.status;
@@ -178,34 +178,34 @@ export function Albums() {
         <div>
             {err && (
                 <div>
-                    <div className='event-create-title'>
+                    <div className='album-create-title'>
                         Ошибка доступа к мероприятию
                     </div>
                 </div>
             )}
             {!err && (
                 <div>
-                    <div className='event-create-title' style={{backgroundImage: `url(${event.background})`, color: `${event.textColor}`, fontFamily: `${event.textFont === "None" ? `-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"` : `${event.textFont}` }`, fontSize: `${event.textSize}pt`}}>
-                        {event.name}
+                    <div className='album-create-title' style={{backgroundImage: `url(${album.background})`, color: `${album.textColor}`, fontFamily: `${album.textFont === "None" ? `-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"` : `${album.textFont}` }`, fontSize: `${album.textSize}pt`}}>
+                        {album.name}
                     </div>
                 </div>
             )}
-            <div className='event-constructor'>
-                <div className='first-block-create-event'>
-                    <div class="event-name-input">
+            <div className='album-constructor'>
+                <div className='first-block-create-album'>
+                    <div class="album-name-input">
                         <label for="input" class="text">Название:</label>
-                        <input onChange={handleInputChange} type="text" placeholder="Пишите здесь..." name="input" value={event.name} class="input" maxLength={50}/>
+                        <input onChange={handleInputChange} type="text" placeholder="Пишите здесь..." name="input" value={album.name} class="input" maxLength={50}/>
                     </div> 
-                    <div className='background-block-create-event'>
+                    <div className='background-block-create-album'>
                         <div>Выберите фон</div>
-                        <div className="background-create-event">
+                        <div className="background-create-album">
                             {backgrounds.map((bgd) => (
                                 <div
                                // key={id}
-                               //id={`${id}-background-create-event`}
+                               //id={`${id}-background-create-album`}
                                 onClick={() => handleBackgroundClick(bgd)}
                                 style={{
-                                    outline: `3px solid ${backgroundBorderColor === bgd || event.background === bgd ? '#112250' : 'transparent'}`,
+                                    outline: `3px solid ${backgroundBorderColor === bgd || album.background === bgd ? '#112250' : 'transparent'}`,
                                     border:  `3px solid #112250`,
                                     outlineOffset: `3px`,
                                     backgroundImage: `url(${bgd})`,
@@ -218,15 +218,15 @@ export function Albums() {
                         </div>
                     </div>
                 </div>
-                <div className='second-block-create-event'>
-                    <div className='text-color-block-create-event'>
+                <div className='second-block-create-album'>
+                    <div className='text-color-block-create-album'>
                         <div>Выберите цвет текста</div>
-                        <div className="text-color-create-event">
+                        <div className="text-color-create-album">
                             {textColors.map((color, index) => (
                                 <div
                                 onClick={() => handleTextColorClick(index)}
                                 style={{
-                                    outline: `3px solid ${borderNameColor === index || event.textColor === color ? '#112250' : 'transparent'}`,
+                                    outline: `3px solid ${borderNameColor === index || album.textColor === color ? '#112250' : 'transparent'}`,
                                     border: `3px solid #112250`,
                                     outlineOffset: `3px`,
                                     backgroundColor: `${color}`
@@ -235,15 +235,15 @@ export function Albums() {
                             ))}
                         </div>
                     </div>
-                    <div classname='text-font-block-create-event'>
+                    <div classname='text-font-block-create-album'>
                         <div>Выберите шрифт</div>
-                        <div className="text-font-create-event">
+                        <div className="text-font-create-album">
                             {textFonts.map((font) => (
                             <div>
-                                {event.textFont === font && (
+                                {album.textFont === font && (
                                     <input style={{accentColor: '#112250'}} type="radio" id={font} name="font" value={font} defaultChecked onChange={() => handleTextFontCLick(font)} />
                                 )}
-                                {event.textFont != font && (
+                                {album.textFont != font && (
                                     <input style={{accentColor: '#112250'}} type="radio" id={font} name="font" value={font} onChange={() => handleTextFontCLick(font)} />
                                 )}
                                 <label for={font}>{font}</label>
@@ -252,20 +252,17 @@ export function Albums() {
                         </div>
                     </div>
                 </div>
-                <div className='third-block-create-event'>
+                <div className='third-block-create-album'>
                     <div>Выберите размер шрифта</div>
                     <div>
-                        <input style={{accentColor: '#112250'}} type="range" id="volume" name='volume' min="28" max="60" defaultValue={event.textSize} onChange={(e) => handletextSizeClick(e.target.value)} />
+                        <input style={{accentColor: '#112250'}} type="range" id="volume" name='volume' min="28" max="60" defaultValue={album.textSize} onChange={(e) => handletextSizeClick(e.target.value)} />
                     </div>
-                    {(eventId && !err) && (
-                        <div>
-                            <button onClick={eventId != null ? () => putEvent() : () => postEvent() }>Save</button>
-                        </div> 
-                    )}
-                    {!eventId && (
-                        <div>
-                            <button onClick={eventId != null ? () => putEvent() : () => postEvent() }>Save</button>
-                        </div> 
+                    {!err && (
+                    <div>
+                        <button onClick={albumId ? putAlbum : postAlbum}>
+                        Save
+                        </button>
+                    </div>
                     )}
                 </div>
             </div>
