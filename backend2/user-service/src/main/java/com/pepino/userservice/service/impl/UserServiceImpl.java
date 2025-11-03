@@ -5,6 +5,7 @@ import com.pepino.userservice.repository.UserRepository;
 import com.pepino.userservice.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -20,11 +21,8 @@ public class UserServiceImpl implements UserService {
     public User saveUser(User user) throws Exception {
         String hashed = passwordEncoder.encode(user.getPassword());
         user.setPassword(hashed);
-        if (userRepository.existsByLogin(user.getLogin())) {
-            throw new Exception("Пользователь с таким логином уже существует");
-        }
-        if (userRepository.existsByEmail(user.getEmail())) {
-            throw new Exception("Пользователь с таким адресом электронной почты уже существует");
+        if (userRepository.existsByLogin(user.getLogin()) || userRepository.existsByEmail(user.getEmail())) {
+            throw new BadCredentialsException("Пользователь с таким логином или почтой уже существует");
         }
         userRepository.save(user);
         return user;

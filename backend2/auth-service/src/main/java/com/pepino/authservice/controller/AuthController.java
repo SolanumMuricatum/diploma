@@ -24,6 +24,7 @@ public class AuthController {
             @RequestBody LoginRequest loginRequest,
             ServerWebExchange exchange
     ) throws Exception {
+        System.out.println("Login request received: " + loginRequest);
         return authService.login(loginRequest, exchange)
                 .then(Mono.just(ResponseEntity.ok().build()));
     }

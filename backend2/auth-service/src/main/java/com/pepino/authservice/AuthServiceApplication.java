@@ -43,7 +43,7 @@ public class AuthServiceApplication {
                 .route("user-service", r -> r
                         .path("/user/**")
                         .filters(f -> f.filter(addInternalAuthFilter()))
-                        .uri("http://user-service")
+                        .uri("lb://user-service")
                 )
                 .build();
     }
