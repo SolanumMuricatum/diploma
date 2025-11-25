@@ -2,13 +2,16 @@ spring:
   application:
     name: user-service
   datasource:
-    url: jdbc:postgresql://localhost:5432/diploma_db
     username: postgres
     password: 1111
+    url: jdbc:postgresql://localhost:5432/user_service_db
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
+    show-sql: true
+  liquibase:
+    change-log: db/changelog/main-changelog.yml
 
 server:
   port: 8081

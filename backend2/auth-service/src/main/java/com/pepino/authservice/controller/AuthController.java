@@ -24,7 +24,6 @@ public class AuthController {
             @RequestBody LoginRequest loginRequest,
             ServerWebExchange exchange
     ) throws Exception {
-        System.out.println("Login request received: " + loginRequest);
         return authService.login(loginRequest, exchange)
                 .then(Mono.just(ResponseEntity.ok().build()));
     }
@@ -46,8 +45,8 @@ public class AuthController {
     }
 
     //защищённые эндпоинты (я ж не девопс чтобы это настраивать)
-    @GetMapping("/internal-service/token/{service-name}")
-    public ResponseEntity<?> getInternalToken(@PathVariable("service-name") String serviceName) throws Exception {
+    @GetMapping("/internal-service/token")
+    public ResponseEntity<?> getInternalToken(@RequestParam("service-name") String serviceName) throws Exception {
         return ResponseEntity.ok(authService.getInternalServiceToken(serviceName));
     }
 

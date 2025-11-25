@@ -71,7 +71,7 @@ export const Login = () => {
       const data = await response.json().catch(() => ({}));
 
       if (!response.ok) {
-        throw new Error(data.message || `Ошибка ${response.status}`);
+        throw new Error(data.error || `Ошибка ${response.status}`);
       }
 
       return data; 

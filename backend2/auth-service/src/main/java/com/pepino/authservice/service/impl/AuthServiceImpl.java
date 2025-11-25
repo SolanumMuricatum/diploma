@@ -24,6 +24,8 @@ import reactor.core.publisher.Mono;
 
 import java.nio.charset.StandardCharsets;
 import java.security.PublicKey;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 @Service
@@ -58,13 +60,16 @@ public class AuthServiceImpl implements AuthService {
     }*/
 
     @Override
-    public Mono<UUID> authCheck() {
+    public Mono<Map<String, String>> authCheck() {
         return ReactiveSecurityContextHolder.getContext()
-                .map(SecurityContext::getAuthentication) // <— используем контекст из Mono
+                .map(SecurityContext::getAuthentication)
                 .map(Authentication::getPrincipal)
                 .flatMap(principal -> {
                     if (principal instanceof UserDetailsImpl userDetailsImpl) {
-                        return Mono.just(userDetailsImpl.getId());
+                        Map<String, String> response = new HashMap<>();
+                        response.put("userId", userDetailsImpl.getId().toString());
+                        response.put("userLogin", userDetailsImpl.getUsername());
+                        return Mono.just(response);
                     } else {
                         return Mono.error(new Exception("User not found"));
                     }

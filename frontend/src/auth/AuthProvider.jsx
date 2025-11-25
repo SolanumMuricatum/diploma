@@ -9,26 +9,33 @@ const AuthContext = createContext();
 export function AuthProvider({ children }) {
   const navigate = useNavigate();
   const [userId, setUserId] = useState();
+  const [userLogin, setUserLogin] = useState();
   const [loading, setLoading] = useState(true);
 
-const checkAuth = async () => {
-  setLoading(true);
-  try {
-    const res = await fetch("http://localhost:8080/auth/check", {
-      method: "GET",
-      credentials: "include",
-    });
+  const checkAuth = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch("http://localhost:8080/auth/check", {
+        method: "GET",
+        credentials: "include",
+      });
 
-    if (!res.ok) throw new Error("Not authorized");
+      if (!res.ok) throw new Error("Not authorized");
 
-    const data = await res.json();
-    setUserId(data);  
-  } catch (err) {
-    setUserId(null);
-  } finally {
-    setLoading(false);
-  }
-};
+      const data = await res.json();
+      setUserId(data.userId); 
+      setUserLogin(data.userLogin);
+    } catch (err) {
+      setUserId(null);
+      setUserLogin(null);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    console.log('✅ userLogin изменился:', userLogin);
+  }, [userLogin]);
 
     // Проверка авторизации при первом рендере
   useEffect(() => {
@@ -48,7 +55,7 @@ const checkAuth = async () => {
         }),
       });
 
-      toast.success('Пользователь успешно вошёл в систему!', {
+      toast.success(`Пользователь успешно вошёл в систему!`, {
         onClose: () => {
           navigate(`/main`)
           window.location.reload();
@@ -58,6 +65,7 @@ const checkAuth = async () => {
       return data;
 
     } catch (error) {
+      setUserLogin(null);
       toast.error(error.message);
       console.error(error);
       return { error: error.message };
@@ -77,6 +85,7 @@ const checkAuth = async () => {
 
     } catch (error) {
       setUserId(null);
+      setUserLogin(null);
       if (error instanceof TypeError) {
         throw new Error('Сервер недоступен. Попробуйте позже.');
       }
@@ -91,6 +100,7 @@ const checkAuth = async () => {
       credentials: "include",
     });
     setUserId(null); //вернуть когда допишу метод сервера
+    setUserLogin(null);
     toast.success('Вы вышли из аккаунта', {
       onClose: () => {
         navigate(`/`)
@@ -100,7 +110,7 @@ const checkAuth = async () => {
   };
 
   return (
-    <AuthContext.Provider value={{ userId, loading, login, logout, checkAuth }}>
+    <AuthContext.Provider value={{ userId, userLogin, loading, login, logout, checkAuth }}>
       {children}
     </AuthContext.Provider>
   );

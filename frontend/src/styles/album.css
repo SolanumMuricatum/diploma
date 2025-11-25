@@ -1,4 +1,4 @@
-.event-title{
+.album-title{
     height: 300px;
     display: flex;
     /* background-image: url(../photo/party.jpg);
@@ -11,7 +11,7 @@
     justify-content: center;
 }
 
-.event-description{
+.album-description{
     height: 40px;
     display: flex;
     align-items: center; 

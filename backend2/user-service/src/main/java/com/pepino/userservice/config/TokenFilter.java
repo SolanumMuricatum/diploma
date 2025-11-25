@@ -31,7 +31,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @NonNullApi
 public class TokenFilter extends OncePerRequestFilter {
     private final Logger logger = LoggerFactory.getLogger(TokenFilter.class);
-    private final AuthServiceClient authServiceClient;
+    private final AuthServiceClient authServiceClient; //переписать для сервиса с клиентами
     private static final AtomicInteger requestCounter = new AtomicInteger(0);
     @Override
     protected void doFilterInternal(

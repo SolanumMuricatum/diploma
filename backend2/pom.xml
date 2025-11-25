@@ -24,6 +24,7 @@
         <module>eureka-server-application</module>
         <module>auth-service</module>
         <module>user-service</module>
+        <module>album-service</module>
         <!-- добавь остальные сервисы -->
     </modules>
 

@@ -3,6 +3,7 @@ package com.pepino.authservice.config;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.ReactiveAuthenticationManager;
 import org.springframework.security.authentication.UserDetailsRepositoryReactiveAuthenticationManager;
@@ -16,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.security.web.server.authentication.HttpStatusServerEntryPoint;
 import org.springframework.security.web.server.context.NoOpServerSecurityContextRepository;
+import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @EnableWebFluxSecurity
@@ -41,7 +43,7 @@ public class AuthConfig {
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
         return http
                 // Разрешаем CORS
-                .cors(Customizer.withDefaults())
+                .cors(ServerHttpSecurity.CorsSpec::disable)
                 // Отключаем CSRF
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
                 // Настраиваем обработку ошибок
@@ -52,7 +54,8 @@ public class AuthConfig {
                 .securityContextRepository(NoOpServerSecurityContextRepository.getInstance())
                 // Авторизация запросов
                 .authorizeExchange(exchanges -> exchanges
-                        .pathMatchers("/auth/login","/auth/internal-service/public-key", "/auth/ping").permitAll()
+                        .pathMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                        .pathMatchers("/auth/login", "/auth/internal-service/public-key", "/auth/internal-service/token", "/auth/ping", "/user/save").permitAll()
                         .anyExchange().authenticated()
                 )
                 // Подключаем свой JWT-фильтр

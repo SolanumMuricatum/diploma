@@ -1,5 +1,5 @@
 import '../../styles/createdAlbums.css';
-import { Event } from '../../connection/Event'
+import { Event } from '../../connection/Album'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ReactComponent as CameraIcon } from '../../photo/photo-camera-svgrepo-com.svg';
 import { ReactComponent as PhotoIcon } from '../../photo/picture-svgrepo-com.svg';

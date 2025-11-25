@@ -7,13 +7,14 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 import java.security.PublicKey;
+import java.util.Map;
 import java.util.UUID;
 
 public interface AuthService {
 
     Mono<?> login(LoginRequest loginRequest, ServerWebExchange exchange) throws Exception;
 /*    boolean isUserExist(String email);*/
-    Mono<UUID> authCheck() throws Exception;
+Mono<Map<String, String>> authCheck() throws Exception;
     Mono<Void> authDelete(ServerWebExchange exchange) throws Exception;
     String getInternalServiceToken(String serviceName) throws Exception;
     String getInternalServicePublicKey() throws Exception;

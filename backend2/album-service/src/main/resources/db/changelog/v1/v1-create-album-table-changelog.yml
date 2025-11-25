@@ -1,0 +1,64 @@
+databaseChangeLog:
+  - changeSet:
+      id: v1-1
+      author: pepino
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            tableExists:
+              tableName: album
+      changes:
+        - createTable:
+            tableName: album
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                  defaultValueComputed: gen_random_uuid()
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: background
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: text_color
+                  type: varchar(7)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: text_font
+                  type: varchar(25)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: text_size
+                  type: varchar(2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: start_date
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: end_date
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: creator_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: creator_login_snapshot
+                  type: varchar(25)
+                  constraints:
+                    nullable: false

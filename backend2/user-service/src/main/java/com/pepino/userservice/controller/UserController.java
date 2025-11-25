@@ -12,7 +12,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/user")
-@CrossOrigin
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
@@ -30,4 +29,5 @@ public class UserController {
         }
         return ResponseEntity.notFound().build();
     }
+
 }

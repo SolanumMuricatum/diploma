@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, BrowserRouter } from 'react-rou
 import { Header } from './components/Header';
 import { Hello } from './pages/Hello';
 import { CurrentAlbum } from './pages/album/CurrentAlbum';
-import { Album } from './pages/album/Album';
+import { CreateUpdateAlbum } from './pages/album/CreateUpdateAlbum';
 import { Login } from './pages/Login';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -45,7 +45,7 @@ function App() {
                   path="/albums/create"
                   element={
                     <PrivateRoute>
-                      <Album />
+                      <CreateUpdateAlbum />
                     </PrivateRoute>
                   }
                 />
@@ -53,7 +53,7 @@ function App() {
                   path="/albums/edit/:albumId"
                   element={
                     <PrivateRoute>
-                      <Album />
+                      <CreateUpdateAlbum />
                     </PrivateRoute>
                   }
                 />

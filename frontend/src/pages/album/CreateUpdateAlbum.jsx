@@ -1,4 +1,4 @@
-import '../../styles/albums.css';
+import '../../styles/createUpdateAlbum.css';
 import bg1 from '../../photo/event/backgrounds/1.png';
 import bg2 from '../../photo/event/backgrounds/2.png';
 import bg3 from '../../photo/event/backgrounds/3.png';
@@ -19,16 +19,17 @@ import { ReactComponent as CameraIcon } from '../../photo/photo-camera-svgrepo-c
 import { ReactComponent as PhotoIcon } from '../../photo/picture-svgrepo-com.svg';
 import { faArrowUp, faDirections } from '@fortawesome/free-solid-svg-icons'
 import React, { useEffect, useState } from 'react';
-import { Event } from '../../connection/Event';
+import { Event } from '../../connection/Album';
 import { useParams } from 'react-router-dom'; // Убедитесь, что это правильно
 import { useAuth } from '../../auth/AuthProvider';
 
-export function Album() {
+export function CreateUpdateAlbum() {
     const { albumId } = useParams();
     const [disableButton, setDisableButton] = useState(true);
     const [err, setErr] = useState(false);
-    const [album, setAlbum] = useState({ name: '', background: '', textColor: '#000000', textFont: 'None', textSize: ''});
+    const [album, setAlbum] = useState({ name: '', background: '', textColor: '#000000', textFont: 'None', textSize: '44'});
     const { userId, setUserId } = useAuth();
+    const { userLogin, setUserLogin } = useAuth();
     //const userId  = '68994ca2-998a-48db-9696-2e7bc761b977';
     const [backgroundBorderColor, setBackgroundBorderColor] = useState(null);
     const [borderNameColor, setBorderNameColor] = useState(null);
@@ -46,6 +47,7 @@ export function Album() {
                     if (!response.ok) {
                         if(response == 409){
                             setUserId(null);
+                            setUserLogin(null);
                         }
                         throw new Error('Network response was not ok');
                     }
@@ -78,6 +80,7 @@ export function Album() {
     };
 
     const handleBackgroundClick = (bgd) => {
+        console.log("mc kmd ckdckwemcowemxow " + bgd + "login" + userLogin)
         setBackgroundBorderColor(bgd); //just it to be existed
         setAlbum((prevAlbum) => ({
         ...prevAlbum,
@@ -103,18 +106,19 @@ export function Album() {
 
     const postAlbum = async () => {
         try {
-            const response = await fetch(`http://localhost:8080/album/save?creatorId=${userId}`, {
+            const response = await fetch(`http://localhost:8080/album/save`, {
             method: 'POST',
             credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({name: album.name, background:album.background, textColor: album.textColor, textFont: album.textFont, textSize: album.textSize}),
+            body: JSON.stringify({name: album.name, background: album.background, textColor: album.textColor, textFont: album.textFont, textSize: album.textSize, creatorId: userId, creatorLoginSnapshot: userLogin}),
             });
 
             const statusCode = response.status;
             if(statusCode == 409){
                 setUserId(null);
+                setUserLogin(null);
             }
             console.log('Код ответа:', statusCode);
             alert('Событие успешно создано!');
@@ -135,12 +139,13 @@ export function Album() {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({name: album.name, background: album.background, textColor: album.textColor, textFont: album.textFont, textSize: album.textSize}),
+            body: JSON.stringify({name: album.name, background: album.background, textColor: album.textColor, textFont: album.textFont, textSize: album.textSize, creatorId: userId, creatorLoginSnapshot: userLogin}),
             });
 
             const statusCode = response.status;
             if(statusCode == 409){
                 setUserId(null);
+                setUserLogin(null);
             }
             console.log('Код ответа:', statusCode);
             alert('Событие успешно отредактировано!');
@@ -235,7 +240,7 @@ export function Album() {
                             ))}
                         </div>
                     </div>
-                    <div classname='text-font-block-create-album'>
+                    <div className='text-font-block-create-album'>
                         <div>Выберите шрифт</div>
                         <div className="text-font-create-album">
                             {textFonts.map((font) => (
@@ -253,12 +258,12 @@ export function Album() {
                     </div>
                 </div>
                 <div className='third-block-create-album'>
-                    <div>Выберите размер шрифта</div>
-                    <div>
-                        <input style={{accentColor: '#112250'}} type="range" id="volume" name='volume' min="28" max="60" defaultValue={album.textSize} onChange={(e) => handletextSizeClick(e.target.value)} />
+                    <div className='text-size-create-album' >
+                        <div>Выберите размер шрифта</div>
+                        <input style={{accentColor: '#112250', width: '300px', marginTop: '10px'}} type="range" id="volume" name='volume' min="28" max="60" defaultValue={album.textSize} onChange={(e) => handletextSizeClick(e.target.value)} />
                     </div>
                     {!err && (
-                    <div>
+                    <div className='button-container'>
                         <button onClick={albumId ? putAlbum : postAlbum}>
                         Save
                         </button>

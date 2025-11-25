@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpCookie;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -53,6 +54,10 @@ public class TokenFilter implements WebFilter {
             return chain.filter(exchange);
         }
 
+        if (exchange.getRequest().getMethod() == HttpMethod.OPTIONS) {
+            return chain.filter(exchange);
+        }
+
         return processTokens(exchange, chain)
                 .onErrorResume(e -> {
                     logger.error("Authentication failed: {}", e.getMessage());
@@ -63,7 +68,7 @@ public class TokenFilter implements WebFilter {
 
 
     private boolean isPublicEndpoint(String path) {
-        return List.of("/auth/login", "/auth/internal-service/public-key", "/auth/ping")
+        return List.of("/auth/login", "/auth/internal-service/public-key", "/auth/internal-service/token", "/auth/ping", "/user/save")
                 .contains(path);
     }
 

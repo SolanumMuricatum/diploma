@@ -18,16 +18,16 @@ app:
     token:
         access:
             name: "AccessToken"
-            privateKeyPath: classpath:token/access/private.pem
-            publicKeyPath: classpath:token/access/public.pem
+            privateKeyPath: classpath:keys/token/access/private.pem
+            publicKeyPath: classpath:keys/token/access/public.pem
             expirationMs: 1800000
         refresh:
             name: "RefreshToken"
-            privateKeyPath: classpath:token/refresh/private.pem
-            publicKeyPath: classpath:token/refresh/public.pem
+            privateKeyPath: classpath:keys/token/refresh/private.pem
+            publicKeyPath: classpath:keys/token/refresh/public.pem
             expirationMs: 604800000
         internal-service:
             name: "InternalServiceToken"
-            privateKeyPath: classpath:token/internal-service/private.pem
-            publicKeyPath: classpath:token/internal-service/public.pem
+            privateKeyPath: classpath:keys/token/internal-service/private.pem
+            publicKeyPath: classpath:keys/token/internal-service/public.pem
             expirationMs: 60000

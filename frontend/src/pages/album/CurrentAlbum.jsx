@@ -1,5 +1,5 @@
 import '../../styles/currentAlbum.css';
-import { Event } from '../../connection/Event'
+import { Album } from '../../connection/Album'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ReactComponent as CameraIcon } from '../../photo/photo-camera-svgrepo-com.svg';
 import { ReactComponent as PhotoIcon } from '../../photo/picture-svgrepo-com.svg';
@@ -10,7 +10,7 @@ import { useParams } from 'react-router-dom'; // Убедитесь, что эт
 export function CurrentAlbum() {
     return (
         <div>
-            <Event/>
+            <Album/>
             <div style={{position: 'sticky', top: '0px', borderBottom: '2px solid black', backgroundColor: 'aquamarine'}}>фильтры</div>
             <div>
                 <div className='friend-data-container-wrapper'>
