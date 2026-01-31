@@ -2,7 +2,7 @@ import '../styles/album.css';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-export const Album = () => {
+export const Album = ({setCreator, setStartDate, setEndDate}) => {
     const [album, setAlbum] = useState(null);
     const [err, setErr] = useState(false);
     const { albumId } = useParams();
@@ -23,13 +23,19 @@ export const Album = () => {
                 let data = await response.json(); 
                 console.log(data);
                 setAlbum(data);
+
+                setCreator(data.creatorLoginSnapshot);
+                setStartDate(data.startDate);
+                setEndDate(data.endDate);
             } catch (error) {
+                setAlbum({creatorLoginSnapshot: 'pepino'})
                 setErr(true);
                 console.error('Ошибка при получении события:', error);
             }
         };
 
         fetchEvent();
+        
     }, [albumId]);
 
     if (err) {
@@ -50,12 +56,12 @@ export const Album = () => {
 
     return (
         <div>
-            <div className='album-title' style={{backgroundImage: `url(${album.background})`, color: `${album.textColor}`, fontFamily: `${album.textFont === "None" ? `-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"` : `${album.textFont}` }`, fontSize: `${album.textSize}pt`}}>{album.name}</div>
-            <div className='album-description'>
+            <div className='album-title' style={{backgroundImage: `url(${album.background})`, color: `${album.textColor}`, fontFamily: `${album.textFont}`, fontSize: `${album.textSize}pt`}}>{album.name}</div>
+{/*             <div className='album-description'>
                 <div>{`Создатель: ${album.creatorLoginSnapshot}`}</div>
                 <div>{`Дата создания: ${album.startDate}`}</div>
                 <div>{`Дата окончания: ${album.endDate}`}</div> 
-            </div>
+            </div> */}
         </div>
     );
 };

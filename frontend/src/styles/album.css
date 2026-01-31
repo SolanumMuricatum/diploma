@@ -1,14 +1,14 @@
 .album-title{
     height: 300px;
     display: flex;
-    /* background-image: url(../photo/party.jpg);
-    background-color: #C56FFF; */
+    background-color: transparent; 
     background-size: cover;
     background-position: center;
     font-size: 32pt;
     color: black;
     align-items: center; 
     justify-content: center;
+    border-top: 2px solid black;
 }
 
 .album-description{

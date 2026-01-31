@@ -13,6 +13,7 @@ import { AuthProvider } from "./auth/AuthProvider";
 import { Account } from './pages/Account';
 import { Main } from './pages/Main';
 import { CreatedAlbums } from './pages/album/CreatedAlbums';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <AuthProvider>
             <div className="App">
               <Header />
+              <ScrollToTop /> 
               <Routes>
                 <Route path="/" element={<Hello />} />
                 <Route path="/login" element={<Login />} />
@@ -44,9 +46,9 @@ function App() {
                 <Route
                   path="/albums/create"
                   element={
-                    <PrivateRoute>
+                    //<PrivateRoute>
                       <CreateUpdateAlbum />
-                    </PrivateRoute>
+                    //</PrivateRoute>
                   }
                 />
                 <Route
@@ -72,7 +74,7 @@ function App() {
           </AuthProvider>
         </Router>
       
-      <ToastContainer position="top-right" autoClose={5000} />
+      <ToastContainer position="top-right" autoClose={2000} />
     </>
   );
 }

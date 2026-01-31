@@ -1,14 +1,16 @@
 import '../styles/header.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser } from '@fortawesome/free-solid-svg-icons'
+import { faEnvelopeSquare, faUser } from '@fortawesome/free-solid-svg-icons'
 import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 import { faCameraRetro } from '@fortawesome/free-solid-svg-icons'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import { faGear } from '@fortawesome/free-solid-svg-icons'
 import { useAuth } from '../auth/AuthProvider';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom'; 
 import { useEffect } from "react";
+
 
 export function Header() {
     const { userId, logout, checkAuth } = useAuth();
@@ -45,9 +47,14 @@ export function Header() {
             </div>
             <nav>
                 <ul>
-                    <li><a href="/">About us</a></li>
-                    <li><a href="/">Instructions</a></li>
-                    <li><a href="/help">Help</a></li>
+                    <li><a href="/">О нас</a></li>
+                    <li><a href="/">Инструкции</a></li>
+                    <li><a href="/help">Помощь</a></li>
+                    {userId && (
+                        <div className='note-icon'>
+                            <FontAwesomeIcon icon={faEnvelope} />
+                        </div>
+                    )}
                 </ul>
             </nav>
             {!userId && (
@@ -57,10 +64,10 @@ export function Header() {
             )}
             {userId && (
                 <div className='header-authenticated-container'>
-                    <div className='note-icon'>
-                        <FontAwesomeIcon icon={faEnvelope} />
-                    </div>
                     <div className='header-account-button-container' onClick={handleAccountButton}></div>
+                    <div className='gear-icon'>
+                        <FontAwesomeIcon onClick={handleExitClick}  icon={faGear} />
+                    </div>
                     <div className='exit-icon'>
                         <FontAwesomeIcon onClick={handleExitClick}  icon={faRightFromBracket} />
                     </div>

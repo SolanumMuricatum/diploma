@@ -112,6 +112,7 @@
     background-color: #112250;
     transition: ease-in 0.3s;
     border: 3px solid #112250;
+      border-radius: 5px;
 
     &:hover{
         cursor: pointer;
@@ -130,6 +131,7 @@
     background-color: #0C7F69;
     transition: ease-in 0.3s;
     border: 3px solid #0C7F69;
+      border-radius: 5px;
 
     &:hover{
         cursor: pointer;

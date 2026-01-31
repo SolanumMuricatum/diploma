@@ -25,6 +25,7 @@
   border-radius: 5px;
   margin: 0 5px;
   font-weight: bold;
+    border-radius: 5px;
 }
 
 .tab-content {
@@ -91,6 +92,7 @@
   border-radius: 5px;
   cursor: pointer;
   width: 100%;
+    border-radius: 5px;
 }
 
 .btn:hover {

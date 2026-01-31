@@ -24,7 +24,7 @@ public class TokenServiceImpl implements TokenService {
                 .httpOnly(true)
                 .secure(true)
                 .path("/")
-                .maxAge(Duration.ofMillis(jwtAccess.getLifetime()))
+                .maxAge(Duration.ofMillis(jwtRefresh.getLifetime()))
                 .sameSite("Strict")
                 .build();
     }

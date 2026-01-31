@@ -28,4 +28,14 @@ public class AlbumController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @GetMapping("/getAll")
+    public ResponseEntity<?> findAllByCreatorId(@RequestParam UUID creatorId) throws Exception {
+        return ResponseEntity.status(200).body(albumService.getAlbumsByCreatorId(creatorId));
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<?> updateAlbum(@RequestParam UUID albumId, @RequestBody Album album) throws Exception {
+        return ResponseEntity.status(200).body(albumService.updateAlbum(albumId, album));
+    }
 }

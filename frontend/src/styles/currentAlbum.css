@@ -11,29 +11,47 @@
 
 .friend-photo{
     margin: 50px;
-    width: 150px;
-    height: 200px;
+    width: 200px;
+    height: 250px;
     background-image: url(../photo/me.jpg);
     background-size: cover;
     background-position: center;
+
+    &:nth-of-type(2){
+        background-image: url(../photo/meee.jpg) !important;
+    }
+
+    &:nth-of-type(3){
+        background-image: url(../photo/я\ в\ париже2.png) !important;
+    }
+
+    &:nth-of-type(4){
+        background-image: url(../photo/20250907_213414.jpg) !important;
+    }
+
+    &:nth-of-type(5){
+        background-image: url(../photo/IMG_20250912_113822_689.jpg) !important;
+    }
+
 }
 
 .friend-name{
     display: flex;
     align-items: center;
     height: 70px;
-    font-size: 16pt;
+    font-size: 14pt;
     padding-left: 20px;
 }
 
 .friend-avatar{
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     border: 1px solid black;
     background-image: url(../photo/me.jpg);
     background-size: cover;
-    background-position: center; ;
+    background-position: center; 
+    background-size: 500%;
 }
 
 .friend-data-container{
@@ -56,8 +74,8 @@
     justify-content: space-between;
     align-items: center;
     border-bottom: 2px solid black;
-    padding-left: 70px;
-    padding-right: 70px;
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 input[type="checkbox"]{
@@ -65,3 +83,80 @@ input[type="checkbox"]{
   width: 20px;
   height: 20px;
 }
+
+#select-all{
+    margin-left: 10px;
+}
+
+.album-control-panel{
+    position: sticky;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #f5f0e9;
+    top: 0px;
+    height: 40px;
+    border-bottom: 2px solid black;
+    border-top: 2px solid black;
+}
+
+.album-creator-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    margin-left: 30px;
+
+    div{
+        margin-left: 10px;
+    }
+}
+
+.album-expiration-date-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    padding-left: 20px;
+
+    div{
+        margin-left: 10px;
+    }
+}
+
+.album-control-panel-options{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    margin-right: 30px;
+
+    div{
+        margin-left: 10px;
+    }
+
+    button{
+        width: 150px;
+        height: 30px;
+        font-size: 12pt;
+        color: #fafafa;
+        background-color: #112250;
+        transition: ease-in 0.3s;
+        border: 3px solid #112250;
+        margin-right: 20px;
+        border-radius: 5px;
+
+        &:hover{
+            cursor: pointer;
+            background-color: #D6AF8D;
+            border-color: #0C7F69;
+            color: black;
+        }
+
+        &:nth-of-type(3){
+            margin-left: 50px;
+            width: 100px !important;
+        }
+    }
+}
+

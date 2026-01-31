@@ -54,15 +54,15 @@ a{
 }
 
 .header-account-button-container{
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     border: 1px solid #112250;
     background-image: url(../photo/me.jpg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: 500%;
-    margin-right: 50px;
+    margin-right: 30px;
     margin-left: 20px;
     z-index: 10;
 }
@@ -80,7 +80,17 @@ a{
 
 .exit-icon {
     z-index: 11;
-    font-size: larger;
+    font-size: 16pt;
+
+    &:hover{
+        cursor: pointer;
+    }
+}
+
+.gear-icon {
+    z-index: 11;
+    font-size: 16pt;
+    margin-right: 30px;
 
     &:hover{
         cursor: pointer;
@@ -94,5 +104,9 @@ a{
     &:hover{
         cursor: pointer;
     }
+}
+
+li:hover{
+    text-decoration: underline;
 }
 

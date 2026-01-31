@@ -7,6 +7,7 @@
     flex-direction: column;
     align-items: center;
     margin-top: 100px;
+    margin-bottom: 100px;
 }
 
 .created-albums-wrapper{
@@ -15,7 +16,8 @@
     grid-template-columns: repeat(3, 1fr);
     justify-items: center;
     align-items: center;
-    row-gap: 70px;
+    row-gap: 130px;
+    column-gap: 80px;
     margin-bottom: 100px;
 }
 
@@ -44,7 +46,7 @@
     .created-album-title,
     .created-album-date,
     .created-album-creator,
-    .created-album-options{
+    .created-album-options-icon{
         color: #f5f0e9;
     }
 }
@@ -61,7 +63,7 @@
     .created-album-title,
     .created-album-date,
     .created-album-creator,
-    .created-album-options{
+    .created-album-options-icon{
         color: #0F172A;
     }
 }
@@ -76,7 +78,6 @@
 .created-album-image{
     width: 80%;
     height: 88.23%;
-    background-image: url(../../src/photo/party.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -119,10 +120,10 @@
     margin-bottom: 2.5px;
 }
 
-.created-album-options{
+.created-album-options-icon{
     position: absolute;
-    bottom: 14px;
-    right: 15px;
+    bottom: 5px;
+    right: -30px;
 }
 
 .albums-created-add-icon{
@@ -137,5 +138,64 @@
         &:hover{
             cursor: pointer;
         }
+    }
+}
+
+.created-album-card-wrapper{
+    position: relative;
+}
+
+
+.created-album-options{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    bottom: -120px;
+    right: -20px;
+    background-color: #f5f0e9;
+    border: 2px solid #0F172A;
+    border-radius: 10px;
+    width: 200px;
+    
+    div{
+        border-bottom: 2px solid #0F172A;
+        padding: 5px;
+
+        &:hover{
+            background-color: #0F172A;
+            cursor: pointer;
+            color: #f5f0e9;
+            border-bottom: 2px solid #0C7F69;
+        }
+
+        &:active{
+            background-color: #f5f0e9;
+            color: #0F172A;
+            border-bottom: 2px solid #0F172A;
+        }
+
+        &:nth-of-type(1):hover{
+            border-radius: 8px 8px 0 0;
+        }
+
+        &:nth-of-type(4){
+            border-bottom: none !important;
+            border-radius: 0 0 8px 8px;
+
+            &:hover{
+                border-bottom: none !important;
+            }
+        }
+    }
+}
+
+.created-album-add-button{
+    position: fixed;
+    font-size: 36pt;
+    right: 30px;
+    bottom: 30px;
+
+    &:hover{
+        cursor: pointer;
     }
 }

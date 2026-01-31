@@ -265,7 +265,7 @@ export function CreateUpdateAlbum() {
                     {!err && (
                     <div className='button-container'>
                         <button onClick={albumId ? putAlbum : postAlbum}>
-                        Save
+                            Сохранить
                         </button>
                     </div>
                     )}

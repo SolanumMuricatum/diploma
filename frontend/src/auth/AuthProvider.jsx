@@ -26,7 +26,6 @@ export function AuthProvider({ children }) {
       setUserId(data.userId); 
       setUserLogin(data.userLogin);
     } catch (err) {
-      setUserId(null);
       setUserLogin(null);
     } finally {
       setLoading(false);
