@@ -13,4 +13,7 @@ public interface AuthServiceClient {
 
     @GetMapping("/auth/internal-service/token")
     ResponseEntity<String> getInternalServiceToken(@RequestParam("service-name") String serviceName);
+
+    @GetMapping("/auth/access-token/public-key")
+    ResponseEntity<String> getAccessTokenPublicKey();
 }

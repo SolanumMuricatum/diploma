@@ -1,4 +1,4 @@
-package com.pepino.albumservice.service;
+package com.pepino.albumservice.service.feign;
 
 import com.pepino.albumservice.client.AuthServiceClient;
 import lombok.RequiredArgsConstructor;
@@ -45,6 +45,23 @@ public class AuthFeignRequestService {
             throw new Exception("Public key not found");
         } catch (Exception e) {
             throw new Exception("Error while fetching public key: " + e.getMessage());
+        }
+    }
+
+    public String getAccessTokenPublicKey(String serviceName) throws Exception {
+        try {
+            ResponseEntity<String> response = authServiceClient.getAccessTokenPublicKey();
+
+            if (!response.getStatusCode().is2xxSuccessful() || response.getBody() == null) {
+                throw new Exception("Error while fetching access token public key");
+            }
+
+            return response.getBody();
+
+        } catch (feign.FeignException.NotFound e) {
+            throw new Exception("Access token public key not found");
+        } catch (Exception e) {
+            throw new Exception("Error while fetching access token public key: " + e.getMessage());
         }
     }
 

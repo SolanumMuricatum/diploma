@@ -1,6 +1,6 @@
 package com.pepino.albumservice.config;
 
-import com.pepino.albumservice.service.AuthFeignRequestService;
+import com.pepino.albumservice.service.feign.AuthFeignRequestService;
 import io.jsonwebtoken.Jwts;
 import io.micrometer.common.lang.NonNullApi;
 import jakarta.servlet.FilterChain;

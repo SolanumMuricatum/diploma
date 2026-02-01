@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ReactComponent as CameraIcon } from '../../photo/photo-camera-svgrepo-com.svg';
 import { ReactComponent as PhotoIcon } from '../../photo/picture-svgrepo-com.svg';
 import { faArrowUp, faDirections } from '@fortawesome/free-solid-svg-icons'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom'; // Убедитесь, что это правильно
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons'
@@ -61,6 +62,11 @@ export function CreatedAlbums() {
 
     return (
         <div className='created-albums-page-container'>
+            <Link to="/main">
+                <div className='created-albums-arrow-right-container'>
+                    <FontAwesomeIcon icon={faArrowLeft}/>
+                </div>
+            </Link>
             <div className='created-albums-container'>
                 <div style={{ marginBottom: '100px', fontSize: '18pt' }}>
                     --- Созданные фотоальбомы ---
@@ -68,6 +74,7 @@ export function CreatedAlbums() {
                 
                 <div className='created-albums-wrapper'>
                     {err && <div>Ошибка загрузки альбомов</div>}
+                    {albums && albums.length === 0 && <div>У вас пока нет созданных альбомов.</div>}
                     {!albums && !err && <div>Загрузка...</div>}
 
                     {albums && Array.isArray(albums) && albums.map((album) => {
@@ -109,7 +116,7 @@ export function CreatedAlbums() {
                                                     onClick={(e) => e.stopPropagation()} 
                                                 >
                                                     <div className='menu-item' onClick={(e) => {e.preventDefault(); navigate(`/albums/edit/${album.id}`);}}>Редактировать</div>
-                                                    <div className='menu-item' onClick={(e) => { e.stopPropagation(); console.log('Photos'); }}>Управлять фотками</div>
+                                                    <div className='menu-item' onClick={(e) => { e.preventDefault(); navigate(`/albums/manage/photos/${album.id}`);}}>Управлять фотографиями</div>
                                                     <div className='menu-item' onClick={(e) => { e.stopPropagation(); console.log('Access'); }}>Управлять доступом</div>
                                                     <div className='menu-item delete' onClick={(e) => { e.stopPropagation(); console.log('Delete'); }}>Удалить</div>
                                                 </div>
@@ -120,8 +127,6 @@ export function CreatedAlbums() {
                             </Link>
                         );
                     })}
-
-                    {albums && albums.length === 0 && <div>У вас пока нет созданных альбомов.</div>}
                 </div>
             </div>
             <div className='created-album-add-button'>

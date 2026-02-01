@@ -1,3 +1,22 @@
+.album-create-arrow-right-container{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16pt;
+    top: 30px;
+    left: 80px;
+    width: 50px;
+    height: 50px;
+    border: 2px solid black;
+    border-radius: 50%;
+    background-color: #f5f0e9;
+    
+    &:hover{
+        cursor: pointer;
+    }
+}
+
 .album-create-title{
   height: 300px;
   display: flex;
@@ -10,7 +29,8 @@
   color: black;
   align-items: center; 
   justify-content: center;
-  border: 1px solid black;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
 }
 
 .album-name-input {

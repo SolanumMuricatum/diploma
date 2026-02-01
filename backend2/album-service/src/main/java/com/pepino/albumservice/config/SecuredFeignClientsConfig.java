@@ -1,7 +1,6 @@
 package com.pepino.albumservice.config;
 
-import com.pepino.albumservice.service.AuthFeignRequestService;
-import feign.Logger;
+import com.pepino.albumservice.service.feign.AuthFeignRequestService;
 import feign.RequestInterceptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

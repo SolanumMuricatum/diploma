@@ -1,18 +1,22 @@
-package com.pepino.albumservice.entity.extra;
+package com.pepino.albumservice.entity;
+
+import jakarta.persistence.Embeddable;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
-public class ParticipantId implements Serializable {
-
+@Data
+@Embeddable
+public class AlbumMemberId implements Serializable {
     private UUID albumId;
     private UUID userId;
 
-    public ParticipantId() {
+    public AlbumMemberId() {
     }
 
-    public ParticipantId(UUID albumId, UUID userId) {
+    public AlbumMemberId(UUID albumId, UUID userId) {
         this.albumId = albumId;
         this.userId = userId;
     }
@@ -21,9 +25,8 @@ public class ParticipantId implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ParticipantId that = (ParticipantId) o;
-        return Objects.equals(albumId, that.albumId) &&
-                Objects.equals(userId, that.userId);
+        AlbumMemberId that = (AlbumMemberId) o;
+        return Objects.equals(albumId, that.albumId) && Objects.equals(userId, that.userId);
     }
 
     @Override

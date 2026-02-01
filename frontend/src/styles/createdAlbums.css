@@ -2,6 +2,25 @@
     position: relative;
 }
 
+.created-albums-arrow-right-container{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16pt;
+    top: -70px;
+    left: 80px;
+    width: 50px;
+    height: 50px;
+    border: 2px solid black;
+    border-radius: 50%;
+    background-color: #f5f0e9;
+    
+    &:hover{
+        cursor: pointer;
+    }
+}
+
 .created-albums-container{
     display: flex;
     flex-direction: column;

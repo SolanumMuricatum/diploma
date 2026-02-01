@@ -13,7 +13,8 @@ import { AuthProvider } from "./auth/AuthProvider";
 import { Account } from './pages/Account';
 import { Main } from './pages/Main';
 import { CreatedAlbums } from './pages/album/CreatedAlbums';
-import ScrollToTop from './components/ScrollToTop';
+import { ScrollToTop } from './components/ScrollToTop';
+import { ManagePhotos } from './pages/ManagePhotos';
 
 function App() {
   return (
@@ -46,8 +47,16 @@ function App() {
                 <Route
                   path="/albums/create"
                   element={
-                    //<PrivateRoute>
+                    <PrivateRoute>
                       <CreateUpdateAlbum />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path="/albums/manage/photos/:albumId"
+                  element={
+                    //<PrivateRoute>
+                      <ManagePhotos />
                     //</PrivateRoute>
                   }
                 />

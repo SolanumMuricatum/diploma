@@ -70,29 +70,8 @@ public class AuthServiceApplication {
                             return requestHeaders;
                         }
                     };
-
-/*                    // Модифицируем ответ - УДАЛЯЕМ все CORS от сервисов - защита от дурака ахах
-                    ServerHttpResponseDecorator mutatedResponse = new ServerHttpResponseDecorator(exchange.getResponse()) {
-                        @Override
-                        public HttpHeaders getHeaders() {
-                            HttpHeaders headers = super.getHeaders();
-
-                            // Удаляем ВСЕ CORS-заголовки от downstream
-                            headers.remove("Access-Control-Allow-Origin");
-                            headers.remove("Access-Control-Allow-Methods");
-                            headers.remove("Access-Control-Allow-Headers");
-                            headers.remove("Access-Control-Allow-Credentials");
-                            headers.remove("Access-Control-Expose-Headers");
-                            headers.remove("Access-Control-Max-Age");
-                            headers.remove("Vary"); // тоже может содержать Origin
-
-                            return headers;
-                        }
-                    };*/
-
                     return chain.filter(exchange.mutate()
                             .request(mutatedRequest)
-                           // .response(mutatedResponse)
                             .build());
                 })
                 .onErrorResume(e -> {

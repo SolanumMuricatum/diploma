@@ -1,4 +1,4 @@
-package com.pepino.albumservice.service;
+package com.pepino.albumservice.service.feign;
 
 import com.pepino.albumservice.client.UserServiceClient;
 import lombok.RequiredArgsConstructor;

@@ -55,7 +55,9 @@ public class AuthConfig {
                 // Авторизация запросов
                 .authorizeExchange(exchanges -> exchanges
                         .pathMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                        .pathMatchers("/auth/login", "/auth/internal-service/public-key", "/auth/internal-service/token", "/auth/ping", "/user/save").permitAll()
+                        .pathMatchers("/auth/login", "/auth/internal-service/public-key",
+                                "/auth/internal-service/token", "/auth/ping",
+                                "/user/save", "/auth/access-token/public-key").permitAll()
                         .anyExchange().authenticated()
                 )
                 // Подключаем свой JWT-фильтр

@@ -8,13 +8,20 @@ import { ReactComponent as CameraIcon } from '../../photo/photo-camera-svgrepo-c
 import { ReactComponent as PhotoIcon } from '../../photo/picture-svgrepo-com.svg';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'; // Убедитесь, что это правильно
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import { Link } from 'react-router-dom';
 
 export function CurrentAlbum() {
     const [creator, setCreator] = useState();
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
     return (
-        <div>
+        <div style={{position: 'relative'}}>
+            <Link to="/albums/created">
+                <div className='album-arrow-right-container'>
+                    <FontAwesomeIcon icon={faArrowLeft}/>
+                </div>
+            </Link>
             <Album setCreator={setCreator} setStartDate={setStartDate} setEndDate={setEndDate}/>
             <div className='album-control-panel'>
                 <div className='album-creator-container'>

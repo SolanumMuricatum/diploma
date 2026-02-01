@@ -1,6 +1,7 @@
 package com.pepino.authservice.service.impl;
 
 import com.pepino.authservice.config.UserDetailsImpl;
+import com.pepino.authservice.model.JwtAccess;
 import com.pepino.authservice.model.JwtInternalService;
 import com.pepino.authservice.model.LoginRequest;
 import com.pepino.authservice.service.AuthService;
@@ -35,6 +36,7 @@ public class AuthServiceImpl implements AuthService {
     private final TokenService tokenService;
 /*    private final UserServiceClient userServiceClient;*/
     private final JwtInternalService jwtInternalService;
+    private final JwtAccess jwtAccessToken;
 
     @Override
     public Mono<Void> login(@RequestBody LoginRequest loginRequest, ServerWebExchange exchange) {
@@ -102,4 +104,8 @@ public class AuthServiceImpl implements AuthService {
         return jwtInternalService.getPublicKey();
     }
 
+    @Override
+    public String getAccessTokenPublicKey() {
+        return jwtAccessToken.getPublicKey();
+    }
 }

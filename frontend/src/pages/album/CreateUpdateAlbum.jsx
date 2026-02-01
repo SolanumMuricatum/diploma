@@ -22,6 +22,8 @@ import React, { useEffect, useState } from 'react';
 import { Event } from '../../connection/Album';
 import { useParams } from 'react-router-dom'; // Убедитесь, что это правильно
 import { useAuth } from '../../auth/AuthProvider';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import { Link } from 'react-router-dom';
 
 export function CreateUpdateAlbum() {
     const { albumId } = useParams();
@@ -121,7 +123,7 @@ export function CreateUpdateAlbum() {
                 setUserLogin(null);
             }
             console.log('Код ответа:', statusCode);
-            alert('Событие успешно создано!');
+            alert('Альбом успешно создан!');
             window.location.reload();
 
             return statusCode;
@@ -132,6 +134,7 @@ export function CreateUpdateAlbum() {
     };
 
     const putAlbum = async () => {
+        var statusCode;
         try {
             const response = await fetch(`http://localhost:8080/album/update?albumId=${albumId}`, {
             method: 'PUT',
@@ -142,19 +145,24 @@ export function CreateUpdateAlbum() {
             body: JSON.stringify({name: album.name, background: album.background, textColor: album.textColor, textFont: album.textFont, textSize: album.textSize, creatorId: userId, creatorLoginSnapshot: userLogin}),
             });
 
-            const statusCode = response.status;
+            statusCode = response.status;
             if(statusCode == 409){
                 setUserId(null);
                 setUserLogin(null);
             }
             console.log('Код ответа:', statusCode);
-            alert('Событие успешно отредактировано!');
             window.location.reload();
 
             return statusCode;
         } catch (error) {
             console.error('Ошибка при отправке данных на сервер:', error); // Логируем ошибку
             return { error: 'Произошла ошибка при соединении с сервером' };
+        } finally {
+            if(statusCode != 200){
+                alert('Произошла ошибка!');
+            } else {
+                alert('Событие успешно отредактировано!');
+            }
         }
     };
 
@@ -180,7 +188,12 @@ export function CreateUpdateAlbum() {
     ];
     
     return (
-        <div>
+        <div style={{position: 'relative'}}>
+            <Link to="/albums/created">
+                <div className='album-create-arrow-right-container'>
+                    <FontAwesomeIcon icon={faArrowLeft}/>
+                </div>
+            </Link>
             {err && (
                 <div>
                     <div className='album-create-title'>

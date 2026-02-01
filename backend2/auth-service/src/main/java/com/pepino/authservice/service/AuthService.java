@@ -18,4 +18,5 @@ Mono<Map<String, String>> authCheck() throws Exception;
     Mono<Void> authDelete(ServerWebExchange exchange) throws Exception;
     String getInternalServiceToken(String serviceName) throws Exception;
     String getInternalServicePublicKey() throws Exception;
+    String getAccessTokenPublicKey() throws Exception;
 }

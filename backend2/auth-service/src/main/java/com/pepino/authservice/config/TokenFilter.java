@@ -68,7 +68,8 @@ public class TokenFilter implements WebFilter {
 
 
     private boolean isPublicEndpoint(String path) {
-        return List.of("/auth/login", "/auth/internal-service/public-key", "/auth/internal-service/token", "/auth/ping", "/user/save")
+        return List.of("/auth/login", "/auth/internal-service/public-key", "/auth/internal-service/token",
+                        "/auth/ping", "/user/save", "/auth/access-token/public-key")
                 .contains(path);
     }
 

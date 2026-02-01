@@ -55,4 +55,8 @@ public class AuthController {
         return ResponseEntity.ok(authService.getInternalServicePublicKey());
     }
 
+    @GetMapping("/access-token/public-key")
+    public ResponseEntity<?> getAccessTokenPublicKey() throws Exception {
+        return ResponseEntity.ok(authService.getAccessTokenPublicKey());
+    }
 }
