@@ -49,7 +49,7 @@ public class TokenFilter extends OncePerRequestFilter {
 
     private String validateAndExtractToken(HttpServletRequest request) throws Exception {
         String headerAuth = request.getHeader("Authorization");
-        /*System.out.println("Authorization header: " + headerAuth);
+System.out.println("Authorization header: " + headerAuth);
 
         int id = requestCounter.incrementAndGet();
         String url = request.getRequestURI();
@@ -61,7 +61,8 @@ public class TokenFilter extends OncePerRequestFilter {
                 " | URL: " + url +
                 " | Has token: " + (headerAuth != null && headerAuth.startsWith("Bearer")));
 
-*/
+
+
         if (headerAuth == null || !headerAuth.startsWith("Bearer ")) {
             throw new Exception("Authorization header must start with 'Bearer'");
         }

@@ -21,6 +21,8 @@ public class User {
     private String password;
     @Column(name = "login")
     private String login;
+    @Column(name = "photo")
+    private String photo;
 
     public User(UUID id) {
         this.id = id;

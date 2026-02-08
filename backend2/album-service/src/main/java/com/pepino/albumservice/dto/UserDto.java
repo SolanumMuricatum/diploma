@@ -1,4 +1,4 @@
-package com.pepino.authservice.dto;
+package com.pepino.albumservice.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,11 +9,8 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserAuthDto {
+public class UserDto {
     private UUID id;
-    private String email;
-    private String password;
     private String login;
     private String photo;
 }
-

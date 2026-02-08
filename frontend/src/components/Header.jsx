@@ -8,12 +8,12 @@ import { faGear } from '@fortawesome/free-solid-svg-icons'
 import { useAuth } from '../auth/AuthProvider';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate, useParams } from 'react-router-dom'; 
 import { useEffect } from "react";
 
 
 export function Header() {
-    const { userId, logout, checkAuth } = useAuth();
+    const { user, userId, logout, checkAuth } = useAuth();
 
     useEffect(() => {
         checkAuth();
@@ -64,7 +64,7 @@ export function Header() {
             )}
             {userId && (
                 <div className='header-authenticated-container'>
-                    <div className='header-account-button-container' onClick={handleAccountButton}></div>
+                    <img className='header-account-button-container' src={user?.photo} onClick={handleAccountButton}/>
                     <div className='gear-icon'>
                         <FontAwesomeIcon onClick={handleExitClick}  icon={faGear} />
                     </div>

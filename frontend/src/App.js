@@ -15,6 +15,7 @@ import { Main } from './pages/Main';
 import { CreatedAlbums } from './pages/album/CreatedAlbums';
 import { ScrollToTop } from './components/ScrollToTop';
 import { ManagePhotos } from './pages/ManagePhotos';
+import { AddedAlbums } from './pages/album/AddedAlbums';
 
 function App() {
   return (
@@ -43,7 +44,7 @@ function App() {
                 <Route path="/account" element={<Account />} />
                 <Route path="/main" element={<Main/>} />
                 <Route path="/albums/created" element={<CreatedAlbums/>} />
-                
+                <Route path="/albums/added" element={<AddedAlbums/>} />
                 <Route
                   path="/albums/create"
                   element={
@@ -55,9 +56,9 @@ function App() {
                 <Route
                   path="/albums/manage/photos/:albumId"
                   element={
-                    //<PrivateRoute>
+                    <PrivateRoute>
                       <ManagePhotos />
-                    //</PrivateRoute>
+                    </PrivateRoute>
                   }
                 />
                 <Route
@@ -69,7 +70,7 @@ function App() {
                   }
                 />
                 <Route
-                  path="/albums/:albumId"
+                  path="/albums/:parent/:albumId"
                   element={
                     <PrivateRoute>
                       <CurrentAlbum />
@@ -83,7 +84,7 @@ function App() {
           </AuthProvider>
         </Router>
       
-      <ToastContainer position="top-right" autoClose={2000} />
+      <ToastContainer position="top-right" autoClose={1000} />
     </>
   );
 }

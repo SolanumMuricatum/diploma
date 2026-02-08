@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.UUID;
-
 @Data
 @Entity
 @AllArgsConstructor
@@ -15,4 +13,6 @@ import java.util.UUID;
 public class AlbumMember {
     @EmbeddedId
     private AlbumMemberId id;
+    @Column(name = "is_creator")
+    private boolean creator;
 }

@@ -19,13 +19,16 @@ public class UserDetailsImpl implements UserDetails {
     private String email;
     private String password;
     private String login;
+    private String photo;
+
 
     public static UserDetailsImpl build(UserAuthDto user) {
         return new UserDetailsImpl(
                 user.getId(),
                 user.getEmail(),
                 user.getPassword(),
-                user.getLogin()
+                user.getLogin(),
+                user.getPhoto()
         );
     }
 

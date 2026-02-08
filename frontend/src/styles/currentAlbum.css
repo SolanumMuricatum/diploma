@@ -30,26 +30,9 @@
     margin: 50px;
     width: 200px;
     height: 250px;
-    background-image: url(../photo/me.jpg);
     background-size: cover;
     background-position: center;
-
-    &:nth-of-type(2){
-        background-image: url(../photo/meee.jpg) !important;
-    }
-
-    &:nth-of-type(3){
-        background-image: url(../photo/я\ в\ париже2.png) !important;
-    }
-
-    &:nth-of-type(4){
-        background-image: url(../photo/20250907_213414.jpg) !important;
-    }
-
-    &:nth-of-type(5){
-        background-image: url(../photo/IMG_20250912_113822_689.jpg) !important;
-    }
-
+    border: 2px solid black;
 }
 
 .friend-name{
@@ -65,10 +48,11 @@
     height: 40px;
     border-radius: 50%;
     border: 1px solid black;
-    background-image: url(../photo/me.jpg);
     background-size: cover;
     background-position: center; 
-    background-size: 500%;
+    object-fit: cover; 
+    object-position: center;
+    background-size: 800%;
 }
 
 .friend-data-container{

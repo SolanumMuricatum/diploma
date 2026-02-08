@@ -15,7 +15,7 @@ export const Main = () => {
               <Link to="/albums/created" className="main-page-button">
                 Созданные
               </Link>
-              <Link to="" className="main-page-button">
+              <Link to="/albums/added" className="main-page-button">
                 Добавленные
               </Link>
             </div>

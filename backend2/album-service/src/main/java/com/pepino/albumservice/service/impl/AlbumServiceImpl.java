@@ -45,14 +45,20 @@ public class AlbumServiceImpl implements AlbumService {
     }
 
     @Override
-    public Album getAlbum(UUID id) throws Exception {
+    public Album getAlbumById(UUID id) throws Exception {
         return albumRepository.findById(id).orElseThrow(() -> new Exception("Альбом с таким ID не найден"));
     }
 
     @Override
-    public List<Album> getAlbumsByCreatorId(UUID creatorId) throws Exception {
-        List<Album> albums = albumRepository.findAllByCreatorId(creatorId);
-        return albums;
+    public List<Album> getCreatedAlbums(UUID creatorId) throws Exception {
+        List<UUID> albumIds = albumMemberService.getAllCreatedAlbums(creatorId);
+        return albumRepository.findAllByIdIn(albumIds);
+    }
+
+    @Override
+    public List<Album> getAddedAlbums(UUID userId) throws Exception {
+        List<UUID> albumIds = albumMemberService.getAllAddedAlbums(userId);
+        return albumRepository.findAllByIdIn(albumIds);
     }
 
     public Album updateAlbum(UUID id, Album album) throws Exception {
@@ -64,7 +70,6 @@ public class AlbumServiceImpl implements AlbumService {
         byte[] keyBytes = Base64.getDecoder().decode(publicKey);
         X509EncodedKeySpec spec = new X509EncodedKeySpec(keyBytes);
 
-// 2. Генерируем объект PublicKey (укажи нужный алгоритм, например "RSA")
         KeyFactory kf = KeyFactory.getInstance("RSA");
         PublicKey key = kf.generatePublic(spec);
 

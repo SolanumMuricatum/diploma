@@ -9,7 +9,9 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -33,4 +35,8 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByLogin(login);
     }
 
+    @Override
+    public List<User> findAllByIds(List<UUID> ids) {
+        return userRepository.findAllByIdIn(ids);
+    }
 }

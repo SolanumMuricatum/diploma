@@ -24,3 +24,10 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
   instance:
     prefer-ip-address: true
+
+s3:
+  access-key: pepino
+  secret-key: b7723e9c1f911897f3e73a35c7b4c1de6e0f6e8c358e42267eee1b0cadce6901
+  endpoint: http://localhost:8333
+  region: us-east-1
+  bucket-name: pepino-photos

@@ -1,0 +1,220 @@
+.added-albums-page-container{
+    position: relative;
+}
+
+.added-albums-arrow-right-container{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16pt;
+    top: -70px;
+    left: 80px;
+    width: 50px;
+    height: 50px;
+    border: 2px solid black;
+    border-radius: 50%;
+    background-color: #f5f0e9;
+    
+    &:hover{
+        cursor: pointer;
+    }
+}
+
+.added-albums-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.added-albums-wrapper{
+    display: grid;
+    width: 1260px;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+    align-items: center;
+    row-gap: 130px;
+    column-gap: 80px;
+    margin-bottom: 100px;
+}
+
+.added-album-card{
+    position: relative;
+    display: grid;
+    grid-template-columns: 125px 175px;
+    justify-items: center;
+    align-items: center;
+    width: 340px;
+    height: 190px;
+    background-color: transparent;
+    border-radius: 10px;
+    border: 2px solid #0F172A;
+}
+
+.added-album-card:hover{
+    background-color: #0F172A;
+    border: 2px solid #0C7F69;
+    cursor: pointer;
+    
+    .added-album-image{
+        border: 2px solid #f5f0e9;
+    }
+
+    .added-album-title,
+    .added-album-date,
+    .added-album-creator,
+    .added-album-options-icon{
+        color: #f5f0e9;
+    }
+}
+
+.added-album-card:active{
+    background-color: #f5f0e9;
+    border: 2px solid #0C7F69;
+    cursor: pointer;
+    
+    .added-album-image{
+        border: 2px solid #0F172A;
+    }
+
+    .added-album-title,
+    .added-album-date,
+    .added-album-creator,
+    .added-album-options-icon{
+        color: #0F172A;
+    }
+}
+
+.added-album-image-container{
+    display: flex;
+    justify-content: start;
+    width: 100%;
+    height: 100%;    
+}
+
+.added-album-image{
+    width: 80%;
+    height: 88.23%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 10px;
+    border: 2px solid #0F172A;
+    margin: 10px 10px 10px 10px;
+}
+
+.added-album-card > div:nth-child(2){
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 90px 60px 25px 15px;
+}
+
+.added-album-title{
+    font-size: 14pt;
+    margin-top: 10px;
+    font-weight: 600;
+}
+
+.added-album-creator{
+    font-size: 10pt;
+    display: flex;
+    align-items: end;
+}
+
+.added-album-creator > svg{
+    margin-right: 10px;
+}
+
+.added-album-date{
+    font-size: 10pt;
+    display: flex;
+    align-items: end;
+}
+
+.added-album-date > svg{
+    margin-right: 10px;
+    margin-bottom: 2.5px;
+}
+
+.added-album-options-icon{
+    position: absolute;
+    bottom: 5px;
+    right: -30px;
+}
+
+.albums-added-add-icon{
+    position: sticky;
+    font-size: 32pt;
+    bottom: 50px;
+    text-align: end;
+
+    svg{
+        margin-right: 50px;
+
+        &:hover{
+            cursor: pointer;
+        }
+    }
+}
+
+.added-album-card-wrapper{
+    position: relative;
+}
+
+
+.added-album-options{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    bottom: -120px;
+    right: -20px;
+    background-color: #f5f0e9;
+    border: 2px solid #0F172A;
+    border-radius: 10px;
+    width: 200px;
+    
+    div{
+        padding: 5px;
+
+        &:nth-of-type(1){
+            border-radius: 8px 8px 0 0;
+            background-color: #f5f0e9;
+            color: #0F172A;
+            border-bottom: 2px solid #0F172A;
+        }
+
+        &:active{
+            background-color: #f5f0e9;
+            color: #0F172A;
+        }
+
+        &:nth-of-type(1):hover{
+            border-radius: 8px 8px 0 0;
+            background-color: #0F172A;
+            cursor: pointer;
+            color: #f5f0e9;
+            border-bottom: 2px solid #0C7F69;
+        }
+
+        &:nth-of-type(2):hover{
+            border-radius: 0 0 8px 8px;
+            background-color: #0F172A;
+            cursor: pointer;
+            color: #f5f0e9;
+        }
+    }
+}
+
+.added-album-add-button{
+    position: fixed;
+    font-size: 36pt;
+    right: 30px;
+    bottom: 30px;
+
+    &:hover{
+        cursor: pointer;
+    }
+}

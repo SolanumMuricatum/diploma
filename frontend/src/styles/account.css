@@ -37,7 +37,8 @@
     outline: 3px solid #112250;
     outline-offset: 5px; 
     border-radius: 50%;
-    background-image: url(../photo/me.jpg);
+    object-fit: cover; 
+    object-position: center;
     background-repeat: no-repeat;
     background-position: center;
 }

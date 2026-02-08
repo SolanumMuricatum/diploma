@@ -91,7 +91,6 @@ export const PhotosOfUserToUpload = ({slots, setSlots}) => {
         }
     };
 
-
     const postPhoto = async (base64String) => {
         try {
             const response = await fetch(`http://localhost:8080/album/save/photo`, {
@@ -116,7 +115,10 @@ export const PhotosOfUserToUpload = ({slots, setSlots}) => {
 
             if (response.ok) {
                 alert('Фото успешно добавлено!');
+                window.location.reload();
                 return true;
+            } else {
+                console.error('Что-то пошло не так...');
             }
         } catch (error) {
             console.error('Ошибка сети:', error);
@@ -162,7 +164,13 @@ export const PhotosOfUserToUpload = ({slots, setSlots}) => {
                 return false;
             }
 
-            alert("Фото успешно удалено!")
+            if (response.ok) {
+                alert('Фото успешно удалено!');
+                window.location.reload();
+                return true;
+            } else {
+                console.error('Что-то пошло не так...');
+            }
             return response.ok;
         } catch (error) {
             console.error('Ошибка при удалении:', error);

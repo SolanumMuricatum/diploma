@@ -10,6 +10,7 @@ export function AuthProvider({ children }) {
   const navigate = useNavigate();
   const [userId, setUserId] = useState();
   const [userLogin, setUserLogin] = useState();
+  const [user, setUser] = useState();
   const [loading, setLoading] = useState(true);
 
   const checkAuth = async () => {
@@ -23,8 +24,9 @@ export function AuthProvider({ children }) {
       if (!res.ok) throw new Error("Not authorized");
 
       const data = await res.json();
-      setUserId(data.userId); 
-      setUserLogin(data.userLogin);
+      setUserId(data.id); 
+      setUserLogin(data.login);
+      setUser(data);
     } catch (err) {
       setUserLogin(null);
     } finally {
@@ -109,7 +111,7 @@ export function AuthProvider({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={{ userId, userLogin, loading, login, logout, checkAuth }}>
+    <AuthContext.Provider value={{ user, userId, userLogin, loading, login, logout, checkAuth }}>
       {children}
     </AuthContext.Provider>
   );

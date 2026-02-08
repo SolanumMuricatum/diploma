@@ -1,6 +1,7 @@
 package com.pepino.authservice.service.impl;
 
 import com.pepino.authservice.config.UserDetailsImpl;
+import com.pepino.authservice.dto.UserAuthDto;
 import com.pepino.authservice.model.JwtAccess;
 import com.pepino.authservice.model.JwtInternalService;
 import com.pepino.authservice.model.LoginRequest;
@@ -62,16 +63,13 @@ public class AuthServiceImpl implements AuthService {
     }*/
 
     @Override
-    public Mono<Map<String, String>> authCheck() {
+    public Mono<UserDetailsImpl> authCheck() {
         return ReactiveSecurityContextHolder.getContext()
                 .map(SecurityContext::getAuthentication)
                 .map(Authentication::getPrincipal)
                 .flatMap(principal -> {
                     if (principal instanceof UserDetailsImpl userDetailsImpl) {
-                        Map<String, String> response = new HashMap<>();
-                        response.put("userId", userDetailsImpl.getId().toString());
-                        response.put("userLogin", userDetailsImpl.getUsername());
-                        return Mono.just(response);
+                        return Mono.just(userDetailsImpl);
                     } else {
                         return Mono.error(new Exception("User not found"));
                     }

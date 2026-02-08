@@ -58,7 +58,8 @@ a{
     height: 30px;
     border-radius: 50%;
     border: 1px solid #112250;
-    background-image: url(../photo/me.jpg);
+    object-fit: cover; 
+    object-position: center;
     background-repeat: no-repeat;
     background-position: center;
     background-size: 500%;

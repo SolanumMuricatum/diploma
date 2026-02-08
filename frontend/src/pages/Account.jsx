@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPencil } from '@fortawesome/free-solid-svg-icons'
 
 export const Account = () => {
+  const { user, userId, logout, checkAuth } = useAuth();
 /*   const [activeTab, setActiveTab] = useState('login');
   const [user, setUser] = useState({login: '', email: '', password: ''});
 
@@ -74,7 +75,7 @@ export const Account = () => {
     <div className='account-container' >
         <div className="account-data-container">
           <div className='account-photo-container'>
-            <div className='account-photo'></div>
+            <img className='account-photo' src={user?.photo} />
             <FontAwesomeIcon className='photo-edit-icon' icon={faPencil}/>
           </div>
             <div className='account-login'>

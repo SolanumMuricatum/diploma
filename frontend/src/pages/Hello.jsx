@@ -4,11 +4,17 @@ import { ReactComponent as CameraIcon } from '../photo/photo-camera-svgrepo-com.
 import { ReactComponent as PhotoIcon } from '../photo/picture-svgrepo-com.svg';
 import { faArrowUp, faDirections } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../auth/AuthProvider';
 
 export function Hello() {
     const navigate = useNavigate();
+    const { userId } = useAuth();
     const handleButtonClick = () =>{
-        navigate('/login');
+        if (userId) {
+            navigate('/main')
+        } else {
+            navigate('/login');
+        }
     }
     return (
         <div>
