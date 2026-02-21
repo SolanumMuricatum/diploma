@@ -116,7 +116,7 @@ export function CreatedAlbums() {
                                                     onClick={(e) => e.stopPropagation()} 
                                                 >
                                                     <div className='menu-item' onClick={(e) => {e.preventDefault(); navigate(`/albums/edit/${album.id}`);}}>Редактировать</div>
-                                                    <div className='menu-item' onClick={(e) => { e.preventDefault(); navigate(`/albums/manage/photos/${album.id}`);}}>Управлять фотографиями</div>
+                                                    <div className='menu-item' onClick={(e) => { e.preventDefault(); navigate(`/albums/created/manage/photos/${album.id}`);}}>Управлять фотографиями</div>
                                                     <div className='menu-item' onClick={(e) => { e.stopPropagation(); console.log('Access'); }}>Управлять доступом</div>
                                                     <div className='menu-item delete' onClick={(e) => { e.stopPropagation(); console.log('Delete'); }}>Удалить</div>
                                                 </div>

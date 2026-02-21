@@ -19,7 +19,6 @@ export function AddedAlbums() {
     const navigate = useNavigate();
     const [albums, setAlbums] = useState(null);
     const [err, setErr] = useState(false);
-    const { albumId } = useParams();
     
     const [openMenuId, setOpenMenuId] = useState(null); 
     const menuRef = useRef(null);
@@ -60,7 +59,7 @@ export function AddedAlbums() {
                 
                 <div className='added-albums-wrapper'>
                     {err && <div>Ошибка загрузки альбомов</div>}
-                    {albums && albums.length === 0 && <div>У вас пока нет созданных альбомов.</div>}
+                    {albums && albums.length === 0 && <div>У вас пока нет добавленных альбомов.</div>}
                     {!albums && !err && <div>Загрузка...</div>}
 
                     {albums && Array.isArray(albums) && albums.map((album) => {
@@ -98,7 +97,7 @@ export function AddedAlbums() {
                                                     ref={menuRef} 
                                                     onClick={(e) => e.stopPropagation()} 
                                                 >
-                                                    <div className='menu-item' onClick={(e) => { e.preventDefault(); navigate(`/albums/manage/photos/${album.id}`);}}>Управлять фотографиями</div>
+                                                    <div className='menu-item' onClick={(e) => { e.preventDefault(); navigate(`/albums/added/manage/photos/${album.id}`);}}>Управлять фотографиями</div>
                                                     <div className='menu-item' onClick={(e) => { e.stopPropagation(); console.log('Delete'); }}>Покинуть фотоальбом</div>
                                                 </div>
                                             )}

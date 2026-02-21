@@ -2,7 +2,7 @@ import '../styles/album.css';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-export const Album = ({setCreator, setStartDate, setEndDate}) => {
+export const Album = ({setAlbumName, setCreator, setStartDate, setEndDate}) => {
     const [album, setAlbum] = useState(null);
     const [err, setErr] = useState(false);
     const { albumId } = useParams();
@@ -25,6 +25,7 @@ export const Album = ({setCreator, setStartDate, setEndDate}) => {
                 setAlbum(data);
 
                 setCreator(data.creatorLoginSnapshot);
+                setAlbumName(data.name);
                 setStartDate(data.startDate);
                 setEndDate(data.endDate);
             } catch (error) {

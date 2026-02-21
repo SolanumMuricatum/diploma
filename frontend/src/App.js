@@ -54,7 +54,7 @@ function App() {
                   }
                 />
                 <Route
-                  path="/albums/manage/photos/:albumId"
+                  path="/albums/:parent/manage/photos/:albumId"
                   element={
                     <PrivateRoute>
                       <ManagePhotos />

@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import '../styles/managePhotos.css';
 import { useAuth } from '../auth/AuthProvider';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Album } from '../connection/Album'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
@@ -15,10 +15,11 @@ export const ManagePhotos = () => {
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
     const [slots, setSlots] = useState(Array(10).fill(null));
+    const { parent } = useParams();
 
     return (
         <div className='main-manage-photos-container'>
-            <Link to="/albums/created">
+            <Link to={`/albums/${parent}`}>
                 <div className='manage-photos-arrow-right-container'>
                     <FontAwesomeIcon icon={faArrowLeft}/>
                 </div>                
