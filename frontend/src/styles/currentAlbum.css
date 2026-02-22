@@ -207,14 +207,18 @@ input[type="checkbox"]{
     color: white; font-size: 50px; cursor: pointer;
     padding: 20px; transition: color 0.2s;
 }
-.modal-nav-btn:hover { color: #007bff; }
+.modal-nav-btn:hover { color: #0C7F69; }
 .prev { left: 20px; }
 .next { right: 20px; }
 
 .modal-close-btn {
     position: absolute; top: 20px; right: 30px;
     background: none; border: none; color: white;
-    font-size: 60px; cursor: pointer;
+    font-size: 60px; cursor: pointer; transition: color 0.2s;
+
+    &:hover {
+        color: #0C7F69;
+    }
 }
 
 .modal-caption {

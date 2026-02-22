@@ -66,6 +66,9 @@ a{
     margin-right: 30px;
     margin-left: 20px;
     z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .header-account-button-container:hover{

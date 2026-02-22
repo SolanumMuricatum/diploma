@@ -74,4 +74,9 @@ public class AlbumController {
     public ResponseEntity<?> getAllAlbumMembers(@RequestParam UUID albumId) throws Exception {
         return ResponseEntity.status(200).body(albumMemberService.getAllAlbumMembers(albumId));
     }
+
+    @PostMapping("/creatorLogin/update")
+    public ResponseEntity<?> updateAlbumCreatorLogin(@RequestParam UUID creatorId, @RequestParam String newLogin) throws Exception {
+        return ResponseEntity.status(200).body(albumService.updateAlbumCreatorLogin(creatorId, newLogin));
+    }
 }

@@ -97,4 +97,20 @@ public class AlbumServiceImpl implements AlbumService {
         albumRepository.save(existingAlbum);
         return existingAlbum;
     }
+
+    @Override
+    public Album updateAlbumCreatorLogin(UUID creatorId, String newLogin) throws Exception {
+        List<Album> albums = albumRepository.findAllByCreatorId(creatorId);
+
+        if (albums.isEmpty()) {
+            throw new Exception("Альбомы с таким creatorId не найдены");
+        }
+
+        for (Album album : albums) {
+            album.setCreatorLoginSnapshot(newLogin);
+            albumRepository.save(album);
+        }
+
+        return albums.getFirst();
+    }
 }

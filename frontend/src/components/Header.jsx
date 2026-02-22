@@ -64,7 +64,13 @@ export function Header() {
             )}
             {userId && (
                 <div className='header-authenticated-container'>
-                    <img className='header-account-button-container' src={user?.photo} onClick={handleAccountButton}/>
+                    {user?.photo ? (
+                        <img className='header-account-button-container' src={user?.photo} onClick={handleAccountButton}/>
+                    ) : (
+                        <div className='header-account-button-container'>
+                           <FontAwesomeIcon className='header-account-photo-icon' icon={faUser} />
+                        </div>
+                    )}
                     <div className='gear-icon'>
                         <FontAwesomeIcon onClick={handleExitClick}  icon={faGear} />
                     </div>

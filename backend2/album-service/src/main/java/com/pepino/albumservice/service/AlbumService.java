@@ -11,4 +11,5 @@ public interface AlbumService {
     List<Album> getCreatedAlbums(UUID creatorId) throws Exception;
     List<Album> getAddedAlbums(UUID userId) throws Exception;
     public Album updateAlbum(UUID id, Album album) throws Exception;
+    public Album updateAlbumCreatorLogin(UUID creatorId, String newLogin) throws Exception;
 }

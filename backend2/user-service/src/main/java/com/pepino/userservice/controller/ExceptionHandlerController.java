@@ -33,6 +33,13 @@ public class ExceptionHandlerController {
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(new ErrorResponse("Ошибка сервера", HttpStatus.INTERNAL_SERVER_ERROR));
     }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ErrorResponse> handleIllegalArgument(IllegalArgumentException e) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(new ErrorResponse(e.getMessage(), HttpStatus.BAD_REQUEST));
+    }
 }
 
 
