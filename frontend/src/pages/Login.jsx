@@ -26,14 +26,13 @@ export const Login = () => {
         }),
       });
 
-      toast.success('Пользователь успешно зарегистрирован!', {
-        onClose: () => window.location.reload()
-      });
+      alert("Пользователь успешно зарегистрирован!");
+
       console.log('Ответ сервера:', data);
       return data;
 
     } catch (error) {
-      toast.error(error.message);
+      alert(error.message);
       console.error(error);
       return { error: error.message };
     }

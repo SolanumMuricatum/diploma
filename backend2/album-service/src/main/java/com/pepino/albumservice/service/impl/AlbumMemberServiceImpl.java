@@ -6,6 +6,7 @@ import com.pepino.albumservice.entity.AlbumMember;
 import com.pepino.albumservice.entity.AlbumMemberId;
 import com.pepino.albumservice.repository.AlbumMemberRepository;
 import com.pepino.albumservice.service.AlbumMemberService;
+import com.pepino.albumservice.service.PhotoService;
 import com.pepino.albumservice.service.feign.UserFeignRequestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ public class AlbumMemberServiceImpl implements AlbumMemberService {
 
     private final AlbumMemberRepository albumMemberRepository;
     private final UserFeignRequestService userFeignRequestService;
+    private final PhotoService photoService;
 
     @Override
     public AlbumMember saveAlbumMember(Album album) {
@@ -52,5 +54,22 @@ public class AlbumMemberServiceImpl implements AlbumMemberService {
         return members.stream()
                 .map(m -> m.getId().getAlbumId())
                 .toList();
+    }
+
+    @Override
+    public void deleteAllMembersWithAlbumId(UUID albumId) {
+        albumMemberRepository.deleteAllByIdAlbumId(albumId);
+    }
+
+    @Override
+    public void leaveAddedAlbum(UUID albumId, UUID userId) {
+        albumMemberRepository.deleteByIdAlbumIdAndIdUserId(albumId, userId);
+
+        photoService.deleteAllMemberPhotos(albumId, userId);
+    }
+
+    @Override
+    public boolean isUserAlbumsCreator(UUID albumId, UUID userId) {
+        return albumMemberRepository.existsByIdAlbumIdAndIdUserIdAndCreatorTrue(albumId, userId);
     }
 }

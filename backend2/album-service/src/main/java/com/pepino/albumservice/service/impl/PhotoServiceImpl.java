@@ -73,4 +73,22 @@ public class PhotoServiceImpl implements PhotoService {
             throw new RuntimeException("Ошибка при удалении файла из хранилища: " + e.getMessage());
         }
     }
+
+    @Override
+    public void deleteAllAlbumPhotos(UUID albumId) {
+        List<Photo> photos = photoRepository.findAllByAlbumId(albumId);
+
+        if (!photos.isEmpty()) {
+            photos.forEach(photo -> deletePhoto(photo.getId()));
+        }
+    }
+
+    @Override
+    public void deleteAllMemberPhotos(UUID albumId, UUID userId) {
+        List<Photo> photos = photoRepository.findAllByAlbumIdAndUserId(albumId, userId);
+
+        if (!photos.isEmpty()) {
+            photos.forEach(photo -> deletePhoto(photo.getId()));
+        }
+    }
 }

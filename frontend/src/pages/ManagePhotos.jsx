@@ -15,6 +15,7 @@ export const ManagePhotos = () => {
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
     const [slots, setSlots] = useState(Array(10).fill(null));
+    const [albumName, setAlbumName] = useState();
     const { parent } = useParams();
 
     return (
@@ -24,7 +25,7 @@ export const ManagePhotos = () => {
                     <FontAwesomeIcon icon={faArrowLeft}/>
                 </div>                
             </Link>
-            <Album setCreator={setCreator} setStartDate={setStartDate} setEndDate={setEndDate}/>
+            <Album setAlbumName={setAlbumName} setCreator={setCreator} setStartDate={setStartDate} setEndDate={setEndDate}/>
             <div className='album-control-panel'>
                 <div className='album-creator-container'>
                     <FontAwesomeIcon icon={faUser} />

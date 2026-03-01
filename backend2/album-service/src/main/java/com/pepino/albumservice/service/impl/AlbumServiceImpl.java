@@ -5,6 +5,7 @@ import com.pepino.albumservice.entity.Album;
 import com.pepino.albumservice.repository.AlbumRepository;
 import com.pepino.albumservice.service.AlbumMemberService;
 import com.pepino.albumservice.service.AlbumService;
+import com.pepino.albumservice.service.PhotoService;
 import com.pepino.albumservice.service.feign.UserFeignRequestService;
 import io.jsonwebtoken.Jwts;
 import jakarta.servlet.http.Cookie;
@@ -31,6 +32,7 @@ public class AlbumServiceImpl implements AlbumService {
     private final UserFeignRequestService userFeignRequestService;
     private final AuthServiceClient authServiceClient;
     private final AlbumMemberService albumMemberService;
+    private final PhotoService photoService;
 
     @Override
     public Album saveAlbum(Album album) throws Exception {
@@ -42,6 +44,20 @@ public class AlbumServiceImpl implements AlbumService {
         albumRepository.save(album);
         albumMemberService.saveAlbumMember(album);
         return album;
+    }
+
+    @Override
+    public void deleteAlbum(UUID id, UUID userId) throws Exception {
+        albumRepository.findById(id)
+                .orElseThrow(() -> new Exception("Альбом с таким ID не найден"));
+
+        if (albumMemberService.isUserAlbumsCreator(id, userId)) {
+            albumMemberService.deleteAllMembersWithAlbumId(id);
+            photoService.deleteAllAlbumPhotos(id);
+            albumRepository.deleteById(id);
+        } else {
+            throw new Exception("Удаление невозможно, поскольку пользователь не является создателем фотоальбома");
+        }
     }
 
     @Override

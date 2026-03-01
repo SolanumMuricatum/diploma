@@ -233,3 +233,151 @@
     color: black;
   }
 }
+
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  width: 350px;
+  box-shadow: 0 0 30px rgba(0,0,0,0.5);
+}
+
+.modal-close-icon {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
+  color: #888;
+  font-size: 1.2rem;
+  transition: color 0.2s;
+  padding: 5px;
+}
+
+.modal-close-icon:hover {
+  color: #333;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; 
+  backdrop-filter: blur(4px); 
+}
+
+.modal-content {
+  position: relative;
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  animation: modalAppear 0.3s ease-out; 
+}
+
+@keyframes modalAppear {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Базовые стили появления */
+.modal-overlay {
+  animation: fadeIn 0.3s forwards;
+}
+.modal-content {
+  animation: slideIn 0.3s ease-out forwards;
+}
+
+/* Стили при закрытии */
+.modal-overlay.closing {
+  animation: fadeOut 0.3s forwards;
+}
+.modal-content.closing {
+  animation: slideOut 0.3s ease-in forwards;
+}
+
+/* Анимации появления */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Анимации исчезновения */
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+@keyframes slideOut {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(0.9); }
+}
+
+.change-password-btn {
+  width: 100px;
+  height: 30px;
+  font-size: 12pt;
+  color: #fafafa;
+  background-color: #112250;
+  transition: ease-in 0.3s;
+  border: 3px solid #122250;
+  border-radius: 5px;
+
+  &:hover{
+    cursor: pointer;
+    background-color: #D6AF8D;
+    border-color: #0C7F69;
+    color: black;
+  }
+}
+
+/* Адаптация твоих инпутов под модальное окно */
+.modal-content .account-login, 
+.modal-content .account-email {
+    margin-top: 0; /* Сбрасываем лишние отступы внутри модалки */
+}
+
+.modal-content label.text {
+    background-color: white; /* Чтобы лейбл перекрывал рамку на белом фоне модалки */
+}
+
+/* Настройка полей пароля (чтобы выглядели как текстовые из твоего CSS) */
+.modal-content input[type=password].input {
+    padding: 11px 10px;
+    font-size: 1rem;
+    border: 2px black solid;
+    border-radius: 5px;
+    background: transparent;
+    width: 100%;
+    box-sizing: border-box; /* Чтобы padding не раздувал ширину */
+}
+
+.modal-content input[type=password].input:focus {
+    outline: none;
+    border-color: #112250;
+}
+
+/* Улучшаем кнопку в модалке, используя твой стиль .change-password-btn */
+.modal-content .change-password-btn {
+    width: 100%;
+    height: 50px;
+    margin-top: 20px;
+    cursor: pointer;
+}

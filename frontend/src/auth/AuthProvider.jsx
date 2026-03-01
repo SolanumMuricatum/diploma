@@ -56,18 +56,15 @@ export function AuthProvider({ children }) {
         }),
       });
 
-      toast.success(`Пользователь успешно вошёл в систему!`, {
-        onClose: () => {
-          navigate(`/main`)
-          window.location.reload();
-        }
-      });
+      alert("Пользователь успешно вошёл в систему!");
+      navigate(`/main`)
+      window.location.reload();
       console.log('Ответ сервера:', data);
       return data;
 
     } catch (error) {
       setUserLogin(null);
-      toast.error(error.message);
+      alert(error.message);
       console.error(error);
       return { error: error.message };
     }
@@ -102,12 +99,9 @@ export function AuthProvider({ children }) {
     });
     setUserId(null); //вернуть когда допишу метод сервера
     setUserLogin(null);
-    toast.success('Вы вышли из аккаунта', {
-      onClose: () => {
-        navigate(`/`)
-        window.location.reload();
-      }
-    });
+    alert("Вы вышли из аккаунта!")
+    navigate(`/`)
+    window.location.reload();
   };
 
   return (

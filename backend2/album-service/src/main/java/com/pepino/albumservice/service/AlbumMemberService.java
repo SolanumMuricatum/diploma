@@ -12,4 +12,7 @@ public interface AlbumMemberService {
     List<UserDto> getAllAlbumMembers(UUID albumId);
     List<UUID> getAllCreatedAlbums(UUID creatorId);
     List<UUID> getAllAddedAlbums(UUID userId);
+    void deleteAllMembersWithAlbumId(UUID albumId);
+    void leaveAddedAlbum(UUID albumId, UUID userId);
+    boolean isUserAlbumsCreator(UUID albumId, UUID userId);
 }

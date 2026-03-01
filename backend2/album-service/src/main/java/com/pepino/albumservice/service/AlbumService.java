@@ -7,6 +7,7 @@ import java.util.UUID;
 
 public interface AlbumService {
     public Album saveAlbum(Album album) throws Exception;
+    public void deleteAlbum(UUID albumId, UUID userId) throws Exception;
     public Album getAlbumById(UUID id) throws Exception;
     List<Album> getCreatedAlbums(UUID creatorId) throws Exception;
     List<Album> getAddedAlbums(UUID userId) throws Exception;

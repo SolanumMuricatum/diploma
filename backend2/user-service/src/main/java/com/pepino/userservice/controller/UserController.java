@@ -21,7 +21,15 @@ public class UserController {
 
     @PostMapping("/save")
     public ResponseEntity<?> saveUser(@RequestBody User user) throws Exception {
-        return ResponseEntity.status(201).body(userService.saveUser(user)); //return dto only!!
+        return ResponseEntity.status(201).body(userService.saveUser(user));
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> deleteUser(@RequestBody Map<String, Object> payload) throws Exception {
+        String password = (String) payload.get("password");
+        String userId = (String) payload.get("userId");
+        userService.deleteUser(password, UUID.fromString(userId));
+        return ResponseEntity.status(200).build();
     }
 
     @GetMapping("/findByLogin/{login}")
@@ -46,14 +54,14 @@ public class UserController {
         return ResponseEntity.status(200).build();
     }
 
-    @PostMapping("/account/login/update")
+    @PutMapping("/account/login/update")
     public ResponseEntity<?> updateUserLogin(@RequestBody Map<String, Object> payload) throws Exception {
         String login = (String) payload.get("login");
         String userId = (String) payload.get("userId");
         return ResponseEntity.status(200).body(userService.updateUserLogin(login, UUID.fromString(userId)));
     }
 
-    @PostMapping("/account/email/update")
+    @PutMapping("/account/email/update")
     public ResponseEntity<?> updateUserEmail(@RequestBody Map<String, Object> payload) throws Exception {
         String email = (String) payload.get("email");
         String userId = (String) payload.get("userId");
@@ -63,6 +71,15 @@ public class UserController {
     @GetMapping("/getAll")
     public ResponseEntity<?> findAllByIds(@RequestParam List<UUID> ids) {
         return ResponseEntity.status(200).body(userService.findAllByIds(ids));
+    }
+
+    @PutMapping("/account/password/update")
+    public ResponseEntity<?> updateUserPassword(@RequestBody Map<String, Object> payload) throws Exception {
+        String oldPassword = (String) payload.get("oldPassword");
+        String newPassword = (String) payload.get("newPassword");
+        String userId = (String) payload.get("userId");
+        userService.updateUserPassword(oldPassword, newPassword, UUID.fromString(userId));
+        return ResponseEntity.status(200).build();
     }
 
 }

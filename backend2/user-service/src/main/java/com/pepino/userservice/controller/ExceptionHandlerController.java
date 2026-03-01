@@ -35,7 +35,7 @@ public class ExceptionHandlerController {
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<ErrorResponse> handleIllegalArgument(IllegalArgumentException e) {
+    public ResponseEntity<ErrorResponse> handleIllegalArgument(Exception e) {
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .body(new ErrorResponse(e.getMessage(), HttpStatus.BAD_REQUEST));

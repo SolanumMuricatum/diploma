@@ -9,5 +9,6 @@ public interface PhotoService {
     Photo savePhoto(Photo photo);
     List<Photo> getAllPhotos(UUID albumId, UUID userId);
     void deletePhoto(UUID photoId);
-
+    void deleteAllAlbumPhotos(UUID albumId);
+    void deleteAllMemberPhotos(UUID albumId, UUID userId);
 }

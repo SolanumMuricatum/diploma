@@ -11,4 +11,7 @@ public interface AlbumMemberRepository extends JpaRepository<AlbumMember, AlbumM
     List<AlbumMember> findAllByIdAlbumId(UUID albumId);
     List<AlbumMember> findAllByIdUserIdAndCreatorTrue(UUID userId);
     List<AlbumMember> findAllByIdUserIdAndCreatorFalse(UUID userId);
+    void deleteAllByIdAlbumId(UUID albumId);
+    void deleteByIdAlbumIdAndIdUserId(UUID albumId, UUID userId);
+    boolean existsByIdAlbumIdAndIdUserIdAndCreatorTrue(UUID albumId, UUID userId);
 }

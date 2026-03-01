@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -22,7 +23,16 @@ public class AlbumController {
 
     @PostMapping("/save")
     public ResponseEntity<?> saveAlbum(@RequestBody Album album) throws Exception {
-        return ResponseEntity.status(201).body(albumService.saveAlbum(album)); //return dto only!!
+        return ResponseEntity.status(201).body(albumService.saveAlbum(album));
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> deleteAlbum(@RequestBody Map<String, Object> payload) throws Exception {
+        String albumId = (String) payload.get("albumId");
+        String userId = (String) payload.get("userId");
+
+        albumService.deleteAlbum(UUID.fromString(albumId), UUID.fromString(userId));
+        return ResponseEntity.status(204).build();
     }
 
     @GetMapping("")
@@ -78,5 +88,13 @@ public class AlbumController {
     @PostMapping("/creatorLogin/update")
     public ResponseEntity<?> updateAlbumCreatorLogin(@RequestParam UUID creatorId, @RequestParam String newLogin) throws Exception {
         return ResponseEntity.status(200).body(albumService.updateAlbumCreatorLogin(creatorId, newLogin));
+    }
+
+    @DeleteMapping("/added/leave")
+    public ResponseEntity<?> leaveAddedAlbum(@RequestBody Map<String, Object> payload) throws Exception {
+        String albumId = (String) payload.get("albumId");
+        String userId = (String) payload.get("userId");
+        albumMemberService.leaveAddedAlbum(UUID.fromString(albumId), UUID.fromString(userId));
+        return ResponseEntity.status(200).build();
     }
 }

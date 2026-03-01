@@ -15,16 +15,16 @@ import { useAuth } from '../../auth/AuthProvider';
 import { Link } from 'react-router-dom';
 
 export function AddedAlbums() {
-    const { userId } = useAuth();
+    const { userId, setUserId, setUserLogin } = useAuth();
     const navigate = useNavigate();
     const [albums, setAlbums] = useState(null);
     const [err, setErr] = useState(false);
-    
-    const [openMenuId, setOpenMenuId] = useState(null); 
+
+    const [openMenuId, setOpenMenuId] = useState(null);
     const menuRef = useRef(null);
 
     useEffect(() => {
-        if (!userId) return; 
+        if (!userId) return;
         setAlbums(null);
         setErr(false);
         const fetchEvent = async () => {
@@ -35,7 +35,7 @@ export function AddedAlbums() {
                     credentials: 'include',
                 });
                 if (!response.ok) throw new Error();
-                let data = await response.json(); 
+                let data = await response.json();
                 setAlbums(data);
             } catch (error) {
                 setErr(true);
@@ -45,18 +45,60 @@ export function AddedAlbums() {
         fetchEvent();
     }, [userId]);
 
+    const handleLeaveAlbum = async (albumId) => {
+        const isConfirmed = window.confirm("Вы уверены, что хотите покинуть фотоальбом?");
+
+        if (!isConfirmed) {
+            setOpenMenuId(null);
+            return;
+        }
+
+        try {
+            const response = await fetch(`http://localhost:8080/album/added/leave`, {
+                method: 'DELETE',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+
+                body: JSON.stringify({
+                    albumId: albumId,
+                    userId: userId
+                }),
+            });
+
+            if (response.status === 409) {
+                setUserId(null);
+                setUserLogin(null);
+                return false;
+            }
+
+            if (response.ok) {
+                alert('Вы успешно покинули фотоальбом! Все Ваши фото были удалены.');
+                window.location.reload();
+                return true;
+            } else {
+                console.error('Что-то пошло не так...');
+            }
+            return response.ok;
+        } catch (error) {
+            console.error('Ошибка при удалении:', error);
+            return false;
+        }
+    };
+
     return (
         <div className='added-albums-page-container'>
             <Link to="/main">
                 <div className='added-albums-arrow-right-container'>
-                    <FontAwesomeIcon icon={faArrowLeft}/>
+                    <FontAwesomeIcon icon={faArrowLeft} />
                 </div>
             </Link>
             <div className='added-albums-container'>
                 <div style={{ marginBottom: '100px', fontSize: '18pt' }}>
                     --- Добавленные фотоальбомы ---
                 </div>
-                
+
                 <div className='added-albums-wrapper'>
                     {err && <div>Ошибка загрузки альбомов</div>}
                     {albums && albums.length === 0 && <div>У вас пока нет добавленных альбомов.</div>}
@@ -69,7 +111,7 @@ export function AddedAlbums() {
                                 <div className='added-album-card-wrapper'>
                                     <div className='added-album-card'>
                                         <div className='added-album-image-container'>
-                                            <div className='added-album-image' style={{backgroundImage: `url(${album.background})`}}></div>
+                                            <div className='added-album-image' style={{ backgroundImage: `url(${album.background})` }}></div>
                                         </div>
                                         <div style={{ position: 'relative' }}>
                                             <div className='added-album-title'>{album.name}</div>
@@ -80,10 +122,10 @@ export function AddedAlbums() {
                                                 <FontAwesomeIcon icon={faCalendar} /> {album.startDate} - {album.endDate}
                                             </div>
 
-                                            <div className='added-album-options-icon' 
+                                            <div className='added-album-options-icon'
                                                 onClick={(e) => {
-                                                    e.preventDefault(); 
-                                                    e.stopPropagation(); 
+                                                    e.preventDefault();
+                                                    e.stopPropagation();
                                                     setOpenMenuId(isMenuOpen ? null : album.id);
                                                 }}
                                                 style={{ padding: '10px', cursor: 'pointer' }}
@@ -92,13 +134,13 @@ export function AddedAlbums() {
                                             </div>
 
                                             {isMenuOpen && (
-                                                <div 
-                                                    className='added-album-options' 
-                                                    ref={menuRef} 
-                                                    onClick={(e) => e.stopPropagation()} 
+                                                <div
+                                                    className='added-album-options'
+                                                    ref={menuRef}
+                                                    onClick={(e) => e.stopPropagation()}
                                                 >
-                                                    <div className='menu-item' onClick={(e) => { e.preventDefault(); navigate(`/albums/added/manage/photos/${album.id}`);}}>Управлять фотографиями</div>
-                                                    <div className='menu-item' onClick={(e) => { e.stopPropagation(); console.log('Delete'); }}>Покинуть фотоальбом</div>
+                                                    <div className='menu-item' onClick={(e) => { e.preventDefault(); navigate(`/albums/added/manage/photos/${album.id}`); }}>Управлять фотографиями</div>
+                                                    <div className='menu-item' onClick={(e) => { e.preventDefault(); e.stopPropagation(); handleLeaveAlbum(album.id); }}>Покинуть фотоальбом</div>
                                                 </div>
                                             )}
                                         </div>

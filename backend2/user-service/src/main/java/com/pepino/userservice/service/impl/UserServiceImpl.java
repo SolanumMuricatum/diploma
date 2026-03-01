@@ -4,6 +4,7 @@ import com.pepino.userservice.entity.User;
 import com.pepino.userservice.repository.UserRepository;
 import com.pepino.userservice.service.UserService;
 import com.pepino.userservice.service.feign.AlbumFeignRequestService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -30,6 +31,18 @@ public class UserServiceImpl implements UserService {
         }
         userRepository.save(user);
         return user;
+    }
+
+    @Override
+    public void deleteUser(String password, UUID userId) throws Exception {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("Пользователь не найден"));
+
+        if (!passwordEncoder.matches(password, user.getPassword())) {
+            throw new IllegalArgumentException("Введён неверный пароль");
+        }
+
+        userRepository.delete(user);
     }
 
     @Override
@@ -69,4 +82,24 @@ public class UserServiceImpl implements UserService {
         user.setEmail(email);
         return userRepository.save(user);
     }
+
+    @Override
+    @Transactional
+    public void updateUserPassword(String oldPassword, String newPassword, UUID userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("Пользователь не найден"));
+
+        if (!passwordEncoder.matches(oldPassword, user.getPassword())) {
+            throw new IllegalArgumentException("Введён неверный старый пароль");
+        }
+
+        if (passwordEncoder.matches(newPassword, user.getPassword())) {
+            throw new IllegalArgumentException("Новый пароль не может быть таким же, как старый");
+        }
+
+        user.setPassword(passwordEncoder.encode(newPassword));
+
+        userRepository.save(user);
+    }
+
 }

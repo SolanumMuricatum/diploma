@@ -7,9 +7,11 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface UserService {
-    public User saveUser(User user) throws Exception;
-    public Optional<User> findByLogin(String login);
-    public List<User> findAllByIds(List<UUID> ids);
-    public User updateUserLogin(String login, UUID userId) throws Exception;
-    public User updateUserEmail(String email, UUID userId) throws Exception;
+    User saveUser(User user) throws Exception;
+    void deleteUser(String password, UUID userId) throws Exception;
+    Optional<User> findByLogin(String login);
+    List<User> findAllByIds(List<UUID> ids);
+    User updateUserLogin(String login, UUID userId) throws Exception;
+    User updateUserEmail(String email, UUID userId) throws Exception;
+    void updateUserPassword(String oldPassword, String newPassword, UUID userId) throws Exception;
 }
