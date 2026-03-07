@@ -9,6 +9,7 @@ import java.util.UUID;
 
 public interface AlbumMemberRepository extends JpaRepository<AlbumMember, AlbumMemberId> {
     List<AlbumMember> findAllByIdAlbumId(UUID albumId);
+    List<AlbumMember> findAllByIdAlbumIdAndCreatorFalse(UUID albumId);
     List<AlbumMember> findAllByIdUserIdAndCreatorTrue(UUID userId);
     List<AlbumMember> findAllByIdUserIdAndCreatorFalse(UUID userId);
     void deleteAllByIdAlbumId(UUID albumId);

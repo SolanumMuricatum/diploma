@@ -52,7 +52,9 @@ export function Header() {
                     <li><a href="/help">Помощь</a></li>
                     {userId && (
                         <div className='note-icon'>
-                            <FontAwesomeIcon icon={faEnvelope} />
+                            <Link to={`/invitations/${userId}`}>
+                                <FontAwesomeIcon icon={faEnvelope} />
+                            </Link>
                         </div>
                     )}
                 </ul>

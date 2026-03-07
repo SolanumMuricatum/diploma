@@ -82,4 +82,8 @@ public class UserController {
         return ResponseEntity.status(200).build();
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<?> searchForUser(@RequestParam String query, @RequestParam UUID albumId) throws Exception {
+        return ResponseEntity.status(200).body(userService.searchForUser(query, albumId));
+    }
 }

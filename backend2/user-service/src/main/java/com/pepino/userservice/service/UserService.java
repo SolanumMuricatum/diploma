@@ -8,6 +8,7 @@ import java.util.UUID;
 
 public interface UserService {
     User saveUser(User user) throws Exception;
+    List<User> searchForUser(String query, UUID albumId) throws Exception;
     void deleteUser(String password, UUID userId) throws Exception;
     Optional<User> findByLogin(String login);
     List<User> findAllByIds(List<UUID> ids);

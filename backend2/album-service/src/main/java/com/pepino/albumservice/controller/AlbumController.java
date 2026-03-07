@@ -1,9 +1,12 @@
 package com.pepino.albumservice.controller;
 
 import com.pepino.albumservice.entity.Album;
+import com.pepino.albumservice.entity.AlbumMemberId;
+import com.pepino.albumservice.entity.MemberInvitation;
 import com.pepino.albumservice.entity.Photo;
 import com.pepino.albumservice.service.AlbumMemberService;
 import com.pepino.albumservice.service.AlbumService;
+import com.pepino.albumservice.service.MemberInvitationService;
 import com.pepino.albumservice.service.PhotoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +23,7 @@ public class AlbumController {
     private final AlbumService albumService;
     private final AlbumMemberService albumMemberService;
     private final PhotoService photoService;
+    private final MemberInvitationService memberInvitationService;
 
     @PostMapping("/save")
     public ResponseEntity<?> saveAlbum(@RequestBody Album album) throws Exception {
@@ -85,6 +89,11 @@ public class AlbumController {
         return ResponseEntity.status(200).body(albumMemberService.getAllAlbumMembers(albumId));
     }
 
+    @GetMapping("/get/members")
+    public ResponseEntity<?> getAlbumMembersWithoutTheCreator(@RequestParam UUID albumId) throws Exception {
+        return ResponseEntity.status(200).body(albumMemberService.getAlbumMembersWithoutTheCreator(albumId));
+    }
+
     @PostMapping("/creatorLogin/update")
     public ResponseEntity<?> updateAlbumCreatorLogin(@RequestParam UUID creatorId, @RequestParam String newLogin) throws Exception {
         return ResponseEntity.status(200).body(albumService.updateAlbumCreatorLogin(creatorId, newLogin));
@@ -96,5 +105,64 @@ public class AlbumController {
         String userId = (String) payload.get("userId");
         albumMemberService.leaveAddedAlbum(UUID.fromString(albumId), UUID.fromString(userId));
         return ResponseEntity.status(200).build();
+    }
+
+    @GetMapping("/get/all/album/invitations")
+    public ResponseEntity<?> getAllAlbumInvitations(@RequestParam UUID albumId) {
+        return ResponseEntity.status(200).body(memberInvitationService.findAllInvitationsForAlbum(albumId));
+    }
+
+    @GetMapping("/get/all/user/invitations")
+    public ResponseEntity<?> getAllUserInvitations(@RequestParam UUID userId) {
+        return ResponseEntity.status(200).body(memberInvitationService.findAllInvitationsForUser(userId));
+    }
+
+    @PostMapping("/save/invitation")
+    public ResponseEntity<?> saveInvitation(@RequestBody Map<String, Object> payload) {
+        String albumId = (String) payload.get("albumId");
+        String userId = (String) payload.get("userId");
+        String creatorLoginSnapshot = (String) payload.get("creatorLoginSnapshot");
+        String albumName = (String) payload.get("albumName");
+
+        AlbumMemberId albumMemberId = new AlbumMemberId(UUID.fromString(albumId), UUID.fromString(userId));
+        MemberInvitation memberInvitation = new MemberInvitation(
+                albumMemberId,
+                null,
+                creatorLoginSnapshot,
+                albumName
+        );
+        memberInvitationService.save(memberInvitation);
+        return ResponseEntity.status(201).build();
+    }
+
+    @PostMapping("/invitation/retry")
+    public ResponseEntity<?> retrySendingInvitation(@RequestBody Map<String, Object> payload) {
+        String albumId = (String) payload.get("albumId");
+        String userId = (String) payload.get("userId");
+        String creatorLoginSnapshot = (String) payload.get("creatorLoginSnapshot");
+        String albumName = (String) payload.get("albumName");
+
+        AlbumMemberId albumMemberId = new AlbumMemberId(UUID.fromString(albumId), UUID.fromString(userId));
+        MemberInvitation memberInvitation = new MemberInvitation(
+                albumMemberId,
+                null,
+                creatorLoginSnapshot,
+                albumName
+        );
+
+        memberInvitationService.retrySendingInvitation(memberInvitation);
+        return ResponseEntity.status(201).build();
+    }
+
+    @PostMapping("invitation/decline")
+    public ResponseEntity<?> declineInvitation(@RequestParam UUID albumId, @RequestParam UUID userId) {
+        memberInvitationService.declineInvitation(albumId, userId);
+        return ResponseEntity.status(201).build();
+    }
+
+    @PostMapping("invitation/accept")
+    public ResponseEntity<?> acceptInvitation(@RequestParam UUID albumId, @RequestParam UUID userId) {
+        memberInvitationService.acceptInvitation(albumId, userId);
+        return ResponseEntity.status(201).build();
     }
 }

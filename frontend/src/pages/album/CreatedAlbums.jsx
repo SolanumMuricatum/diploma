@@ -159,7 +159,7 @@ export function CreatedAlbums() {
                                                 >
                                                     <div className='menu-item' onClick={(e) => { e.preventDefault(); navigate(`/albums/edit/${album.id}`); }}>Редактировать</div>
                                                     <div className='menu-item' onClick={(e) => { e.preventDefault(); navigate(`/albums/created/manage/photos/${album.id}`); }}>Управлять фотографиями</div>
-                                                    <div className='menu-item' onClick={(e) => { e.stopPropagation(); console.log('Access'); }}>Управлять доступом</div>
+                                                    <div className='menu-item' onClick={(e) => { e.preventDefault(); navigate(`/albums/created/manage/members/${album.id}`); }}>Управлять доступом</div>
                                                     <div className='menu-item delete' onClick={(e) => { e.preventDefault(); e.stopPropagation(); handleDeleteAlbum(album.id); }}>Удалить</div>
                                                 </div>
                                             )}

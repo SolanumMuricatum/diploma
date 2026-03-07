@@ -1,5 +1,7 @@
 package com.pepino.userservice.service.impl;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pepino.userservice.entity.User;
 import com.pepino.userservice.repository.UserRepository;
 import com.pepino.userservice.service.UserService;
@@ -11,9 +13,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -21,6 +21,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final AlbumFeignRequestService albumFeignRequestService;
+    private final ObjectMapper objectMapper;
 
     @Override
     public User saveUser(User user) throws Exception {
@@ -34,6 +35,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> searchForUser(String query, UUID albumId) throws Exception {
+
+        List<UUID> usersIdInCurrentAlbum = objectMapper.convertValue(
+                albumFeignRequestService.getAllUsersInAlbum(albumId),
+                new TypeReference<List<User>>() {}
+        ).stream().map(User::getId).toList();
+
+        List<UUID> usersIdFromCurrentAlbumInvitations = albumFeignRequestService.getAllUsersIdInAlbumInvitations(albumId);
+
+        Set<UUID> set = new LinkedHashSet<>(usersIdInCurrentAlbum);
+        set.addAll(usersIdFromCurrentAlbumInvitations);
+        List<UUID> unionList = new ArrayList<>(set);
+
+        return userRepository.searchUsers(query, unionList);
+    }
+
+    @Override
+    @Transactional
     public void deleteUser(String password, UUID userId) throws Exception {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("Пользователь не найден"));

@@ -4,6 +4,7 @@ import com.pepino.userservice.config.props.S3Props;
 import com.pepino.userservice.entity.User;
 import com.pepino.userservice.repository.UserRepository;
 import com.pepino.userservice.service.PhotoService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import software.amazon.awssdk.core.sync.RequestBody;
@@ -44,6 +45,7 @@ public class PhotoServiceImpl implements PhotoService {
     }
 
     @Override
+    @Transactional
     public void deleteAccountPhoto(UUID userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("Пользователь не найден"));

@@ -49,19 +49,6 @@ public class TokenFilter extends OncePerRequestFilter {
 
     private String validateAndExtractToken(HttpServletRequest request) throws Exception {
         String headerAuth = request.getHeader("Authorization");
-System.out.println("Authorization header: " + headerAuth);
-
-        int id = requestCounter.incrementAndGet();
-        String url = request.getRequestURI();
-        String method = request.getMethod();
-        Thread thread = Thread.currentThread();
-
-        System.out.println("[" + id + "] Thread: " + thread.getName() +
-                " | Method: " + method +
-                " | URL: " + url +
-                " | Has token: " + (headerAuth != null && headerAuth.startsWith("Bearer")));
-
-
 
         if (headerAuth == null || !headerAuth.startsWith("Bearer ")) {
             throw new Exception("Authorization header must start with 'Bearer'");
@@ -71,7 +58,6 @@ System.out.println("Authorization header: " + headerAuth);
         if (token.isEmpty()) {
             throw new Exception("Bearer token is empty");
         }
-        //TODO тут проверить сработает ли изЭмпти или оставить .equals("null") хоть бредово
 
         return token;
     }

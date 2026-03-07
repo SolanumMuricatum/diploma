@@ -1,0 +1,26 @@
+.invitations-button {
+    display: flex;
+    width: 150px;
+    height: 35px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-size: 12pt;
+    color: #fafafa;
+    background-color: #112250;
+    transition: ease-in 0.3s;
+    border: 3px solid #112250;
+    border-radius: 5px;
+}
+
+.invitations-button:nth-child(2) {
+    background-color: #0C7F69;
+    border: 3px solid #0C7F69;
+}
+
+.invitations-button:hover {
+    cursor: pointer;
+    background-color: #D6AF8D;
+    border-color: #0C7F69;
+    color: black;
+}

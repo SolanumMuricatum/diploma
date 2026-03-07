@@ -14,4 +14,10 @@ import java.util.UUID;
 public interface AlbumServiceClient {
     @PostMapping("/album/creatorLogin/update")
     ResponseEntity<?> updateAlbumCreatorLogin(@RequestParam UUID creatorId, @RequestParam String newLogin);
+
+    @GetMapping("/album/get/all/members")
+    ResponseEntity<?> getAllUsersInAlbum(@RequestParam UUID albumId);
+
+    @GetMapping("/album/get/all/album/invitations")
+    ResponseEntity<?> getAllAlbumInvitations(@RequestParam UUID albumId);
 }

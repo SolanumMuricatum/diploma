@@ -10,6 +10,7 @@ import com.pepino.albumservice.service.feign.UserFeignRequestService;
 import io.jsonwebtoken.Jwts;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -42,18 +43,19 @@ public class AlbumServiceImpl implements AlbumService {
         album.setStartDate(LocalDate.now());
         album.setEndDate(LocalDate.now().plusMonths(1));
         albumRepository.save(album);
-        albumMemberService.saveAlbumMember(album);
+        albumMemberService.saveAlbumCreator(album);
         return album;
     }
 
     @Override
+    @Transactional
     public void deleteAlbum(UUID id, UUID userId) throws Exception {
         albumRepository.findById(id)
                 .orElseThrow(() -> new Exception("Альбом с таким ID не найден"));
 
         if (albumMemberService.isUserAlbumsCreator(id, userId)) {
-            albumMemberService.deleteAllMembersWithAlbumId(id);
             photoService.deleteAllAlbumPhotos(id);
+            albumMemberService.deleteAllMembersWithAlbumId(id);
             albumRepository.deleteById(id);
         } else {
             throw new Exception("Удаление невозможно, поскольку пользователь не является создателем фотоальбома");

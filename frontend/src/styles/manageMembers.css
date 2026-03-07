@@ -1,0 +1,215 @@
+.manage-members-arrow-right-container {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16pt;
+    top: 110px;
+    left: 80px;
+    width: 50px;
+    height: 50px;
+    border: 2px solid black;
+    border-radius: 50%;
+    background-color: #f5f0e9;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.album-control-panel {
+    background-color: #f5f0e9;
+    z-index: 10;
+}
+
+.manage-members-album-name {
+    margin: 20px;
+    font-size: 36pt;
+}
+
+.manage-members-album-description {
+    display: flex;
+    align-items: center;
+    margin-right: 30px;
+    font-size: 14pt;
+}
+
+.manage-members-control-panel-options {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    margin-right: 30px;
+    background-color: #f5f0e9;
+    z-index: 10;
+
+    div {
+        margin-left: 10px;
+    }
+
+    button {
+        width: 150px;
+        height: 30px;
+        font-size: 12pt;
+        color: #fafafa;
+        background-color: #112250;
+        transition: ease-in 0.3s;
+        border: 3px solid #112250;
+        margin-right: 20px;
+        border-radius: 5px;
+
+        &:hover {
+            cursor: pointer;
+            background-color: #D6AF8D;
+            border-color: #0C7F69;
+            color: black;
+        }
+
+        &:nth-of-type(3) {
+            margin-left: 50px;
+            width: 100px !important;
+        }
+    }
+}
+
+/* Модальное окно поиска (на базе твоих .modal-overlay и .modal-content) */
+.search-modal-content {
+    background-color: #f5f0e9;
+    /* Твой фирменный бежевый */
+    border: 3px solid #112250;
+    padding: 25px;
+    border-radius: 15px;
+    width: 400px;
+    position: relative;
+}
+
+.search-input-wrapper {
+    position: relative;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+/* Стилизация инпута в стиле .account-login */
+.search-input-wrapper label.text {
+    font-size: 0.75rem;
+    color: black;
+    font-weight: 700;
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    padding: 0 5px;
+    background-color: #f5f0e9;
+    z-index: 10;
+}
+
+.search-input-wrapper input {
+    width: 100%;
+    padding: 12px 10px;
+    font-size: 1rem;
+    border: 2px solid black;
+    border-radius: 5px;
+    background: transparent;
+    box-sizing: border-box;
+}
+
+.search-input-wrapper input:focus {
+    outline: none;
+    border-color: #112250;
+}
+
+/* Список результатов */
+.search-results-list {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-right: 5px;
+}
+
+/* Элемент пользователя в поиске */
+.search-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background: white;
+    border: 2px solid #112250;
+    border-radius: 10px;
+    transition: transform 0.2s;
+}
+
+.search-item:hover {
+    transform: translateX(5px);
+}
+
+.search-user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.search-user-info img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #112250;
+}
+
+.search-user-name {
+    font-weight: 700;
+    color: #112250;
+}
+
+/* Кнопка "Пригласить" в стиле .account-save-btn */
+.invite-btn {
+    padding: 5px 15px;
+    font-size: 10pt;
+    color: #fafafa;
+    background-color: #112250;
+    /* Зеленый как у .account-delete */
+    border: 2px solid #112250;
+    border-radius: 5px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.invite-btn:hover {
+    background-color: #D6AF8D;
+    border-color: #0C7F69;
+    color: black;
+}
+
+/* Кастомный скроллбар в стиле проекта */
+.search-results-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.search-results-list::-webkit-scrollbar-thumb {
+    background-color: #112250;
+    border-radius: 10px;
+}
+
+.album-invitations-button {
+    display: flex;
+    width: 150px;
+    height: 35px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-size: 12pt;
+    color: #fafafa;
+    background-color: #112250;
+    transition: ease-in 0.3s;
+    border: 3px solid #112250;
+    border-radius: 5px;
+}
+
+.album-invitations-button:hover {
+    cursor: pointer;
+    background-color: #D6AF8D;
+    border-color: #0C7F69;
+    color: black;
+}

@@ -4,6 +4,7 @@ import com.pepino.albumservice.config.props.S3Props;
 import com.pepino.albumservice.entity.Photo;
 import com.pepino.albumservice.repository.PhotoRepository;
 import com.pepino.albumservice.service.PhotoService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import software.amazon.awssdk.core.sync.RequestBody;
@@ -53,6 +54,7 @@ public class PhotoServiceImpl implements PhotoService {
     }
 
     @Override
+    @Transactional
     public void deletePhoto(UUID photoId) {
         Photo photo = photoRepository.findById(photoId)
                 .orElseThrow(() -> new RuntimeException("Фото не найдено"));
