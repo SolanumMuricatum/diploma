@@ -5,6 +5,7 @@ import com.pepino.albumservice.entity.Album;
 import com.pepino.albumservice.entity.AlbumMember;
 import com.pepino.albumservice.entity.AlbumMemberId;
 import com.pepino.albumservice.repository.AlbumMemberRepository;
+import com.pepino.albumservice.repository.MemberInvitationRepository;
 import com.pepino.albumservice.service.AlbumMemberService;
 import com.pepino.albumservice.service.PhotoService;
 import com.pepino.albumservice.service.feign.UserFeignRequestService;
@@ -22,6 +23,7 @@ public class AlbumMemberServiceImpl implements AlbumMemberService {
     private final AlbumMemberRepository albumMemberRepository;
     private final UserFeignRequestService userFeignRequestService;
     private final PhotoService photoService;
+    private final MemberInvitationRepository memberInvitationRepository;
 
     @Override
     public void saveAlbumCreator(Album album) {
@@ -86,6 +88,7 @@ public class AlbumMemberServiceImpl implements AlbumMemberService {
     public void leaveAddedAlbum(UUID albumId, UUID userId) {
         photoService.deleteAllMemberPhotos(albumId, userId);
         albumMemberRepository.deleteByIdAlbumIdAndIdUserId(albumId, userId);
+        memberInvitationRepository.deleteByIdAlbumIdAndIdUserId(albumId, userId);
     }
 
     @Override

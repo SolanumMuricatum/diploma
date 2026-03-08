@@ -66,4 +66,9 @@ public class MemberInvitationServiceImpl implements MemberInvitationService {
         albumMemberService.saveAlbumMember(albumId, userId);
         memberInvitationRepository.save(memberInvitation);
     }
+
+    @Override
+    public boolean checkForNewInvitations(UUID userId) {
+        return memberInvitationRepository.hasPendingInvitations(userId);
+    }
 }

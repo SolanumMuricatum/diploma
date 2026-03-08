@@ -31,3 +31,11 @@ s3:
   endpoint: http://localhost:8333
   region: us-east-1
   bucket-name: pepino-photos
+
+aws:
+  ses:
+    enabled: false
+    access-key: 1111
+    secret-key: 1111
+    region: us-east-2
+    sender-address: sharephoto@gmail.com

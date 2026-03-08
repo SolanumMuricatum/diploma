@@ -154,15 +154,20 @@ public class AlbumController {
         return ResponseEntity.status(201).build();
     }
 
-    @PostMapping("invitation/decline")
+    @PostMapping("/invitation/decline")
     public ResponseEntity<?> declineInvitation(@RequestParam UUID albumId, @RequestParam UUID userId) {
         memberInvitationService.declineInvitation(albumId, userId);
         return ResponseEntity.status(201).build();
     }
 
-    @PostMapping("invitation/accept")
+    @PostMapping("/invitation/accept")
     public ResponseEntity<?> acceptInvitation(@RequestParam UUID albumId, @RequestParam UUID userId) {
         memberInvitationService.acceptInvitation(albumId, userId);
         return ResponseEntity.status(201).build();
+    }
+
+    @GetMapping("/invitation/check-pending")
+    public ResponseEntity<?> checkIfNewInvitationsExist(@RequestParam UUID userId) {
+        return ResponseEntity.status(200).body(memberInvitationService.checkForNewInvitations(userId));
     }
 }

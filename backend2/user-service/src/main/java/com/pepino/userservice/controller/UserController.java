@@ -86,4 +86,10 @@ public class UserController {
     public ResponseEntity<?> searchForUser(@RequestParam String query, @RequestParam UUID albumId) throws Exception {
         return ResponseEntity.status(200).body(userService.searchForUser(query, albumId));
     }
+
+    @GetMapping("/login/data/recovery")
+    public ResponseEntity<?> sendEmailForLoginDataRecovery(@RequestParam String email) {
+        userService.sendEmailForLoginDataRecovery(email);
+        return ResponseEntity.status(200).build();
+    }
 }

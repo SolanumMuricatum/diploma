@@ -9,11 +9,35 @@ import { useAuth } from '../auth/AuthProvider';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 
 export function Header() {
     const { user, userId, logout, checkAuth } = useAuth();
+
+    const [hasNewInvites, setHasNewInvites] = useState(false);
+
+    useEffect(() => {
+        if (!userId) return;
+
+        const checkInvites = async () => {
+            try {
+                const res = await fetch(`http://localhost:8080/album/invitation/check-pending?userId=${userId}`, {
+                    credentials: 'include'
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    setHasNewInvites(data);
+                }
+            } catch (err) {
+                console.error("Ошибка проверки уведомлений", err);
+            }
+        };
+
+        checkInvites();
+        const interval = setInterval(checkInvites, 60000);
+        return () => clearInterval(interval);
+    }, [userId]);
 
     useEffect(() => {
         checkAuth();
@@ -55,6 +79,18 @@ export function Header() {
                             <Link to={`/invitations/${userId}`}>
                                 <FontAwesomeIcon icon={faEnvelope} />
                             </Link>
+                            {hasNewInvites && (
+                                <div style={{
+                                    position: 'absolute',
+                                    top: '15px',
+                                    right: '560px',
+                                    width: '10px',
+                                    height: '10px',
+                                    backgroundColor: '#0C7F69',
+                                    borderRadius: '50%',
+                                    border: '2px solid white'
+                                }} />
+                            )}
                         </div>
                     )}
                 </ul>

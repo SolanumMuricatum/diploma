@@ -12,4 +12,5 @@ public interface MemberInvitationService {
     void retrySendingInvitation(MemberInvitation memberInvitation);
     void declineInvitation(UUID albumId, UUID userId);
     void acceptInvitation(UUID albumId, UUID userId);
+    boolean checkForNewInvitations(UUID userId);
 }

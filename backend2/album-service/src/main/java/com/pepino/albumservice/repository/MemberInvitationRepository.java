@@ -14,9 +14,13 @@ import java.util.UUID;
 public interface MemberInvitationRepository extends JpaRepository<MemberInvitation, AlbumMemberId> {
     List<MemberInvitation> findAllByIdUserId(UUID userId);
     List<MemberInvitation> findAllByIdAlbumId(UUID albumId);
+    void deleteByIdAlbumIdAndIdUserId(UUID albumId, UUID userId);
 
     @Modifying(clearAutomatically = true, flushAutomatically = true)
     @Transactional
     @Query("UPDATE MemberInvitation mi SET mi.accepted = null WHERE mi.id = :id")
     void resetInvitationStatus(@Param("id") AlbumMemberId id);
+
+    @Query("SELECT COUNT(mi) > 0 FROM MemberInvitation mi WHERE mi.id.userId = :userId AND mi.accepted IS NULL")
+    boolean hasPendingInvitations(@Param("userId") UUID userId);
 }

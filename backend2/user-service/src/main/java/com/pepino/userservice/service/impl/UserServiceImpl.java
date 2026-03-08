@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pepino.userservice.entity.User;
 import com.pepino.userservice.repository.UserRepository;
+import com.pepino.userservice.service.LoginDataRecoveryService;
 import com.pepino.userservice.service.UserService;
 import com.pepino.userservice.service.feign.AlbumFeignRequestService;
 import jakarta.transaction.Transactional;
@@ -22,6 +23,7 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
     private final AlbumFeignRequestService albumFeignRequestService;
     private final ObjectMapper objectMapper;
+    private final LoginDataRecoveryService loginDataRecoveryService;
 
     @Override
     public User saveUser(User user) throws Exception {
@@ -121,4 +123,12 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
+    @Override
+    public void sendEmailForLoginDataRecovery(String email) {
+        User user = userRepository.findByEmail(email).orElseThrow(
+                () -> new IllegalArgumentException("Пользователь с такой почтой не найден!")
+        );
+
+        loginDataRecoveryService.sendEmail(email, user.getLogin(), passwordEncoder.encode(user.getPassword()));
+    }
 }

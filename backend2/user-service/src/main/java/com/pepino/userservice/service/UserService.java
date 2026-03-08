@@ -15,4 +15,5 @@ public interface UserService {
     User updateUserLogin(String login, UUID userId) throws Exception;
     User updateUserEmail(String email, UUID userId) throws Exception;
     void updateUserPassword(String oldPassword, String newPassword, UUID userId) throws Exception;
+    void sendEmailForLoginDataRecovery(String email);
 }

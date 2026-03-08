@@ -109,14 +109,6 @@ export const AlbumInvitationsHistory = () => {
                         <div>{startDate} - {endDate}</div>
                     </div>
                 </div>
-                <div className='album-control-panel-options'>
-                    <button onClick={() => setIsModalOpen(true)}>
-                        Добавить
-                    </button>
-                    <button>
-                        История заявок
-                    </button>
-                </div>
             </div>
             {members && members.length === 0 && (
                 <div style={{ margin: '20px' }}>У вас нету заявок</div>
