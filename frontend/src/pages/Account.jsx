@@ -109,20 +109,35 @@ export const Account = () => {
 		setIsMenuOpen(false);
 	};
 
-	const handleFileChange = (e) => {
+	const toBase64 = (file) => new Promise((resolve, reject) => {
+		const reader = new FileReader();
+		reader.readAsDataURL(file);
+		reader.onload = () => resolve(reader.result);
+		reader.onerror = (error) => reject(error);
+	});
+
+	const handleFileChange = async (e) => {
 		const file = e.target.files[0];
 		if (file) {
-			const reader = new FileReader();
-			reader.onloadend = () => {
-				const base64String = reader.result; // Это строка base64
-				postPhoto(base64String);
-			};
-			reader.readAsDataURL(file);
+			console.log("File size:", file.size); // размер в байтах
+			console.log("File type:", file.type);
+			console.log("File name:", file.name);
+			// ...
+		}
+		if (file) {
+			try {
+				const base64String = await toBase64(file);
+				await postPhoto(base64String);
+			} catch (error) {
+				console.error("Ошибка при обработке файла:", error);
+			}
 		}
 	};
 
 	// 2. POST запрос (Добавление)
 	const postPhoto = async (base64String) => {
+		console.log("base64String length:", base64String.length);
+		console.log("base64String start:", base64String.substring(0, 50));
 		try {
 			const response = await fetch(`http://localhost:8080/user/account/save/photo`, {
 				method: 'POST',
@@ -137,7 +152,7 @@ export const Account = () => {
 			}
 		} catch (error) {
 			console.error('Ошибка при сохранении:', error);
-			alert('Произошла ошибка при сохрании фото');
+			alert('Произошла ошибка при сохранении фото');
 		}
 	};
 

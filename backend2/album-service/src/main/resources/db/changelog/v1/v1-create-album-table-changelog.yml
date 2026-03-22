@@ -48,11 +48,6 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: end_date
-                  type: date
-                  constraints:
-                    nullable: false
-              - column:
                   name: creator_id
                   type: UUID
                   constraints:

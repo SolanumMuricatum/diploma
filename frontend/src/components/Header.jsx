@@ -109,9 +109,6 @@ export function Header() {
                             <FontAwesomeIcon className='header-account-photo-icon' icon={faUser} />
                         </div>
                     )}
-                    <div className='gear-icon'>
-                        <FontAwesomeIcon icon={faGear} />
-                    </div>
                     <div className='exit-icon'>
                         <FontAwesomeIcon onClick={handleExitClick} icon={faRightFromBracket} />
                     </div>

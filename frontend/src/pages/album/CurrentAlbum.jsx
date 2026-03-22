@@ -4,8 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import { faCalendar } from '@fortawesome/free-solid-svg-icons'
 import { faFilter } from '@fortawesome/free-solid-svg-icons'
-import { ReactComponent as CameraIcon } from '../../photo/photo-camera-svgrepo-com.svg';
-import { ReactComponent as PhotoIcon } from '../../photo/picture-svgrepo-com.svg';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'; // Убедитесь, что это правильно
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
@@ -21,15 +19,14 @@ export function CurrentAlbum() {
     const [selectedPhotos, setSelectedPhotos] = useState(new Set()); // Храним ID выбранных фото
     const [creator, setCreator] = useState();
     const [startDate, setStartDate] = useState();
-    const [endDate, setEndDate] = useState();
     const [isSelectionMode, setIsSelectionMode] = useState(false);
     const [isDownloading, setIsDownloading] = useState(false);
     const [albumName, setAlbumName] = useState([]);
     const [currentPhotoIdx, setCurrentPhotoIdx] = useState(null);
 
     const allPhotosFlat = Object.values(photosByUser)
-    .flat()
-    .filter(p => p !== null && p.image);
+        .flat()
+        .filter(p => p !== null && p.image);
 
     const showNext = (e) => {
         e.stopPropagation();
@@ -44,7 +41,7 @@ export function CurrentAlbum() {
 
     useEffect(() => {
         if (!albumId) return;
-        
+
         const fetchAllData = async () => {
             try {
                 const res = await fetch(`http://localhost:8080/album/get/all/members?albumId=${albumId}`, {
@@ -53,7 +50,7 @@ export function CurrentAlbum() {
                 if (res.ok) {
                     const membersData = await res.json();
                     setMembers(membersData);
-                    
+
                     // 2. Сразу загружаем фото для каждого участника
                     membersData.forEach(member => {
                         fetchUserPhotos(member.id);
@@ -79,7 +76,7 @@ export function CurrentAlbum() {
                 const data = await res.json();
                 // Заполняем до 10 слотов для красоты верстки
                 const slots = Array(10).fill(null).map((_, i) => data[i] || null);
-                
+
                 setPhotosByUser(prev => ({
                     ...prev,
                     [userId]: slots
@@ -105,11 +102,11 @@ export function CurrentAlbum() {
         const loadedPhotoIds = userSlots
             .filter(p => p !== null && p.id !== undefined)
             .map(p => p.id);
-        
+
         if (loadedPhotoIds.length === 0) return;
 
         const newSelection = new Set(selectedPhotos);
-        
+
         loadedPhotoIds.forEach(id => {
             if (isChecked) {
                 newSelection.add(id);
@@ -117,7 +114,7 @@ export function CurrentAlbum() {
                 newSelection.delete(id);
             }
         });
-        
+
         setSelectedPhotos(newSelection);
     };
 
@@ -138,7 +135,7 @@ export function CurrentAlbum() {
             // Если не всё — выделяем всё
             setSelectedPhotos(new Set(allLoadedIds));
             // Заодно включим режим выделения, чтобы появилась обводка
-            setIsSelectionMode(true); 
+            setIsSelectionMode(true);
         }
     };
 
@@ -148,7 +145,7 @@ export function CurrentAlbum() {
 
         setIsDownloading(true); // Включаем "крутилку"
         const zip = new JSZip();
-        
+
         // Собираем массив объектов фото, которые выбраны
         const photosToDownload = Object.values(photosByUser)
             .flat()
@@ -168,7 +165,7 @@ export function CurrentAlbum() {
             });
 
             await Promise.all(downloadPromises);
-            
+
             const content = await zip.generateAsync({ type: "blob" });
             saveAs(content, `${albumName}.zip`);
         } catch (err) {
@@ -198,7 +195,7 @@ export function CurrentAlbum() {
         };
 
         window.addEventListener('keydown', handleKeyDown);
-        
+
         // Обязательно чистим обработчик при размонтировании
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, [currentPhotoIdx, allPhotosFlat.length]); // Следим за индексом и длиной массива
@@ -209,23 +206,23 @@ export function CurrentAlbum() {
             <Link to={`/albums/${parent}`}>
                 <div className='album-arrow-right-container'><FontAwesomeIcon icon={faArrowLeft} /></div>
             </Link>
-            
-            <Album setAlbumName={setAlbumName} setCreator={setCreator} setStartDate={setStartDate} setEndDate={setEndDate} />
+
+            <Album setAlbumName={setAlbumName} setCreator={setCreator} setStartDate={setStartDate} />
 
             {/* Панель управления (теперь кнопки могут что-то делать) */}
             <div className='album-control-panel'>
                 <div className='album-creator-container'>
                     <FontAwesomeIcon icon={faUser} /> <div>{creator}</div>
                     <div className='album-expiration-date-container'>
-                        <FontAwesomeIcon icon={faCalendar} /> <div>{startDate} - {endDate}</div>
+                        <FontAwesomeIcon icon={faCalendar} /> <div>{startDate}</div>
                     </div>
                 </div>
                 <div className='album-control-panel-options'>
                     <button onClick={handleToggleAllPhotos}>
                         Выделить всё
                     </button>
-                    <button 
-                        onClick={handleDownloadSelected} 
+                    <button
+                        onClick={handleDownloadSelected}
                         disabled={selectedPhotos.size === 0 || isDownloading}
                         className={isDownloading ? 'btn-loading' : ''}
                     >
@@ -244,13 +241,13 @@ export function CurrentAlbum() {
                 <div key={member.id} className="member-block">
                     <div className='friend-data-container-wrapper'>
                         <div className='friend-data-container'>
-                            <img className='friend-avatar' src={member.photo}/>
+                            <img className='friend-avatar' src={member.photo} />
                             <div className='friend-name'>{member.login}</div>
                         </div>
                         <div className='friend-select-all-container'>
                             <label htmlFor={`select-${member.id}`}>Выделить всё</label>
-                            <input 
-                                type="checkbox" 
+                            <input
+                                type="checkbox"
                                 id={`select-${member.id}`}
                                 checked={(() => {
                                     const photos = (photosByUser[member.id] || []).filter(p => p !== null);
@@ -265,8 +262,8 @@ export function CurrentAlbum() {
                         {(photosByUser[member.id] || Array(10).fill(null)).map((photo, idx) => {
                             const isSelected = photo && selectedPhotos.has(photo.id);
                             return (
-                               <div 
-                                    key={idx} 
+                                <div
+                                    key={idx}
                                     className={`friend-photo ${isSelected ? 'selected' : ''}`}
                                     onClick={() => photo && togglePhotoSelection(photo.id)}
                                     onDoubleClick={() => {
@@ -278,11 +275,11 @@ export function CurrentAlbum() {
                                     style={{ cursor: 'pointer', position: 'relative', userSelect: 'none' }}
                                 >
                                     {photo && (
-                                        <img 
-                                            src={photo.image} 
-                                            alt="upload" 
+                                        <img
+                                            src={photo.image}
+                                            alt="upload"
                                             draggable="false"
-                                            style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                                         />
                                     )}
                                 </div>
@@ -294,13 +291,13 @@ export function CurrentAlbum() {
             {currentPhotoIdx !== null && allPhotosFlat[currentPhotoIdx] && (
                 <div className="photo-modal-overlay" onClick={() => setCurrentPhotoIdx(null)}>
                     <button className="modal-close-btn" onClick={() => setCurrentPhotoIdx(null)}>&times;</button>
-                    
+
                     <button className="modal-nav-btn prev" onClick={showPrev}>❮</button>
-                    
+
                     <div className="modal-image-container" onClick={(e) => e.stopPropagation()}>
-                        <img 
-                            src={allPhotosFlat[currentPhotoIdx].image} 
-                            alt="Full size" 
+                        <img
+                            src={allPhotosFlat[currentPhotoIdx].image}
+                            alt="Full size"
                         />
                     </div>
 

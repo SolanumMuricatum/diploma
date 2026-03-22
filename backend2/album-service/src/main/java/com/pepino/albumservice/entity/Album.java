@@ -30,8 +30,6 @@ public class Album {
     private String textSize;
     @Column(name = "start_date")
     private LocalDate startDate;
-    @Column(name = "end_date")
-    private LocalDate endDate;
     @Column(name = "creator_id")
     private UUID creatorId;
     @Column(name = "creator_login_snapshot")

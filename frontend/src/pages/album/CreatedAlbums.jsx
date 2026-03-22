@@ -1,9 +1,6 @@
 import '../../styles/createdAlbums.css';
 import { Event } from '../../connection/Album'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { ReactComponent as CameraIcon } from '../../photo/photo-camera-svgrepo-com.svg';
-import { ReactComponent as PhotoIcon } from '../../photo/picture-svgrepo-com.svg';
-import { faArrowUp, faDirections } from '@fortawesome/free-solid-svg-icons'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom'; // Убедитесь, что это правильно
@@ -136,7 +133,7 @@ export function CreatedAlbums() {
                                                 <FontAwesomeIcon icon={faUser} /> {album.creatorLoginSnapshot}
                                             </div>
                                             <div className='created-album-date'>
-                                                <FontAwesomeIcon icon={faCalendar} /> {album.startDate} - {album.endDate}
+                                                <FontAwesomeIcon icon={faCalendar} /> {album.startDate}
                                             </div>
 
                                             <div className='created-album-options-icon'

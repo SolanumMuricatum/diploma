@@ -13,7 +13,6 @@ import { PhotosOfUserToUpload } from '../connection/PhotosOfUserToUpload';
 export const ManagePhotos = () => {
     const [creator, setCreator] = useState();
     const [startDate, setStartDate] = useState();
-    const [endDate, setEndDate] = useState();
     const [slots, setSlots] = useState(Array(10).fill(null));
     const [albumName, setAlbumName] = useState();
     const { parent } = useParams();
@@ -22,24 +21,24 @@ export const ManagePhotos = () => {
         <div className='main-manage-photos-container'>
             <Link to={`/albums/${parent}`}>
                 <div className='manage-photos-arrow-right-container'>
-                    <FontAwesomeIcon icon={faArrowLeft}/>
-                </div>                
+                    <FontAwesomeIcon icon={faArrowLeft} />
+                </div>
             </Link>
-            <Album setAlbumName={setAlbumName} setCreator={setCreator} setStartDate={setStartDate} setEndDate={setEndDate}/>
+            <Album setAlbumName={setAlbumName} setCreator={setCreator} setStartDate={setStartDate} />
             <div className='album-control-panel'>
                 <div className='album-creator-container'>
                     <FontAwesomeIcon icon={faUser} />
                     <div>{creator}</div>
                     <div className='album-expiration-date-container'>
                         <FontAwesomeIcon icon={faCalendar} />
-                        <div>{startDate} - {endDate}</div>
+                        <div>{startDate}</div>
                     </div>
                 </div>
-                <div className='manage-photos-control-panel-options'>                        
+                <div className='manage-photos-control-panel-options'>
                     <div className='manage-photos-album-description'>Добавьте 10 лучших фото!</div>
                 </div>
             </div>
-            <PhotosOfUserToUpload slots={slots} setSlots={setSlots}/>
+            <PhotosOfUserToUpload slots={slots} setSlots={setSlots} />
         </div>
     );
 };

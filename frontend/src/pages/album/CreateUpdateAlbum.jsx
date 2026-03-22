@@ -15,9 +15,6 @@ import bg13 from '../../photo/event/backgrounds/13.png';
 import bg14 from '../../photo/event/backgrounds/14.png';
 import bg15 from '../../photo/event/backgrounds/15.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { ReactComponent as CameraIcon } from '../../photo/photo-camera-svgrepo-com.svg';
-import { ReactComponent as PhotoIcon } from '../../photo/picture-svgrepo-com.svg';
-import { faArrowUp, faDirections } from '@fortawesome/free-solid-svg-icons'
 import React, { useEffect, useState } from 'react';
 import { Event } from '../../connection/Album';
 import { useParams } from 'react-router-dom'; // Убедитесь, что это правильно
@@ -29,7 +26,7 @@ export function CreateUpdateAlbum() {
     const { albumId } = useParams();
     const [disableButton, setDisableButton] = useState(true);
     const [err, setErr] = useState(false);
-    const [album, setAlbum] = useState({ name: '', background: '', textColor: '#000000', textFont: 'None', textSize: '44'});
+    const [album, setAlbum] = useState({ name: '', background: '', textColor: '#000000', textFont: 'None', textSize: '44' });
     const { userId, setUserId } = useAuth();
     const { userLogin, setUserLogin } = useAuth();
     //const userId  = '68994ca2-998a-48db-9696-2e7bc761b977';
@@ -38,7 +35,7 @@ export function CreateUpdateAlbum() {
     const backgrounds = [bg1, bg2, bg3, bg4, bg5, bg6, bg7, bg8, bg9, bg10, bg11, bg12, bg13, bg14, bg15];
 
     useEffect(() => {
-        if(albumId != undefined){
+        if (albumId != undefined) {
             const getAlbum = async () => {
                 try {
                     let response = await fetch(`http://localhost:8080/album?id=${albumId}`, {
@@ -47,7 +44,7 @@ export function CreateUpdateAlbum() {
                         credentials: 'include',
                     });
                     if (!response.ok) {
-                        if(response == 409){
+                        if (response == 409) {
                             setUserId(null);
                             setUserLogin(null);
                         }
@@ -68,16 +65,16 @@ export function CreateUpdateAlbum() {
     const handleInputChange = (e) => {
         const { value } = e.target;
         setAlbum((prevAlbum) => ({
-        ...prevAlbum,
-        ['name']: value,
+            ...prevAlbum,
+            ['name']: value,
         }));
     };
 
     const handleTextColorClick = (index) => {
         setBorderNameColor(index); //just it to be existed
         setAlbum((prevAlbum) => ({
-        ...prevAlbum,
-        ['textColor']: textColors[index],
+            ...prevAlbum,
+            ['textColor']: textColors[index],
         }));
     };
 
@@ -85,23 +82,23 @@ export function CreateUpdateAlbum() {
         console.log("mc kmd ckdckwemcowemxow " + bgd + "login" + userLogin)
         setBackgroundBorderColor(bgd); //just it to be existed
         setAlbum((prevAlbum) => ({
-        ...prevAlbum,
-        ['background']: bgd,
+            ...prevAlbum,
+            ['background']: bgd,
         }));
     };
 
     const handleTextFontCLick = (font) => {
         setAlbum((prevAlbum) => ({
-             ... prevAlbum,
+            ...prevAlbum,
             ['textFont']: font,
         }));
     }
 
-    const  handletextSizeClick = (value) =>{
+    const handletextSizeClick = (value) => {
         console.log(value);
         setAlbum((prevAlbum) => ({
-        ...prevAlbum,
-        ['textSize']: value,
+            ...prevAlbum,
+            ['textSize']: value,
         }));
         console.log(albumId);
     }
@@ -109,16 +106,16 @@ export function CreateUpdateAlbum() {
     const postAlbum = async () => {
         try {
             const response = await fetch(`http://localhost:8080/album/save`, {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({name: album.name, background: album.background, textColor: album.textColor, textFont: album.textFont, textSize: album.textSize, creatorId: userId, creatorLoginSnapshot: userLogin}),
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name: album.name, background: album.background, textColor: album.textColor, textFont: album.textFont, textSize: album.textSize, creatorId: userId, creatorLoginSnapshot: userLogin }),
             });
 
             const statusCode = response.status;
-            if(statusCode == 409){
+            if (statusCode == 409) {
                 setUserId(null);
                 setUserLogin(null);
             }
@@ -137,16 +134,16 @@ export function CreateUpdateAlbum() {
         var statusCode;
         try {
             const response = await fetch(`http://localhost:8080/album/update?albumId=${albumId}`, {
-            method: 'PUT',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({name: album.name, background: album.background, textColor: album.textColor, textFont: album.textFont, textSize: album.textSize, creatorId: userId, creatorLoginSnapshot: userLogin}),
+                method: 'PUT',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name: album.name, background: album.background, textColor: album.textColor, textFont: album.textFont, textSize: album.textSize, creatorId: userId, creatorLoginSnapshot: userLogin }),
             });
 
             statusCode = response.status;
-            if(statusCode == 409){
+            if (statusCode == 409) {
                 setUserId(null);
                 setUserLogin(null);
             }
@@ -158,7 +155,7 @@ export function CreateUpdateAlbum() {
             console.error('Ошибка при отправке данных на сервер:', error); // Логируем ошибку
             return { error: 'Произошла ошибка при соединении с сервером' };
         } finally {
-            if(statusCode != 200){
+            if (statusCode != 200) {
                 alert('Произошла ошибка!');
             } else {
                 alert('Событие успешно отредактировано!');
@@ -186,12 +183,12 @@ export function CreateUpdateAlbum() {
         "Rosarium",
         "Manrope"
     ];
-    
+
     return (
-        <div style={{position: 'relative'}}>
+        <div style={{ position: 'relative' }}>
             <Link to="/albums/created">
                 <div className='album-create-arrow-right-container'>
-                    <FontAwesomeIcon icon={faArrowLeft}/>
+                    <FontAwesomeIcon icon={faArrowLeft} />
                 </div>
             </Link>
             {err && (
@@ -203,7 +200,7 @@ export function CreateUpdateAlbum() {
             )}
             {!err && (
                 <div>
-                    <div className='album-create-title' style={{backgroundImage: `url(${album.background})`, color: `${album.textColor}`, fontFamily: `${album.textFont === "None" ? `-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"` : `${album.textFont}` }`, fontSize: `${album.textSize}pt`}}>
+                    <div className='album-create-title' style={{ backgroundImage: `url(${album.background})`, color: `${album.textColor}`, fontFamily: `${album.textFont === "None" ? `-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"` : `${album.textFont}`}`, fontSize: `${album.textSize}pt` }}>
                         {album.name}
                     </div>
                 </div>
@@ -212,25 +209,25 @@ export function CreateUpdateAlbum() {
                 <div className='first-block-create-album'>
                     <div class="album-name-input">
                         <label for="input" class="text">Название:</label>
-                        <input onChange={handleInputChange} type="text" placeholder="Пишите здесь..." name="input" value={album.name} class="input" maxLength={50}/>
-                    </div> 
+                        <input onChange={handleInputChange} type="text" placeholder="Пишите здесь..." name="input" value={album.name} class="input" maxLength={50} />
+                    </div>
                     <div className='background-block-create-album'>
                         <div>Выберите фон</div>
                         <div className="background-create-album">
                             {backgrounds.map((bgd) => (
                                 <div
-                               // key={id}
-                               //id={`${id}-background-create-album`}
-                                onClick={() => handleBackgroundClick(bgd)}
-                                style={{
-                                    outline: `3px solid ${backgroundBorderColor === bgd || album.background === bgd ? '#112250' : 'transparent'}`,
-                                    border:  `3px solid #112250`,
-                                    outlineOffset: `3px`,
-                                    backgroundImage: `url(${bgd})`,
-                                    backgroundRepeat: `no-repeat`,
-                                    backgroundSize: `cover`,
-                                    backgroundPosition: `center`
-                                }}
+                                    // key={id}
+                                    //id={`${id}-background-create-album`}
+                                    onClick={() => handleBackgroundClick(bgd)}
+                                    style={{
+                                        outline: `3px solid ${backgroundBorderColor === bgd || album.background === bgd ? '#112250' : 'transparent'}`,
+                                        border: `3px solid #112250`,
+                                        outlineOffset: `3px`,
+                                        backgroundImage: `url(${bgd})`,
+                                        backgroundRepeat: `no-repeat`,
+                                        backgroundSize: `cover`,
+                                        backgroundPosition: `center`
+                                    }}
                                 ></div>
                             ))}
                         </div>
@@ -242,13 +239,13 @@ export function CreateUpdateAlbum() {
                         <div className="text-color-create-album">
                             {textColors.map((color, index) => (
                                 <div
-                                onClick={() => handleTextColorClick(index)}
-                                style={{
-                                    outline: `3px solid ${borderNameColor === index || album.textColor === color ? '#112250' : 'transparent'}`,
-                                    border: `3px solid #112250`,
-                                    outlineOffset: `3px`,
-                                    backgroundColor: `${color}`
-                                }}
+                                    onClick={() => handleTextColorClick(index)}
+                                    style={{
+                                        outline: `3px solid ${borderNameColor === index || album.textColor === color ? '#112250' : 'transparent'}`,
+                                        border: `3px solid #112250`,
+                                        outlineOffset: `3px`,
+                                        backgroundColor: `${color}`
+                                    }}
                                 ></div>
                             ))}
                         </div>
@@ -257,15 +254,15 @@ export function CreateUpdateAlbum() {
                         <div>Выберите шрифт</div>
                         <div className="text-font-create-album">
                             {textFonts.map((font) => (
-                            <div>
-                                {album.textFont === font && (
-                                    <input style={{accentColor: '#112250'}} type="radio" id={font} name="font" value={font} defaultChecked onChange={() => handleTextFontCLick(font)} />
-                                )}
-                                {album.textFont != font && (
-                                    <input style={{accentColor: '#112250'}} type="radio" id={font} name="font" value={font} onChange={() => handleTextFontCLick(font)} />
-                                )}
-                                <label for={font}>{font}</label>
-                            </div>
+                                <div>
+                                    {album.textFont === font && (
+                                        <input style={{ accentColor: '#112250' }} type="radio" id={font} name="font" value={font} defaultChecked onChange={() => handleTextFontCLick(font)} />
+                                    )}
+                                    {album.textFont != font && (
+                                        <input style={{ accentColor: '#112250' }} type="radio" id={font} name="font" value={font} onChange={() => handleTextFontCLick(font)} />
+                                    )}
+                                    <label for={font}>{font}</label>
+                                </div>
                             ))}
                         </div>
                     </div>
@@ -273,18 +270,18 @@ export function CreateUpdateAlbum() {
                 <div className='third-block-create-album'>
                     <div className='text-size-create-album' >
                         <div>Выберите размер шрифта</div>
-                        <input style={{accentColor: '#112250', width: '300px', marginTop: '10px'}} type="range" id="volume" name='volume' min="28" max="60" defaultValue={album.textSize} onChange={(e) => handletextSizeClick(e.target.value)} />
+                        <input style={{ accentColor: '#112250', width: '300px', marginTop: '10px' }} type="range" id="volume" name='volume' min="28" max="60" defaultValue={album.textSize} onChange={(e) => handletextSizeClick(e.target.value)} />
                     </div>
                     {!err && (
-                    <div className='button-container'>
-                        <button onClick={albumId ? putAlbum : postAlbum}>
-                            Сохранить
-                        </button>
-                    </div>
+                        <div className='button-container'>
+                            <button onClick={albumId ? putAlbum : postAlbum}>
+                                Сохранить
+                            </button>
+                        </div>
                     )}
                 </div>
             </div>
-             
+
         </div>
     );
 }

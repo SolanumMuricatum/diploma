@@ -13,18 +13,8 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 export const UserInvitationsHistory = () => {
-    const [creator, setCreator] = useState();
-    const [startDate, setStartDate] = useState();
-    const [endDate, setEndDate] = useState();
     const [invitations, setInvitations] = useState([]);
-    const [albumName, setAlbumName] = useState([]);
-    const { parent } = useParams();
     const { userId, userLogin, setUserId, setUserLogin } = useAuth();
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [searchQuery, setSearchQuery] = useState("");
-    const [searchResults, setSearchResults] = useState([]);
-    const [isSearching, setIsSearching] = useState(false);
-
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -93,6 +83,7 @@ export const UserInvitationsHistory = () => {
 
     return (
         <div className='main-manage-members-container'>
+            <div style={{ margin: "20px", fontSize: "16pt", textAlign: "center" }}>----- Заявки -----</div>
             {invitations && invitations.length === 0 && (
                 <div style={{ margin: '20px' }}>У вас нету приглашений</div>
             )}

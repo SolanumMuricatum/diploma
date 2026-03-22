@@ -2,7 +2,7 @@ import '../styles/album.css';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-export const Album = ({setAlbumName, setCreator, setStartDate, setEndDate}) => {
+export const Album = ({ setAlbumName, setCreator, setStartDate }) => {
     const [album, setAlbum] = useState(null);
     const [err, setErr] = useState(false);
     const { albumId } = useParams();
@@ -20,23 +20,22 @@ export const Album = ({setAlbumName, setCreator, setStartDate, setEndDate}) => {
                 if (!response.ok) {
                     throw new Error();
                 }
-                let data = await response.json(); 
+                let data = await response.json();
                 console.log(data);
                 setAlbum(data);
 
                 setCreator(data.creatorLoginSnapshot);
                 setAlbumName(data.name);
                 setStartDate(data.startDate);
-                setEndDate(data.endDate);
             } catch (error) {
-                setAlbum({creatorLoginSnapshot: 'pepino'})
+                setAlbum({ creatorLoginSnapshot: 'pepino' })
                 setErr(true);
                 console.error('Ошибка при получении события:', error);
             }
         };
 
         fetchEvent();
-        
+
     }, [albumId]);
 
     if (err) {
@@ -57,12 +56,7 @@ export const Album = ({setAlbumName, setCreator, setStartDate, setEndDate}) => {
 
     return (
         <div>
-            <div className='album-title' style={{backgroundImage: `url(${album.background})`, color: `${album.textColor}`, fontFamily: `${album.textFont}`, fontSize: `${album.textSize}pt`}}>{album.name}</div>
-{/*             <div className='album-description'>
-                <div>{`Создатель: ${album.creatorLoginSnapshot}`}</div>
-                <div>{`Дата создания: ${album.startDate}`}</div>
-                <div>{`Дата окончания: ${album.endDate}`}</div> 
-            </div> */}
+            <div className='album-title' style={{ backgroundImage: `url(${album.background})`, color: `${album.textColor}`, fontFamily: `${album.textFont}`, fontSize: `${album.textSize}pt` }}>{album.name}</div>
         </div>
     );
 };

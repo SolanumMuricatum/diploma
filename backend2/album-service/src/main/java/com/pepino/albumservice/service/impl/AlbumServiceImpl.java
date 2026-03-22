@@ -41,7 +41,6 @@ public class AlbumServiceImpl implements AlbumService {
             throw new Exception("Пользователя с таким логином не найдено");
         }
         album.setStartDate(LocalDate.now());
-        album.setEndDate(LocalDate.now().plusMonths(1));
         albumRepository.save(album);
         albumMemberService.saveAlbumCreator(album);
         return album;
@@ -79,6 +78,7 @@ public class AlbumServiceImpl implements AlbumService {
         return albumRepository.findAllByIdIn(albumIds);
     }
 
+    @Override
     public Album updateAlbum(UUID id, Album album) throws Exception {
         String publicKey = authServiceClient.getAccessTokenPublicKey().getBody();
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();

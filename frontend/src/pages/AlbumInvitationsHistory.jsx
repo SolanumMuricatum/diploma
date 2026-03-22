@@ -16,7 +16,6 @@ export const AlbumInvitationsHistory = () => {
     const [creator, setCreator] = useState();
     const [startDate, setStartDate] = useState();
     const { albumId } = useParams();
-    const [endDate, setEndDate] = useState();
     const [members, setMembers] = useState([]);
     const [albumName, setAlbumName] = useState([]);
     const { parent } = useParams();
@@ -99,14 +98,14 @@ export const AlbumInvitationsHistory = () => {
                     <FontAwesomeIcon icon={faArrowLeft} />
                 </div>
             </Link>
-            <Album setAlbumName={setAlbumName} setCreator={setCreator} setStartDate={setStartDate} setEndDate={setEndDate} />
+            <Album setAlbumName={setAlbumName} setCreator={setCreator} setStartDate={setStartDate} />
             <div className='album-control-panel'>
                 <div className='album-creator-container'>
                     <FontAwesomeIcon icon={faUser} />
                     <div>{creator}</div>
                     <div className='album-expiration-date-container'>
                         <FontAwesomeIcon icon={faCalendar} />
-                        <div>{startDate} - {endDate}</div>
+                        <div>{startDate}</div>
                     </div>
                 </div>
             </div>

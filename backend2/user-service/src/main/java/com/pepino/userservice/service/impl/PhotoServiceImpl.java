@@ -7,6 +7,7 @@ import com.pepino.userservice.service.PhotoService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.DeleteObjectRequest;
@@ -29,10 +30,14 @@ public class PhotoServiceImpl implements PhotoService {
 
         String fileName = UUID.randomUUID() + ".jpg";
 
-        s3Client.putObject(
-                PutObjectRequest.builder().bucket(s3Props.getBucketName()).key(fileName).build(),
-                RequestBody.fromBytes(imageBytes)
-        );
+        WebClient webClient = WebClient.create();
+        webClient.put()
+                .uri("http://localhost:8888/buckets/{bucket}/{file}", s3Props.getBucketName(), fileName)
+                .header("Content-Type", "image/jpeg")
+                .bodyValue(imageBytes)
+                .retrieve()
+                .toBodilessEntity()
+                .block();
 
         String fileUrl = String.format("http://localhost:8888/buckets/%s/%s", s3Props.getBucketName(), fileName);
 
@@ -40,7 +45,6 @@ public class PhotoServiceImpl implements PhotoService {
                 .orElseThrow(() -> new RuntimeException("Пользователь не найден"));
 
         user.setPhoto(fileUrl);
-
         return userRepository.save(user);
     }
 
