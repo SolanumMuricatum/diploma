@@ -1,0 +1,47 @@
+databaseChangeLog:
+  - changeSet:
+      id: v1-3
+      author: pepino
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            tableExists:
+              tableName: member_invitation
+      changes:
+        - createTable:
+            tableName: member_invitation
+            columns:
+              - column:
+                  name: album_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+              - column:
+                  name: is_accepted
+                  type: boolean
+              - column:
+                  name: creator_login_snapshot
+                  type: varchar(25)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: album_name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: member_invitation
+            baseColumnNames: album_id
+            referencedTableName: album
+            referencedColumnNames: id
+            constraintName: fk_member_invitation_to_album_id
+            onDelete: CASCADE
+        - addPrimaryKey:
+            tableName: member_invitation
+            columnNames: user_id, album_id
+            constraintName: pk_member_invitation

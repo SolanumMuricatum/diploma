@@ -1,0 +1,39 @@
+databaseChangeLog:
+  - changeSet:
+      id: v1-2
+      author: pepino
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            tableExists:
+              tableName: album_member
+      changes:
+        - createTable:
+            tableName: album_member
+            columns:
+              - column:
+                  name: album_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+              - column:
+                  name: is_creator
+                  type: boolean
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: album_member
+            baseColumnNames: album_id
+            referencedTableName: album
+            referencedColumnNames: id
+            constraintName: fk_album_member_album_id
+            onDelete: CASCADE
+        - addPrimaryKey:
+            tableName: album_member
+            columnNames: user_id, album_id
+            constraintName: pk_album_member

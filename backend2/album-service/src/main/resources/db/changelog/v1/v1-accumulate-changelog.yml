@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - include:
+      relativeToChangelogFile: true
+      file: v1-create-album-table-changelog.yml
+  - include:
+      relativeToChangelogFile: true
+      file: v1-create-album-member-table-changelog.yml
+  - include:
+      relativeToChangelogFile: true
+      file: v1-create-member-invitation-table-changelog.yml
+  - include:
+      relativeToChangelogFile: true
+      file: v1-create-photo-table-changelog.yml

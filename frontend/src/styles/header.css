@@ -1,0 +1,115 @@
+header {
+  height: 80px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left: 5vw;
+  padding-right: 5vw;
+  align-items: center;
+  background-color: transparent;
+  /*     border-bottom: 1px solid whitesmoke; */
+}
+
+.logo {
+  z-index: 9;
+  font-size: larger;
+}
+
+.logo-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+nav {
+  position: absolute;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  z-index: 1;
+}
+
+ul {
+  width: 30vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  list-style-type: none;
+  padding-inline-start: 0px !important;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.logo-icon {
+  z-index: 9;
+  margin-right: 2px;
+}
+
+.login {
+  z-index: 10;
+}
+
+.header-account-button-container {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid #112250;
+  object-fit: cover;
+  object-position: center;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 500%;
+  margin-right: 30px;
+  margin-left: 20px;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-account-button-container:hover {
+  cursor: pointer;
+}
+
+.header-authenticated-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.exit-icon {
+  z-index: 11;
+  font-size: 16pt;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.gear-icon {
+  z-index: 11;
+  font-size: 16pt;
+  margin-right: 30px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.note-icon {
+  z-index: 11;
+  font-size: larger;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+li:hover {
+  text-decoration: underline;
+}

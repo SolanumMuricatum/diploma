@@ -1,0 +1,219 @@
+.created-albums-page-container {
+  position: relative;
+}
+
+.created-albums-arrow-right-container {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16pt;
+  top: -70px;
+  left: 80px;
+  width: 50px;
+  height: 50px;
+  border: 2px solid black;
+  border-radius: 50%;
+  background-color: #f5f0e9;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.created-albums-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+.created-albums-wrapper {
+  display: grid;
+  width: 1260px;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  align-items: center;
+  row-gap: 130px;
+  column-gap: 80px;
+  margin-bottom: 100px;
+}
+
+.created-album-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 125px 175px;
+  justify-items: center;
+  align-items: center;
+  width: 340px;
+  height: 190px;
+  background-color: transparent;
+  border-radius: 10px;
+  border: 2px solid #0f172a;
+}
+
+.created-album-card:hover {
+  background-color: #0f172a;
+  border: 2px solid #0c7f69;
+  cursor: pointer;
+
+  .created-album-image {
+    border: 2px solid #f5f0e9;
+  }
+
+  .created-album-title,
+  .created-album-date,
+  .created-album-creator,
+  .created-album-options-icon {
+    color: #f5f0e9;
+  }
+}
+
+.created-album-card:active {
+  background-color: #f5f0e9;
+  border: 2px solid #0c7f69;
+  cursor: pointer;
+
+  .created-album-image {
+    border: 2px solid #0f172a;
+  }
+
+  .created-album-title,
+  .created-album-date,
+  .created-album-creator,
+  .created-album-options-icon {
+    color: #0f172a;
+  }
+}
+
+.created-album-image-container {
+  display: flex;
+  justify-content: start;
+  width: 100%;
+  height: 100%;
+}
+
+.created-album-image {
+  width: 80%;
+  height: 88.23%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 10px;
+  border: 2px solid #0f172a;
+  margin: 10px 10px 10px 10px;
+}
+
+.created-album-card > div:nth-child(2) {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 90px 60px 25px 15px;
+}
+
+.created-album-title {
+  font-size: 14pt;
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+.created-album-creator {
+  font-size: 10pt;
+  display: flex;
+  align-items: end;
+}
+
+.created-album-creator > svg {
+  margin-right: 10px;
+}
+
+.created-album-date {
+  font-size: 10pt;
+  display: flex;
+  align-items: end;
+}
+
+.created-album-date > svg {
+  margin-right: 10px;
+  margin-bottom: 2.5px;
+}
+
+.created-album-options-icon {
+  position: absolute;
+  bottom: 5px;
+  right: -30px;
+}
+
+.albums-created-add-icon {
+  position: sticky;
+  font-size: 32pt;
+  bottom: 50px;
+  text-align: end;
+
+  svg {
+    margin-right: 50px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.created-album-card-wrapper {
+  position: relative;
+}
+
+.created-album-options {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  bottom: -120px;
+  right: -20px;
+  background-color: #f5f0e9;
+  border: 2px solid #0f172a;
+  border-radius: 10px;
+  width: 200px;
+
+  div {
+    border-bottom: 2px solid #0f172a;
+    padding: 5px;
+
+    &:hover {
+      background-color: #0f172a;
+      cursor: pointer;
+      color: #f5f0e9;
+      border-bottom: 2px solid #0c7f69;
+    }
+
+    &:active {
+      background-color: #f5f0e9;
+      color: #0f172a;
+      border-bottom: 2px solid #0f172a;
+    }
+
+    &:nth-of-type(1):hover {
+      border-radius: 8px 8px 0 0;
+    }
+
+    &:nth-of-type(4) {
+      border-bottom: none !important;
+      border-radius: 0 0 8px 8px;
+
+      &:hover {
+        border-bottom: none !important;
+      }
+    }
+  }
+}
+
+.created-album-add-button {
+  position: fixed;
+  font-size: 36pt;
+  right: 50px;
+  bottom: 50px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}

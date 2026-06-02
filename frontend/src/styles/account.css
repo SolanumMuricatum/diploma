@@ -1,0 +1,421 @@
+.account-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.account-data-container {
+  margin-top: 100px;
+  width: 100%;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.account-photo-container {
+  position: relative;
+}
+
+.photo-edit-icon {
+  position: absolute;
+  right: 0px;
+  bottom: 3px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.account-photo {
+  width: 200px;
+  height: 200px;
+  outline: 3px solid #112250;
+  outline-offset: 5px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-account-photo-icon {
+  font-size: 8pt;
+}
+
+.account-login {
+  z-index: 10;
+  position: relative;
+  font-size: 16pt;
+  margin-top: 10px;
+  width: 300px;
+}
+
+.account-login label.text {
+  font-size: 0.75rem;
+  color: black;
+  font-weight: 700;
+  position: relative;
+  top: 0.5rem;
+  margin: 0 0 0 7px;
+  padding: 0 3px;
+  background-color: #f5f0e9;
+  width: fit-content;
+}
+
+.account-login input[type='text'].input {
+  padding: 11px 10px;
+  font-size: 1rem;
+  border: 2px black solid;
+  border-radius: 5px;
+  background: transparent;
+}
+
+.account-login input[type='text'].input:focus {
+  outline: none;
+}
+
+.account-email {
+  position: relative;
+  font-size: 16pt;
+  width: 300px;
+}
+
+.account-email label.text {
+  font-size: 0.75rem;
+  color: black;
+  font-weight: 700;
+  position: relative;
+  top: 0.5rem;
+  margin: 0 0 0 7px;
+  padding: 0 3px;
+  background-color: #f5f0e9;
+  width: fit-content;
+}
+
+.account-email input[type='text'].input {
+  padding: 11px 10px;
+  font-size: 1rem;
+  border: 2px black solid;
+  border-radius: 5px;
+  background: transparent;
+}
+
+.account-email input[type='text'].input:focus {
+  outline: none;
+}
+
+.account-password > button {
+  width: 300px;
+  height: 50px;
+  margin-top: 30px;
+  font-size: 12pt;
+  color: #fafafa;
+  background-color: #112250;
+  transition: ease-in 0.3s;
+  border: 3px solid #112250;
+  border-radius: 5px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #d6af8d;
+    border-color: #0c7f69;
+    color: black;
+  }
+}
+
+.account-delete > button {
+  width: 300px;
+  height: 50px;
+  margin-top: 30px;
+  font-size: 12pt;
+  color: #fafafa;
+  background-color: #0c7f69;
+  transition: ease-in 0.3s;
+  border: 3px solid #0c7f69;
+  border-radius: 5px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #d6af8d;
+    border-color: #0c7f69;
+    color: black;
+  }
+}
+
+.account-photo-options-icon {
+  position: absolute;
+  z-index: 100;
+  bottom: 5px;
+  right: -30px;
+  cursor: pointer;
+}
+
+.account-photo-options {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  bottom: -54px;
+  right: -20px;
+  background-color: #f5f0e9;
+  border: 2px solid #0f172a;
+  border-radius: 10px;
+  width: 200px;
+  z-index: 100;
+
+  div {
+    padding: 5px;
+
+    &:nth-of-type(1) {
+      border-radius: 8px 8px 0 0;
+      background-color: #f5f0e9;
+      color: #0f172a;
+      border-bottom: 2px solid #0f172a;
+    }
+
+    &:active {
+      background-color: #f5f0e9;
+      color: #0f172a;
+    }
+
+    &:nth-of-type(1):hover {
+      border-radius: 8px 8px 0 0;
+      background-color: #0f172a;
+      cursor: pointer;
+      color: #f5f0e9;
+      border-bottom: 2px solid #0c7f69;
+    }
+
+    &:nth-of-type(2):hover {
+      border-radius: 0 0 8px 8px;
+      background-color: #0f172a;
+      cursor: pointer;
+      color: #f5f0e9;
+    }
+  }
+}
+
+.added-album-add-button {
+  position: fixed;
+  font-size: 36pt;
+  right: 30px;
+  bottom: 30px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.account-save-btn {
+  position: absolute;
+  left: 330px;
+  top: 36px;
+  width: 100px;
+  height: 30px;
+  font-size: 12pt;
+  color: #fafafa;
+  background-color: #112250;
+  transition: ease-in 0.3s;
+  border: 3px solid #122250;
+  border-radius: 5px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #d6af8d;
+    border-color: #0c7f69;
+    color: black;
+  }
+}
+
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  width: 350px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.modal-close-icon {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
+  color: #888;
+  font-size: 1.2rem;
+  transition: color 0.2s;
+  padding: 5px;
+}
+
+.modal-close-icon:hover {
+  color: #333;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  backdrop-filter: blur(4px);
+}
+
+.modal-content {
+  position: relative;
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  animation: modalAppear 0.3s ease-out;
+}
+
+@keyframes modalAppear {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Базовые стили появления */
+.modal-overlay {
+  animation: fadeIn 0.3s forwards;
+}
+
+.modal-content {
+  animation: slideIn 0.3s ease-out forwards;
+}
+
+/* Стили при закрытии */
+.modal-overlay.closing {
+  animation: fadeOut 0.3s forwards;
+}
+
+.modal-content.closing {
+  animation: slideOut 0.3s ease-in forwards;
+}
+
+/* Анимации появления */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Анимации исчезновения */
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}
+
+.change-password-btn {
+  width: 100px;
+  height: 30px;
+  font-size: 12pt;
+  color: #fafafa;
+  background-color: #112250;
+  transition: ease-in 0.3s;
+  border: 3px solid #122250;
+  border-radius: 5px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #d6af8d;
+    border-color: #0c7f69;
+    color: black;
+  }
+}
+
+/* Адаптация твоих инпутов под модальное окно */
+.modal-content .account-login,
+.modal-content .account-email {
+  margin-top: 0;
+  /* Сбрасываем лишние отступы внутри модалки */
+}
+
+.modal-content label.text {
+  background-color: white;
+  /* Чтобы лейбл перекрывал рамку на белом фоне модалки */
+}
+
+/* Настройка полей пароля (чтобы выглядели как текстовые из твоего CSS) */
+.modal-content input[type='password'].input {
+  padding: 11px 10px;
+  font-size: 1rem;
+  border: 2px black solid;
+  border-radius: 5px;
+  background: transparent;
+  width: 100%;
+  box-sizing: border-box;
+  /* Чтобы padding не раздувал ширину */
+}
+
+.modal-content input[type='password'].input:focus {
+  outline: none;
+  border-color: #112250;
+}
+
+/* Улучшаем кнопку в модалке, используя твой стиль .change-password-btn */
+.modal-content .change-password-btn {
+  width: 100%;
+  height: 50px;
+  margin-top: 20px;
+  cursor: pointer;
+}

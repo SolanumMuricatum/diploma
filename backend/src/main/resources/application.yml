@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: backend
+  datasource:
+    username: postgres
+    password: 1111
+    url: jdbc:postgresql://localhost:5432/diploma_db
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 100MB
+  liquibase:
+    change-log: db/changelog/main-changelog.yml
+
+app:
+  token:
+    access:
+      name: "AccessToken"
+      secret: "pepino is a bushy perennial plant (Solanum muricatum) of the nightshade family that is native to temperate uplands of South America and has an edible usually purple-marked yellow fruit"
+      expirationMs: 1800000
+    refresh:
+      name: "RefreshToken"
+      secret: "And so, Sally can wait, she knows it's too late, as we're walkin' on by. Her soul slides away, but don't look back in anger, I heard you say"
+      expirationMs: 604800000
+  endpoints:
+    login: "/auth/login"
+    registration: "/user/save"

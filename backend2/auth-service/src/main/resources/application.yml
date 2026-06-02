@@ -1,0 +1,33 @@
+spring:
+    application:
+        name: auth-service
+
+server:
+    port: 8087
+
+eureka:
+    client:
+        register-with-eureka: true
+        fetch-registry: true
+        service-url:
+            defaultZone: http://localhost:8761/eureka/
+    instance:
+        prefer-ip-address: true
+
+app:
+    token:
+        access:
+            name: "AccessToken"
+            privateKeyPath: classpath:keys/token/access/private.pem
+            publicKeyPath: classpath:keys/token/access/public.pem
+            expirationMs: 1800000
+        refresh:
+            name: "RefreshToken"
+            privateKeyPath: classpath:keys/token/refresh/private.pem
+            publicKeyPath: classpath:keys/token/refresh/public.pem
+            expirationMs: 604800000
+        internal-service:
+            name: "InternalServiceToken"
+            privateKeyPath: classpath:keys/token/internal-service/private.pem
+            publicKeyPath: classpath:keys/token/internal-service/public.pem
+            expirationMs: 60000

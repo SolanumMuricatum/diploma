@@ -1,0 +1,41 @@
+databaseChangeLog:
+  - changeSet:
+      id: v1-4
+      author: pepino
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            tableExists:
+              tableName: photo
+      changes:
+        - createTable:
+            tableName: photo
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                  defaultValueComputed: gen_random_uuid()
+              - column:
+                  name: album_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+              - column:
+                  name: image
+                  type: text
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: photo
+            baseColumnNames: user_id, album_id
+            referencedTableName: album_member
+            referencedColumnNames: user_id, album_id
+            constraintName: fk_photo_to_album_member
+            onDelete: CASCADE
